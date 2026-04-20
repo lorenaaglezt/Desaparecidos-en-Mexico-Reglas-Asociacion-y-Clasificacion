@@ -1,15 +1,53 @@
 ---
-title: "Tarea 03: Almacenes y Minería de Datos"
-subtitle: "Semestre 2026-2"
-author: 
-  - "Integrante 1"
-  - "Integrante 2"
-  - "Integrante 3"
-  - "Integrante 4"
-date: "2026-04-30"
+title: "Reglas de Asociación y Modelos de Clasificación"
+subtitle: "Almacenes y Minería de Datos. Personas Desaparecidas en México."
 format:
-  pdf:
+  html:
+    theme: simplex
     toc: true
+    toc-title: Contenido
     number-sections: true
     colorlinks: true
 ---
+
+# Introducción
+
+## Contexto del problema
+
+Los derechos humanos buscan asegurar la dignidad de las personas, su propósito radica en salvaguardar y garantizar el bien común sin discriminar por raza, sexo, religión, edad, ideologías, entre otros aspectos. Asimismo, el reconocimiento de los derechos humanos a partir de 1948 (proclamados en la Declaración Universal de los Derechos Humanos por la ONU) señala derechos inherentes a los individuos por el hecho de ser humanos, proporcionando una protección a no sufrir tratos crueles, inhumanos o degradantes.
+
+La desaparición de personas es un problema de seguridad y justicia, es un fenómeno que viola la dignidad del ser humano, la cual se basa en el reconocimiento de la libertad e igualdad en sus derechos. Esta privación de libertad atenta contra los derechos humanos de las personas, afecta a las víctimas y a sus familias, sembrando miedo e incertidumbre en la sociedad.
+
+México es un país que alberga tradiciones y costumbres inigualables, sin embargo, no está exento de ser afectado por la violencia. Los índices de violencia han incrementado con el tiempo y se ha normalizado este fenómeno provocando falta de empatía y solidaridad en la sociedad, evidenciando la desigualdad. Con esto, la desaparición de personas en México ha experimentado un aumento constante y alarmante, generando una profunda crisis de derechos humanos.
+
+Como continuación del análisis anterior sobre conjuntos de datos de los registros de estas desapariciones, en el presente trabajo buscamos continuar aplicando técnicas de minería de datos para encontrar reglas de asociación y construir modelos de clasificación que nos ayuden a encontrar nuevos patrones e información que aporte nuevas perspectivas de esta problemática.
+
+Además, en el desarrollo de este trabajo reconocemos la importancia de este tema que nos incumbe a todos como humanidad, es un tema que ha sembrado desesperanza no sólo en México, sino en varias partes del mundo, es por ello que lo debemos tratar con la delicadeza y detalle que merece.
+
+## Objetivos
+
+Aplicar técnicas fundamentales de minería de datos (específicamente el descubrimiento de reglas de asociación y la construcción de modelos de clasificación) sobre un conjunto de datos real y limpio de personas desaparecidas. El propósito central es extraer patrones subyacentes e implementar predicciones automatizadas, evaluando críticamente tanto el rendimiento técnico de los algoritmos como las implicaciones del mundo real y los posibles sesgos presentes en el sistema de registro.
+
+## Descripción del dataset
+
+Para cumplir con los objetivos del presente trabajo contamos con un archivo que contiene información de los registros de personas desaparecidas en México. En total hay **133,887 registros** (que pueden contener campos vacíos), para cada uno de ellos hay 11 variables (características de cada registro).
+
+Los campos con los que cuenta cada registro son los siguientes:
+
+| Nombre de columna | Descripción | Tipo de dato | Datos no nulos |
+|:--- |:--- |:---: |:---:|
+| id_victima | Identificador único alfanumérico asignado a cada registro. Variable cualitativa nominal. | string | 133,887 |
+| origen_reporte | Institución, fiscalía o comisión de búsqueda que emite o registra el caso. Variable cualitativa nominal. | string | 133,887 |
+| fecha_nacimiento | Día, mes y año en el que nació la persona. Variable cualitativa. | datetime | 105,000 |
+| sexo | Género de la víctima: HOMBRE o MUJER. Variable cualitativa nominal. | string | 133,887 |
+| fecha_desaparicion | Fecha y hora del último avistamiento o reporte. Variable cualitativa. | datetime | 125,727 |
+| fecha_registro | Fecha y hora de ingreso formal al sistema. Variable cualitativa. | datetime | 127,790 |
+| estatus_victima | Condición actual de la persona en el sistema. Variable cualitativa nominal. | string | 133,887 |
+| cve_ent | Clave numérica oficial de la Entidad Federativa (INEGI). Variable cualitativa. | int64 | 133,887 |
+| entidad | Nombre del Estado de la República Mexicana. Variable cualitativa. | string | 133,887 |
+| cve_mun | Clave numérica oficial del Municipio (INEGI). Variable cualitativa. | int64 | 133,887 |
+| municipio | Nombre del municipio o alcaldía. Variable cualitativa. | string | 133,887 |
+
+: Diccionario de datos del registro de víctimas {#tbl-descripciondataset tbl-colwidths="[20,50,15,15]"}
+
+Con esta información podemos ver que en varios campos (id_victima, origen_reporte, sexo, estatus_victima, cve_ent, entidad, cve_mun, municipio) se cuenta con los registros completos, sin embargo, al observar los datos se identifico que muchos están completados con: CONFIDENCIAL, por lo que debemos considerar esto al realizar nuestros análisis.
