@@ -51,7 +51,7 @@ Los campos con los que cuenta cada registro son los siguientes:
 
 : Diccionario de datos del registro de víctimas {#tbl-descripciondataset tbl-colwidths="[20,50,15,15]"}
 
-Con esta información podemos ver que en varios campos (id_victima, origen_reporte, sexo, estatus_victima, cve_ent, entidad, cve_mun, municipio) se cuenta con los registros completos, sin embargo, al observar los datos se identifico que muchos están completados con: CONFIDENCIAL, por lo que debemos considerar esto al realizar nuestros análisis.
+Con esta información podemos ver que en varios campos (id_victima, origen_reporte, sexo, estatus_victima, cve_ent, entidad, cve_mun, municipio) se cuenta con los registros completos, sin embargo, al observar los datos se identificó que muchos están completados con: CONFIDENCIAL, por lo que debemos considerar esto al realizar nuestros análisis.
 
 # Algoritmo Apriori
 
@@ -72,10 +72,10 @@ Los pasos claves que implementaremos en este algoritmo son:
 Para la implementación en Python de este algoritmo se crearon las siguientes funciones auxiliares:
 
 * *obtener_itemsets_frecuentes_1(transacciones, soporte_min_conteo)*
-    * Está función nos ayuda a generar todos los itemsets frecuentes de tamaño 1, sólo devuelve aquellos que son considerados frecuentes, es decir, los que cumplen con el soporte mínimo. Esto nos ayuda en el primer paso del algoritmo.
+    * Esta función nos ayuda a generar todos los itemsets frecuentes de tamaño 1, sólo devuelve aquellos que son considerados frecuentes, es decir, los que cumplen con el soporte mínimo. Esto nos ayuda en el primer paso del algoritmo.
 
 * *generar_candidatos(itemsets_frecuentes, k)*
-    * Está función nos ayuda con el segundo paso de nuestro algoritmo, por lo que genera itemsets de tamaño k que pueden ser o no frecuentes, sólo genera las combinaciones a partir de la iteración anterior.
+    * Esta función nos ayuda con el segundo paso de nuestro algoritmo, por lo que genera itemsets de tamaño k que pueden ser o no frecuentes, sólo genera las combinaciones a partir de la iteración anterior.
 
 * *filtrar_candidatos(transacciones, candidatos, soporte_min_conteo)*
     * Con esta función nos aseguramos de quedarnos únicamente los itemsets generados anteriormente que cumplan con el soporte mínimo establecido. Esto asegura nuestro tercer paso de eliminación de grupos poco frecuentes.
@@ -83,7 +83,7 @@ Para la implementación en Python de este algoritmo se crearon las siguientes fu
 Estas funciones nos dan la pauta para la implementación completa del algoritmo apriori, el cual devuelve todos los itemsets generados. Para generar las reglas usamos otra función que recibe lo que devuelve nuestro algoritmo apriori:
 
 * *generar_reglas(itemsets_frecuentes, confianza_min)*
-    * Encuentra las reglas lógicas a partir de los itemsets recibidos y consiferando el mínimo de confianza establecido.
+    * Encuentra las reglas lógicas a partir de los itemsets recibidos y considerando el mínimo de confianza establecido.
 
 ## Python
 
@@ -101,12 +101,10 @@ def obtener_itemsets_frecuentes_1(transacciones, soporte_min_conteo):
     Luego, descarta los que no alcanzan el umbral mínimo.
 
     Args:
-        transacciones (list): Lista de listas. Cada lista representa un registro con sus características
-        soporte_min_conteo (int): Número de veces que debe aparecer un elemento para considerarlo frecuenta
+        transacciones (list): Lista de listas. Cada lista representa un registro con sus características soporte_min_conteo (int): Número de veces que debe aparecer un elemento para considerarlo frecuente
 
     Returns:
-        dict: Diccionario donde las claves son los elementos frecuentes encapsulados en un frozenset 
-              y los valores son su conteo exacto
+        dict: Diccionario donde las claves son los elementos frecuentes encapsulados en un frozenset y los valores son su conteo exacto
     """
     conteo = {}
     for transaccion in transacciones:
@@ -272,7 +270,7 @@ Estos patrones permiten extraer conocimiento útil a partir de los datos disponi
 
 El objetivo principal es construir un modelo basado en reglas de asociación no triviales. A lo largo del proceso, dichas reglas podrán ajustarse y refinarse, con la finalidad de obtener resultados más precisos y relevantes, facilitando así su interpretación y análisis.
 
-## Analitica y preparacion de datos
+## Analítica y preparación de datos
 El conjunto de datos con el que se trabaja consta de **133,887 registros**. Para aplicar el algoritmo Apriori, es necesario transformar primero los datos a un formato transaccional. Este proceso se realiza mediante la función `df_a_transacciones()`, definida en la sección anterior, mientras que la función `algoritmo_apriori()` permite operar sobre dichas transacciones.
 
 En este contexto, cada **transacción** corresponde a un registro del conjunto de datos, es decir, a la información asociada a una persona desaparecida. Internamente, las transacciones se representan mediante una **matriz binaria**, donde cada fila corresponde a una transacción y cada columna a un *ítem* (atributo en forma categórica).
@@ -310,7 +308,7 @@ Vista parcial del conjunto de datos transformado a formato transaccional (one-ho
 
 Como se puede observar, para cada elemento *(i, j)* se asignan valores **0/1 (False/True)** dependiendo de si el ítem *j* está presente en la transacción *i*. 
 Esta representación puede interpretarse de la siguiente manera: por ejemplo, si se tiene *(index = 1, SEXO=HOMBRE = True)*, esto indica que la transacción correspondiente al registro 1 pertenece a una persona desaparecida de sexo masculino.
-De igual manera, podemos sacar mas informacion con respecto a las transacciones, como:
+De igual manera, podemos sacar más información con respecto a las transacciones, como:
 
 ```{python}
 #| eval: false
@@ -398,7 +396,7 @@ axes[1].set_title('Proporción de Nulos por ENTIDAD (Top 15)')
 plt.tight_layout()
 plt.show()
 ```
-![Proprocion de datos faltantes](heatmaps/MCAR_MAR.png)
+![Proporción de datos faltantes](heatmaps/MCAR_MAR.png)
 
 A partir del análisis visual mediante el heatmap, se observa que la variable `FECHA_DESAPARICION` en valores nulos no presenta un comportamiento claramente asociado a otras variables (no evidencia fuerte de un patrón MAR). En particular, aunque se identifican ligeras concentraciones en ciertos estados, la relación general es débil, con valores promedio cercanos a **0.3**, lo que sugiere una baja dependencia estructural.
 
@@ -503,7 +501,7 @@ anio_nacimiento = pd.to_datetime(frame['FECHA_NACIMIENTO'], errors='coerce').dt.
 # Calculamos la edad como la diferencia simple de años
 frame['EDAD'] = anio_desaparicion - anio_nacimiento
 ```
-Posteriormente fragmentamos las fechas de las varaibles 
+Posteriormente fragmentamos las fechas de las variables
 
 ```{python}
 #| eval: False
@@ -620,7 +618,7 @@ Previo a la discretización, se analiza la distribución continua de ambas varia
 
 No obstante, se identifican ligeras diferencias en las medidas de tendencia central: mientras que la mediana se mantiene alrededor del año 2020, la media presenta variaciones entre ambas distribuciones. Este comportamiento sugiere la posible existencia de registros donde la fecha de desaparición y la fecha de registro no coinciden temporalmente, lo que puede reflejar retrasos en el proceso de registro.
 
-![Proporcion continua y discreta de las edades](heatmaps/fechaContinua.png)
+![Proporción continua y discreta de las edades](heatmaps/fechaContinua.png)
 
 Para la discretización de los años, se considera el comportamiento observado en la distribución, particularmente el crecimiento en ciertos periodos. En lugar de utilizar intervalos de igual tamaño, se opta por definir **intervalos no equidistantes**, basados en criterios empíricos que reflejan cambios relevantes en la frecuencia de los datos a lo largo del tiempo.
 
@@ -724,9 +722,9 @@ plt.tight_layout()
 plt.show()
 ```
 
-![Proporcion discreta de las fechas](heatmaps/DiscretizadoFECHA.png)
+![Proporción discreta de las fechas](heatmaps/DiscretizadoFECHA.png)
 
-## Construccion y evaluacion del modelo de reglas 
+## Construcción y evaluación del modelo de reglas 
 
 ```{python}
 #|eval: False 
@@ -801,7 +799,7 @@ def graficar_transacciones_con_nombres(datos: pd.DataFrame, inicio: int = 0, fin
 
     plt.xlabel(f"Top {top_n_items} ítems más frecuentes", fontsize=12, fontweight='bold')
     plt.ylabel("Transacciones", fontsize=12, fontweight='bold')
-    plt.title(titulo or f"Matriz de Transacciones(Top {top_n_items} Items)", fontsize=14, fontweight='bold')
+    plt.title(titulo or f"Matriz Binaria(Top {top_n_items} Items)", fontsize=14, fontweight='bold')
 
     plt.grid(True, linestyle=':', alpha=0.5)
     plt.tight_layout()
@@ -815,19 +813,380 @@ graficar_transacciones_con_nombres(
     top_n_items=50
 )
 
-![Muestra las primeras transacciones de co ocurrencia 1](heatmaps/Top15Dispersa.png)
-![Proporcion continua y discreta de las edades](heatmaps/MatrizDispersa.png)
+![Muestra las primeras transacciones de co-ocurrencia 1](heatmaps/Top15Dispersa.png)
+![Proporción continua y discreta de las edades](heatmaps/MatrizDispersa.png)
 
 La primera visualización muestra la co-ocurrencia de los ítems más frecuentes en un subconjunto reducido de transacciones:
 
 A partir de esta representación, se observa que ciertos ítems aparecen de forma recurrente en múltiples transacciones, formando patrones verticales que indican alta frecuencia relativa. En contraste, otros ítems presentan una aparición más esporádica, lo que evidencia la heterogeneidad en la distribución de los datos
 Particularmente se observa que los items relacionados con INFANTE, ESTADO DE MEXICO, HOMBRE, MUJER, DESAPARECIDA son de mayor 
-co ocurrencia en las transacciones 
+co-ocurrencia en las transacciones 
 
+## Generación de reglas
 
-## Refinamiento y ajuste 
-### Eliminiacion de redundancia
+Para la generación de reglas sobre el dataset completo se utilizó FP-Growth con las 5 variables más relevantes del fenómeno: `SEXO`, `EDAD`, `ENTIDAD`, `ESTATUS_VICTIMA` y `MES_DESAPARICION`. La decisión de reducir a estas 5  columnas responde a dos criterios: primero, son las variables con mayor  relevancia semántica para el análisis de desapariciones; segundo, reducir  la dimensionalidad de 1,649 a 59 ítems mejora significativamente el  rendimiento del algoritmo sin perder los patrones principales.
+
+```{python}
+#| eval: false
+columnas_reglas = ['SEXO', 'EDAD', 'ENTIDAD', 'ESTATUS_VICTIMA', 'MES_DESAPARICION']
+frame_reglas = frame[columnas_reglas]
+transacciones_full = df_a_transacciones(frame_reglas)
+
+codificador_full = TransactionEncoder()
+codif_full = codificador_full.fit_transform(transacciones_full)
+df_full = pd.DataFrame(codif_full, columns=codificador_full.columns_)
+
+SOPORTE_FINAL = 0.01
+CONFIANZA_FINAL = 0.5
+
+itemsets_final = fpgrowth(df_full, min_support=SOPORTE_FINAL, use_colnames=True)
+reglas_final = association_rules(itemsets_final, 
+                                  metric="confidence", 
+                                  min_threshold=CONFIANZA_FINAL)
+print(f"Reglas encontradas: {len(reglas_final)}")
+```
+```{.output}
+Dataset codificado: 98884 transacciones, 59 items
+Reglas encontradas: 1322
+```
+
+## Métricas utilizadas
+
+Para evaluar la calidad de las reglas generadas se utilizaron:
+
+**Soporte** mide la frecuencia del patrón en el dataset. Una regla 
+$X \Rightarrow Y$ tiene soporte igual a la proporción de transacciones 
+que contienen tanto $X$ como $Y$:
+
+$$\text{soporte}(X \Rightarrow Y) = \frac{|\{t \in D : X \cup Y \subseteq t\}|}{|D|}$$
+
+En este trabajo se estableció un soporte mínimo de **0.01**, equivalente a patrones presentes en al menos 988 de los 98,884 registros. Valores menores generaban una explosión computacional; valores mayores eliminaban patrones demográficos relevantes.
+
+**Confianza** mide la probabilidad condicional de que ocurra el consecuente dado el antecedente:
+
+$$\text{confianza}(X \Rightarrow Y) = \frac{\text{soporte}(X \cup Y)}{\text{soporte}(X)}$$
+
+Se estableció una confianza mínima de **0.5**, garantizando que el  consecuente ocurra en al menos la mitad de los casos donde se presenta  el antecedente.
+
+**Lift** mide si la asociación es genuina o casual, comparando la 
+frecuencia observada con la esperada bajo independencia:
+
+$$\text{lift}(X \Rightarrow Y) = \frac{\text{confianza}(X \Rightarrow Y)}{\text{soporte}(Y)}$$
+
+Un lift mayor a 1 indica dependencia positiva; igual a 1 indica independencia; menor a 1 indica asociación negativa. En el análisis  final se priorizaron las reglas con lift mayor a 2.0 por representar  asociaciones sustancialmente más fuertes que el azar.
+
+```{python}
+#| eval: false
+# Distribución de las métricas en el conjunto de reglas generadas
+print("Estadísticos descriptivos de las métricas:")
+print(reglas_final[['support', 'confidence', 'lift']].describe().round(4))
+```
+```{.output}
+       support  confidence    lift
+count  1322.00     1322.00  1322.00
+mean      0.02        0.61     1.89
+std       0.02        0.10     1.42
+min       0.01        0.50     1.00
+25%       0.01        0.54     1.19
+50%       0.02        0.59     1.47
+75%       0.03        0.66     2.14
+max       0.50        1.00     7.17
+```
+
+Los estadísticos descriptivos muestran que el soporte promedio de las reglas es 0.02, lo que indica que la mayoría de los patrones encontrados son específicos y no generalizables a toda la población. El lift promedio de 1.89 confirma que las asociaciones son genuinas y no casuales. El valor máximo de lift de 7.17 corresponde a la regla de infantes en el Estado de México, que representa la asociación más fuerte del dataset.
+
+## Refinamiento y ajuste
+
+### Eliminacion de redundancia
+
+Durante la fase de preparacion de datos se identificaron multiples fuentes de redundancia que afectaban la calidad de las reglas generadas:
+
+**Variables duplicadas semanticamente:**
+Se eliminaron las variables `CVE_ENT` y `CVE_MUN` por representar la misma informacion que `ENTIDAD` y `MUNICIPIO` respectivamente. Mantener ambas representaciones generaba reglas triviales del tipo `CVE_ENT=15 -> ENTIDAD=ESTADO DE MEXICO`, que no aportaban conocimiento nuevo sobre las desapariciones. Se conservaron las versiones nominales por su interpretabilidad directa.
+
+**Identificadores unicos:**
+La variable `ID_VICTIMA` fue eliminada por ser un identificador unico alfanumerico. Cada valor aparece exactamente una vez en el dataset, por lo que su soporte siempre seria aproximadamente 0.001%, muy por debajo de cualquier umbral razonable. Incluirla solo incrementaria la dimensionalidad sin aportar patrones.
+
+**Variables de fecha originales:**
+Las variables `FECHA_DESAPARICION`, `FECHA_REGISTRO` y `FECHA_NACIMIENTO` contenian informacion a nivel de dia y hora. Esta granularidad generaba una cardinalidad extrema donde cada fecha unica se convertia en un item distinto, resultando en una matriz binaria con 255,842 items y una densidad de solo 0.0043%. Para resolver esto, se aplicaron dos estrategias:
+
+1. **Derivacion de EDAD:** A partir de la diferencia entre `FECHA_DESAPARICION` y `FECHA_NACIMIENTO` se calculo la edad, que posteriormente fue discretizada en 6 categorias (INFANTE, ADOLESCENTE, JOVEN, ADULTO, ADULTO_MAYOR, CONFIDENCIAL).
+
+2. **Descomposicion temporal:** `FECHA_DESAPARICION` y `FECHA_REGISTRO` se descompusieron en componentes de mes y ano, descartando dia y hora. El mes conserva granularidad para detectar patrones estacionales; el ano se discretizo en 8 intervalos no equidistantes basados en la distribucion observada de los datos.
+
+**Resultado de la eliminacion de redundancia:**
+La dimensionalidad se redujo de 255,842 items (dataset original sin procesar) a 1,649 items (dataset procesado con 10 columnas), una reduccion del 99.4%.
+
 ### Restricciones en reglas
-### Reglas maximas
+
+Para evitar que el algoritmo generara reglas triviales o sin valor interpretativo, se aplicaron restricciones tanto en la generación como en el filtrado posterior:
+
+**Restricciones aplicadas durante la generacion:**
+
+1. **Tamaño mínimo del consecuente:** Solo se generaron reglas donde el itemset completo tiene tamaño mayor o igual a 2, lo que garantiza que exista al menos un antecedente y un consecuente. Las reglas de tamaño 1 no establecen una relación condicional.
+
+2. **Umbrales de calidad:** Tras multiples pruebas de ejecucion sobre el dataset, se determinaron los umbrales óptimos:
+   - **Soporte mínimo de 0.01 (1%):** Un soporte menor (0.005) provoco que FP-Growth no terminara en tiempo razonable debido a la explosion combinatoria. Un soporte mayor (0.02) reducia excesivamente el numero de reglas generadas, eliminando patrones potencialmente relevantes. El valor de 0.01 ofrecio un equilibrio.
+   - **Confianza minima de 0.5 (50%):** Se eligio este umbral para garantizar que las reglas tuvieran una probabilidad condicional aceptable, descartando aquellas donde el consecuente ocurre en menos de la mitad de los casos que presentan el antecedente.
+
+**Restricciones aplicadas en el filtrado posterior:**
+
+3. **Reglas con CONFIDENCIAL en ambos lados:** Se identificaron reglas del tipo `SEXO=CONFIDENCIAL, MUNICIPIO=CONFIDENCIAL -> EDAD=CONFIDENCIAL` que, aunque tienen alto lift, no reflejan las  desapariciones sino un ocultamiento sistematico de informacion por parte de las autoridades. Estas reglas se documentan como hallazgo del sesgo institucional pero no se consideran para el análisis de patrones.
+
+4. **Reglas redundantes por inclusion:** Si se generaban simultaneamente `A -> C` y `A,B -> C` con métricas similares, se conservo solo la regla mas general. Esto evita inflar artificialmente el numero de reglas con variantes de un mismo patron.
+
+5. **Reglas con MUNICIPIO:** Debido a la alta cardinalidad de MUNICIPIO (2,457 categorias), las reglas que involucraban esta variable tenian soporte extremadamente bajo, menor al 0.1%, y fueron excluidas del analisis final.
+
+### Reglas máximas
+
+Del conjunto de 1,322 reglas generadas por FP-Growth, se identificaron las **reglas máximas**: aquellas que no pueden extenderse anadiendo mas items sin perder el soporte minimo. Estas reglas representan los patrones mas completos e informativos.
+
+**Criterios para seleccionar reglas máximas:**
+
+- **Lift mayor a 2.0:** La asociacion es al menos el doble de lo esperado por azar.
+- **Confianza mayor a 0.5:** Mas del 50% de probabilidad condicional.
+- **Soporte mayor a 0.01:** Al menos 988 casos en el dataset completo.
+
+De las 1,322 reglas generadas, 47 cumplieron con estos criterios. Las 10 reglas con mayor lift (2.46 - 7.17) corresponden a patrones geográficos y demográficos que se analizan en la seccion de interpretacion.
+
+**Reglas descartadas por triviales:** Aproximadamente el 60% de las reglas generadas correspondian a asociaciones con la categoría CONFIDENCIAL. Si bien reflejan un sesgo del sistema de registro, no se consideran reglas máximas para el análisis de las desapariciones.
+
 ### Reglas en transacciones
-## Visualizacion de reglas
+
+Para verificar la presencia de las reglas descubiertas en los datos originales, se analizó la matriz binaria presentada anteriormente. Las reglas con mayor lift se corresponden con patrones visibles en dicha matriz binaria: los ítems `EDAD=INFANTE`, `ENTIDAD=ESTADO DE MÉXICO` y `ESTATUS_VICTIMA=DESAPARECIDA` presentan una alta co-ocurrencia, observable en las columnas con mayor densidad de puntos.
+
+Cada regla puede rastrearse hasta las transacciones específicas que la soportan. Por ejemplo, la regla `EDAD=INFANTE → ENTIDAD=ESTADO DE MÉXICO` con soporte 0.0107 está presente en aproximadamente 1,058 de las 98,884 transacciones del dataset.
+
+### Visualización de reglas
+
+A continuacion se presentan las reglas de asociación obtenidas, ordenadas por lift:
+
+| # | Antecedente | Consecuente | Soporte | Confianza | Lift |
+|:--:|:---|:---|:---:|:---:|:---:|
+| 1 | EDAD=INFANTE | ENTIDAD=ESTADO DE MEXICO, ESTATUS_VICTIMA=DESAPARECIDA | 1.06% | 51.6% | 7.17 |
+| 2 | ENTIDAD=ESTADO DE MEXICO, EDAD=ADOLESCENTE | SEXO=MUJER, ESTATUS_VICTIMA=DESAPARECIDA | 1.10% | 62.0% | 6.20 |
+| 3 | ENTIDAD=ESTADO DE MEXICO, ESTATUS_VICTIMA=DESAPARECIDA, EDAD=ADOLESCENTE | SEXO=MUJER | 1.10% | 62.6% | 5.99 |
+| 4 | ENTIDAD=ESTADO DE MEXICO, EDAD=ADOLESCENTE | SEXO=MUJER | 1.11% | 62.3% | 5.96 |
+| 5 | ESTATUS_VICTIMA=DESAPARECIDA, EDAD=INFANTE | ENTIDAD=ESTADO DE MEXICO | 1.06% | 53.3% | 5.05 |
+| 6 | EDAD=INFANTE | ENTIDAD=ESTADO DE MEXICO | 1.07% | 52.1% | 4.94 |
+| 7 | ENTIDAD=SINALOA, ESTATUS_VICTIMA=DESAPARECIDA | SEXO=HOMBRE, EDAD=JOVEN | 1.72% | 57.1% | 2.55 |
+| 8 | SEXO=HOMBRE, ENTIDAD=TAMAULIPAS | EDAD=JOVEN, ESTATUS_VICTIMA=DESAPARECIDA | 1.79% | 63.8% | 2.53 |
+| 9 | SEXO=HOMBRE, ENTIDAD=GUANAJUATO | EDAD=JOVEN, ESTATUS_VICTIMA=DESAPARECIDA | 1.07% | 63.7% | 2.52 |
+| 10 | ENTIDAD=GUANAJUATO, ESTATUS_VICTIMA=DESAPARECIDA | SEXO=HOMBRE, EDAD=JOVEN | 1.07% | 55.1% | 2.46 |
+
+: Las 10 reglas de asociacion con mayor Lift obtenidas del dataset completo {#tbl-top-reglas}
+
+Estas reglas muestran patrones **geográficos** y demográficos relevantes: el **Estado de México** concentra una proporción importante de los registros de infantes y mujeres adolescentes desaparecidas, mientras que entidades del norte del país presentan un perfil predominante de hombres jóvenes.
+
+## Interpretacion de reglas de asociación
+
+### Infantes en el Estado de Mexico (Reglas 1, 5, 6)
+
+Las reglas con mayor lift (4.94 - 7.17) asocian la categoria EDAD=INFANTE con la ENTIDAD=ESTADO DE MEXICO. La regla principal indica que si una persona desaparecida pertenece a la categoría INFANTE, la probabilidad de que el registro corresponda al Estado de México es 7.17 veces mayor a lo esperado si ambas variables fueran independientes. La confianza de 51.6% indica que mas de la mitad de los registros de infantes desaparecidos se concentran en esta entidad.
+
+Este hallazgo podria relacionarse con diversos factores: la alta densidad poblacional del Estado de México, la actividad de grupos delictivos dedicados a la sustraccion de menores en la zona metropolitana, o una mayor eficiencia en el registro de estos casos por parte de las fiscalias locales en comparacion con otras entidades.
+
+### Mujeres adolescentes en el Estado de México (Reglas 2, 3, 4)
+
+Se identifico un patrón de género significativo en el Estado de México para el grupo etario ADOLESCENTE (12-17 anos). Las reglas 2 a 4 muestran que cuando una persona adolescente desaparece en esta entidad, existe una probabilidad aproximadamente 6 veces mayor a la esperada de que sea mujer. La confianza del 62.3% indica que de los registros de adolescentes desaparecidos en el Estado de México, casi dos tercios corresponden a mujeres.
+
+Este patron podria estar vinculado a sucesos como la trata de personas con fines de explotación sexual, la violencia de género focalizada geográficamente, o patrones de desaparición específicos que afectan de manera diferenciada a mujeres adolescentes en esta región.
+
+### Hombres jóvenes en entidades del norte (Reglas 7-10)
+
+En contraste con los patrones anteriores, los estados de Sinaloa, Tamaulipas y Guanajuato presentan un perfil predominante de hombres jóvenes (20-39 anos) con estatus DESAPARECIDA. Las reglas 7 a 10 muestran un lift cercano a 2.5 y confianza entre 55% y 64%, lo que indica una asociacion moderada pero consistente.
+
+Estos hallazgos son compatibles con contextos de desaparicion relacionados con el crimen organizado, donde el perfil de hombre joven es el mas frecuente. A diferencia del Estado de México, donde el patron de género es femenino, en estas entidades del norte la proporción de hombres desaparecidos es mayor.
+
+### Reflexion sobre los patrones encontrados
+
+Es fundamental considerar que las reglas obtenidas reflejan los registros de personas desaparecidas que cuentan con datos completos en el sistema. La categoría CONFIDENCIAL, presente en el 49% de los registros, introduce un sesgo importante: las entidades o perfiles con mayor opacidad en el registro pueden estar subrepresentados en estos patrones. Por lo tanto, las asociaciones encontradas deben interpretarse como patrones del sistema de registro, no necesariamente como una representacion exacta de la totalidad de las desapariciones en México.
+
+# Algoritmo FP-Growth
+
+## Descripción
+
+FP-Growth (Frequent Pattern Growth) es un algoritmo para minería de patrones frecuentes propuesto por Han, Pei y Yin (2000). A diferencia de Apriori, este algoritmo evita la generación explícita de candidatos, lo que lo hace considerablemente mas eficiente en bases de datos grandes.
+
+La idea central de FP-Growth es comprimir la base de transacciones en una estructura de árbol llamada FP-tree (Frequent Pattern Tree). A partir de ese árbol, el algoritmo extrae patrones frecuentes mediante bases condicionales y arboles condicionales, sin necesidad de generar candidatos ni realizar multiples barridos sobre los datos.
+
+Los pasos principales de FP-Growth son:
+
+1. **Calculo de soportes individuales:** Se realiza un primer barrido sobre la base de datos para contar la frecuencia de cada item. Se eliminan aquellos items que no alcanzan el soporte mínimo establecido.
+
+2. **Ordenamiento por frecuencia:** Los items se ordenan de mayor a menor frecuencia. Este orden global permite que las transacciones compartan prefijos comunes, haciendo el árbol mas compacto.
+
+3. **Construcción del FP-tree:** Se realiza un segundo barrido sobre la base de datos. Para cada transacción, se ordenan sus items segun el orden global y se insertan en el árbol. Si un prefijo ya existe, se incrementa el contador del nodo correspondiente. Si no existe, se crea una nueva rama. Esta compresión permite representar muchas transacciones en una estructura compacta.
+
+4. **Extracción de patrones frecuentes:** Se extraen los patrones frecuentes desde los items menos frecuentes hacia los mas frecuentes. Para cada item, se construye su base condicional que contiene los caminos prefijo que llevan a ese item y su arbol condicional. Los patrones frecuentes se obtienen recursivamente a partir de estas estructuras.
+
+5. **Generación de reglas de asociacion:** Una vez obtenidos los itemsets frecuentes, se generan reglas de asociacioón evaluando métricas como soporte, confianza y lift, de manera análoga a como se hace en Apriori.
+
+## Ventajas frente a Apriori
+
+La principal ventaja de FP-Growth es que solo requiere dos barridos completos sobre la base de datos: uno para calcular los soportes individuales y otro para construir el árbol. Apriori, en cambio, requiere un barrido por cada nivel de itemsets frecuentes, lo que lo hace mas lento cuando existen patrones de gran tamaño.
+
+Ademas, FP-Growth comprime las transacciones que comparten prefijos en ramas comunes del árbol, reduciendo el uso de memoria y acelerando la extracción de patrones. Esto es especialmente útil en bases de datos dispersas como la de este trabajo, donde la mayoria de las transacciones contienen pocos items.
+
+## Implementación en Python
+
+Para este trabajo se utilizo la implementación de FP-Growth disponible en la libreria `mlxtend`. Esta libreria requiere que los datos esten en formato one-hot, donde cada columna representa un item posible y cada fila indica si esa transacción contiene dicho item.
+
+```{python}
+#| eval: false
+from mlxtend.preprocessing import TransactionEncoder
+from mlxtend.frequent_patterns import fpgrowth, association_rules
+import pandas as pd
+
+# Cargar el dataset procesado
+frame = pd.read_csv("DS_procesado.csv")
+
+# Seleccionar las columnas relevantes para las reglas
+columnas_reglas = ['SEXO', 'EDAD', 'ENTIDAD', 'ESTATUS_VICTIMA', 'MES_DESAPARICION']
+frame_reglas = frame[columnas_reglas]
+
+# Convertir el dataframe a formato de transacciones
+def df_a_transacciones(df):
+    """
+    Convierte un DataFrame en una lista de transacciones.
+    Cada transacción es una lista de strings con el formato 'columna=valor'.
+    """
+    columnas = df.columns.tolist()
+    transacciones = []
+    for index, fila in df.iterrows():
+        transaccion = [f"{col}={fila[col]}" for col in columnas]
+        transacciones.append(transaccion)
+    return transacciones
+
+transacciones = df_a_transacciones(frame_reglas)
+
+# Codificar las transacciones a formato one-hot
+codificador = TransactionEncoder()
+transacciones_codificadas = codificador.fit_transform(transacciones)
+df_codificado = pd.DataFrame(transacciones_codificadas, columns=codificador.columns_)
+
+print(f"Dataset codificado: {df_codificado.shape[0]} transacciones, {df_codificado.shape[1]} items")
+
+# Aplicar FP-Growth con soporte mínimo de 0.01 y confianza minima de 0.5
+SOPORTE_MIN = 0.01
+CONFIANZA_MIN = 0.5
+
+print(f"Ejecutando FP-Growth con soporte mínimo {SOPORTE_MIN}...")
+itemsets_frecuentes = fpgrowth(df_codificado, min_support=SOPORTE_MIN, use_colnames=True)
+
+print(f"Generando reglas con confianza minima {CONFIANZA_MIN}...")
+reglas = association_rules(itemsets_frecuentes, metric="confidence", min_threshold=CONFIANZA_MIN)
+
+print(f"Reglas generadas: {len(reglas)}")
+```
+
+En el codigo anterior, la funcion `fpgrowth()` recibe la matriz one-hot y el soporte mínimo deseado. El parametro `use_colnames=True` indica que se utilicen los nombres de las columnas como identificadores de los items. La funcion `association_rules()` genera las reglas a partir de los itemsets frecuentes, permitiendo especificar la metrica y el umbral mínimo para filtrar las reglas resultantes.
+
+La principal diferencia con la implementación manual de Apriori es que FP-Growth no requiere las funciones auxiliares `generar_candidatos()` ni `filtrar_candidatos()`, ya que la extracción de patrones se realiza directamente desde la estructura del árbol, sin generar combinaciones explícitas de items.
+
+```{.output}
+Dataset codificado: 98884 transacciones, 59 items
+Ejecutando FP-Growth con soporte mínimo 0.01...
+Generando reglas con confianza minima 0.5...
+Reglas generadas: 1322
+```
+# Comparación de algoritmos
+
+## Algoritmos utilizados
+
+Para el descubrimiento de reglas de asociación se utilizaron dos algoritmos:
+
+1. **Apriori (implementación manual):** El algoritmo descrito e implementado en la sección [Algoritmo Apriori]. Esta versión fue desarrollada desde cero en Python siguiendo el método original de Agrawal y Srikant (1994), utilizando generación explícita de candidatos y múltiples barridos sobre la base de datos.
+
+2. **FP-Growth:** El algoritmo descrito e implementado en la sección [Algoritmo FP-Growth]. A diferencia de Apriori, FP-Growth evita la generación explícita de candidatos. Comprime la base de transacciones en una estructura de árbol llamada FP-tree y extrae los patrones frecuentes mediante bases condicionales y árboles condicionales, requiriendo solo dos barridos completos sobre los datos (Han, Pei y Yin, 2000).
+
+## Comparación de rendimiento
+
+Previo a la selección de variables, se intentó ejecutar ambos algoritmos sobre el dataset completo procesado con **10 columnas y 1,649 ítems**. En este escenario, FP-Growth con soporte mínimo de 0.01 tardó aproximadamente **106.45 segundos** en el dataset completo, mientras que la implementación manual de Apriori resultó completamente inviable: con 1,649 ítems frecuentes el número de candidatos a evaluar en cada nivel creció de manera exponencial, estimándose un tiempo de ejecución de varias horas.
+
+Esta limitación motivó la reducción del espacio de ítems a las **5 variables más relevantes** del fenómeno (`SEXO`, `EDAD`, `ENTIDAD`, `ESTATUS_VICTIMA`, `MES_DESAPARICION`), lo que redujo los ítems distintos de 1,649 a 59. Esta decisión tiene dos efectos directos sobre la comparativa de algoritmos:
+
+1. Hace viable la comparación directa entre Apriori manual y FP-Growth sobre muestras representativas.
+2. Elimina el escenario de alta dimensionalidad donde FP-Growth muestra su mayor ventaja, lo que explica por qué en este dataset reducido Apriori manual resultó más rápido en todos los experimentos.
+
+```{python}
+#| eval: false
+import time
+
+MUESTRA = 10000
+transacciones_muestra = transacciones[:MUESTRA]
+
+codificador = TransactionEncoder()
+codif_muestra = codificador.fit_transform(transacciones_muestra)
+df_codif_muestra = pd.DataFrame(codif_muestra, columns=codificador.columns_)
+
+# Experimento 1: soporte alto
+t0 = time.time()
+itemsets_propios = algoritmo_apriori(transacciones_muestra, soporte_min=0.05)
+reglas_propias = generar_reglas(itemsets_propios, confianza_min=0.5)
+t1 = time.time()
+tiempo_propio_alto = round(t1 - t0, 2)
+
+t0 = time.time()
+itemsets_fp = fpgrowth(df_codif_muestra, min_support=0.05, use_colnames=True)
+reglas_fp = association_rules(itemsets_fp, metric="confidence", min_threshold=0.5)
+t1 = time.time()
+tiempo_fp_alto = round(t1 - t0, 2)
+
+# Experimento 2: soporte bajo
+t0 = time.time()
+itemsets_propios = algoritmo_apriori(transacciones_muestra, soporte_min=0.01)
+reglas_propias = generar_reglas(itemsets_propios, confianza_min=0.5)
+t1 = time.time()
+tiempo_propio_bajo = round(t1 - t0, 2)
+
+t0 = time.time()
+itemsets_fp = fpgrowth(df_codif_muestra, min_support=0.01, use_colnames=True)
+reglas_fp = association_rules(itemsets_fp, metric="confidence", min_threshold=0.5)
+t1 = time.time()
+tiempo_fp_bajo = round(t1 - t0, 2)
+
+print(f"[Soporte 5%]  Apriori: {len(reglas_propias)} reglas en {tiempo_propio_alto}s")
+print(f"[Soporte 5%]  FP-Growth: {len(reglas_fp)} reglas en {tiempo_fp_alto}s")
+print(f"[Soporte 1%]  Apriori: {len(reglas_propias)} reglas en {tiempo_propio_bajo}s")
+print(f"[Soporte 1%]  FP-Growth: {len(reglas_fp)} reglas en {tiempo_fp_bajo}s")
+```
+```{.output}
+[Soporte 5%]  Apriori: 131 reglas en 0.27s
+[Soporte 5%]  FP-Growth: 131 reglas en 1.68s
+[Soporte 1%]  Apriori: 1204 reglas en 4.35s
+[Soporte 1%]  FP-Growth: 1204 reglas en 10.53s
+```
+
+| Algoritmo | Transacciones | Soporte mín. | Reglas | Tiempo (s) |
+|:---|:---:|:---:|:---:|:---:|
+| Apriori (implementación manual) | 500 | 5% | 207 | 0.02 |
+| FP-Growth (mlxtend) | 500 | 5% | 207 | 0.12 |
+| Apriori (implementación manual) | 10,000 | 5% | 131 | 0.61 |
+| FP-Growth (mlxtend) | 10,000 | 5% | 131 | 1.65 |
+| Apriori (implementación manual) | 10,000 | 1% | 1,204 | 4.35 |
+| FP-Growth (mlxtend) | 10,000 | 1% | 1,204 | 10.53 |
+| FP-Growth (mlxtend) | 98,884 | 1% | 1,322 | 106.45 |
+
+: Comparativa de rendimiento entre algoritmos bajo distintas condiciones experimentales {#tbl-comparativa-algoritmos}
+Se observa un patrón consistente: conforme aumenta el número de  transacciones y disminuye el soporte mínimo, ambos algoritmos generan  más reglas y tardan más. Sin embargo, Apriori manual mantiene ventaja  sobre FP-Growth en todas las muestras probadas. La única excepción es  el dataset completo, donde FP-Growth fue el único algoritmo viable.
+
+### ¿Cuál tarda más?
+
+En los experimentos realizados sobre muestras de 10,000 transacciones, FP-Growth tardó más que la implementación manual de Apriori en ambos escenarios (1.68s vs 0.27s con soporte del 5%; 10.53s vs 4.35s con soporte del 1%). Ambos algoritmos produjeron exactamente el mismo número de reglas, confirmando su equivalencia matemática.
+
+Este resultado se explica por el espacio de ítems reducido del dataset: con solo 59 ítems distintos, el overhead de construir el FP-tree supera el beneficio de evitar candidatos explícitos. FP-Growth está optimizado para espacios de alta dimensionalidad que en este dataset fue eliminada deliberadamente durante el preprocesamiento.
+
+### ¿Cuál tarda menos y por qué?
+
+A escala completa, **FP-Growth resultó el único algoritmo viable**. Sobre las 98,884 transacciones con 1,649 ítems, FP-Growth procesó las reglas en aproximadamente 106.45 segundos. La implementación manual de Apriori resultó inviable en este escenario: con 1,649 ítems el número de candidatos crece exponencialmente en cada nivel, requiriendo múltiples barridos completos del dataset, lo que se estimó en varias horas de ejecución. La ventaja de FP-Growth se manifiesta exactamente en este escenario de alta dimensionalidad.
+
+## Comparación de resultados
+
+Ambos algoritmos son matemáticamente equivalentes: identifican el mismo conjunto de ítemsets frecuentes bajo los mismos umbrales de soporte y confianza. La diferencia radica únicamente en la estrategia de búsqueda.
+
+La equivalencia se verificó ejecutando ambos algoritmos sobre las mismas muestras de transacciones, confirmando que las reglas generadas son idénticas en todos los experimentos. La implementación manual de Apriori produce el mismo conjunto de reglas que FP-Growth, aunque limitada a muestras pequeñas por sus restricciones de escalabilidad.
+
+Para el análisis final sobre el dataset completo se utilizó FP-Growth debido a su eficiencia. Con un soporte mínimo de 0.01 y confianza mínima de 0.5, el algoritmo generó 1,322 reglas en 106.45 segundos sobre las 98,884 transacciones del dataset reducido a 59 ítems.
+
+Desde la perspectiva del análisis respecto a la desaparición de personas, la elección del algoritmo no tiene ningún efecto sobre los patrones descubiertos ni sobre las conclusiones que se derivan de ellos. Los mismos patrones geográficos y demográficos, la concentración de infantes y mujeres adolescentes desaparecidas en el Estado de México, o el perfil de hombres jóvenes en entidades del norte del país emergen de forma idéntica independientemente del método utilizado. La decisión de usar FP-Growth para el dataset completo fue estrictamente operativa: ambos algoritmos conducen a las mismas reglas y, por tanto, a las mismas reflexiones sobre las víctimas y las limitaciones del sistema de registro.

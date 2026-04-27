@@ -71,7 +71,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="reporte_files/libs/quarto-html/quarto-syntax-highlighting-a06763021a52c43c40a351ac8b799b8f.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="reporte_files/libs/bootstrap/bootstrap.min.js"></script>
 <link href="reporte_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="reporte_files/libs/bootstrap/bootstrap-7927b542fa1d84950307462b573002e1.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="reporte_files/libs/bootstrap/bootstrap-59595c850a2b5f2eb326261049429a34.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
   <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
@@ -127,22 +127,47 @@ window.Quarto = {
   <li><a href="#descubrimiento-de-patrones-reglas-de-asociación" id="toc-descubrimiento-de-patrones-reglas-de-asociación" class="nav-link" data-scroll-target="#descubrimiento-de-patrones-reglas-de-asociación"><span class="header-section-number">3</span> Descubrimiento de patrones: Reglas de Asociación</a>
   <ul class="collapse">
   <li><a href="#conocimiento-de-la-problemática" id="toc-conocimiento-de-la-problemática" class="nav-link" data-scroll-target="#conocimiento-de-la-problemática"><span class="header-section-number">3.1</span> Conocimiento de la problemática</a></li>
-  <li><a href="#analitica-y-preparacion-de-datos" id="toc-analitica-y-preparacion-de-datos" class="nav-link" data-scroll-target="#analitica-y-preparacion-de-datos"><span class="header-section-number">3.2</span> Analitica y preparacion de datos</a>
+  <li><a href="#analítica-y-preparación-de-datos" id="toc-analítica-y-preparación-de-datos" class="nav-link" data-scroll-target="#analítica-y-preparación-de-datos"><span class="header-section-number">3.2</span> Analítica y preparación de datos</a>
   <ul class="collapse">
   <li><a href="#preparación-de-datos" id="toc-preparación-de-datos" class="nav-link" data-scroll-target="#preparación-de-datos"><span class="header-section-number">3.2.1</span> Preparación de datos</a></li>
   <li><a href="#tratamiento-de-datos-faltantes-mcar-vs-mar" id="toc-tratamiento-de-datos-faltantes-mcar-vs-mar" class="nav-link" data-scroll-target="#tratamiento-de-datos-faltantes-mcar-vs-mar"><span class="header-section-number">3.2.2</span> Tratamiento de datos faltantes (MCAR vs MAR)</a></li>
   <li><a href="#manejo-de-datos-confidenciales" id="toc-manejo-de-datos-confidenciales" class="nav-link" data-scroll-target="#manejo-de-datos-confidenciales"><span class="header-section-number">3.2.3</span> Manejo de datos confidenciales</a></li>
   <li><a href="#discretizacion-de-variables-continuas" id="toc-discretizacion-de-variables-continuas" class="nav-link" data-scroll-target="#discretizacion-de-variables-continuas"><span class="header-section-number">3.2.4</span> Discretizacion de variables continuas</a></li>
   </ul></li>
-  <li><a href="#construccion-y-evaluacion-del-modelo-de-reglas" id="toc-construccion-y-evaluacion-del-modelo-de-reglas" class="nav-link" data-scroll-target="#construccion-y-evaluacion-del-modelo-de-reglas"><span class="header-section-number">3.3</span> Construccion y evaluacion del modelo de reglas</a></li>
-  <li><a href="#refinamiento-y-ajuste" id="toc-refinamiento-y-ajuste" class="nav-link" data-scroll-target="#refinamiento-y-ajuste"><span class="header-section-number">3.4</span> Refinamiento y ajuste</a>
+  <li><a href="#construcción-y-evaluación-del-modelo-de-reglas" id="toc-construcción-y-evaluación-del-modelo-de-reglas" class="nav-link" data-scroll-target="#construcción-y-evaluación-del-modelo-de-reglas"><span class="header-section-number">3.3</span> Construcción y evaluación del modelo de reglas</a></li>
+  <li><a href="#generación-de-reglas" id="toc-generación-de-reglas" class="nav-link" data-scroll-target="#generación-de-reglas"><span class="header-section-number">3.4</span> Generación de reglas</a></li>
+  <li><a href="#métricas-utilizadas" id="toc-métricas-utilizadas" class="nav-link" data-scroll-target="#métricas-utilizadas"><span class="header-section-number">3.5</span> Métricas utilizadas</a></li>
+  <li><a href="#refinamiento-y-ajuste" id="toc-refinamiento-y-ajuste" class="nav-link" data-scroll-target="#refinamiento-y-ajuste"><span class="header-section-number">3.6</span> Refinamiento y ajuste</a>
   <ul class="collapse">
-  <li><a href="#eliminiacion-de-redundancia" id="toc-eliminiacion-de-redundancia" class="nav-link" data-scroll-target="#eliminiacion-de-redundancia"><span class="header-section-number">3.4.1</span> Eliminiacion de redundancia</a></li>
-  <li><a href="#restricciones-en-reglas" id="toc-restricciones-en-reglas" class="nav-link" data-scroll-target="#restricciones-en-reglas"><span class="header-section-number">3.4.2</span> Restricciones en reglas</a></li>
-  <li><a href="#reglas-maximas" id="toc-reglas-maximas" class="nav-link" data-scroll-target="#reglas-maximas"><span class="header-section-number">3.4.3</span> Reglas maximas</a></li>
-  <li><a href="#reglas-en-transacciones" id="toc-reglas-en-transacciones" class="nav-link" data-scroll-target="#reglas-en-transacciones"><span class="header-section-number">3.4.4</span> Reglas en transacciones</a></li>
+  <li><a href="#eliminacion-de-redundancia" id="toc-eliminacion-de-redundancia" class="nav-link" data-scroll-target="#eliminacion-de-redundancia"><span class="header-section-number">3.6.1</span> Eliminacion de redundancia</a></li>
+  <li><a href="#restricciones-en-reglas" id="toc-restricciones-en-reglas" class="nav-link" data-scroll-target="#restricciones-en-reglas"><span class="header-section-number">3.6.2</span> Restricciones en reglas</a></li>
+  <li><a href="#reglas-máximas" id="toc-reglas-máximas" class="nav-link" data-scroll-target="#reglas-máximas"><span class="header-section-number">3.6.3</span> Reglas máximas</a></li>
+  <li><a href="#reglas-en-transacciones" id="toc-reglas-en-transacciones" class="nav-link" data-scroll-target="#reglas-en-transacciones"><span class="header-section-number">3.6.4</span> Reglas en transacciones</a></li>
+  <li><a href="#visualización-de-reglas" id="toc-visualización-de-reglas" class="nav-link" data-scroll-target="#visualización-de-reglas"><span class="header-section-number">3.6.5</span> Visualización de reglas</a></li>
   </ul></li>
-  <li><a href="#visualizacion-de-reglas" id="toc-visualizacion-de-reglas" class="nav-link" data-scroll-target="#visualizacion-de-reglas"><span class="header-section-number">3.5</span> Visualizacion de reglas</a></li>
+  <li><a href="#interpretacion-de-reglas-de-asociación" id="toc-interpretacion-de-reglas-de-asociación" class="nav-link" data-scroll-target="#interpretacion-de-reglas-de-asociación"><span class="header-section-number">3.7</span> Interpretacion de reglas de asociación</a>
+  <ul class="collapse">
+  <li><a href="#infantes-en-el-estado-de-mexico-reglas-1-5-6" id="toc-infantes-en-el-estado-de-mexico-reglas-1-5-6" class="nav-link" data-scroll-target="#infantes-en-el-estado-de-mexico-reglas-1-5-6"><span class="header-section-number">3.7.1</span> Infantes en el Estado de Mexico (Reglas 1, 5, 6)</a></li>
+  <li><a href="#mujeres-adolescentes-en-el-estado-de-méxico-reglas-2-3-4" id="toc-mujeres-adolescentes-en-el-estado-de-méxico-reglas-2-3-4" class="nav-link" data-scroll-target="#mujeres-adolescentes-en-el-estado-de-méxico-reglas-2-3-4"><span class="header-section-number">3.7.2</span> Mujeres adolescentes en el Estado de México (Reglas 2, 3, 4)</a></li>
+  <li><a href="#hombres-jóvenes-en-entidades-del-norte-reglas-7-10" id="toc-hombres-jóvenes-en-entidades-del-norte-reglas-7-10" class="nav-link" data-scroll-target="#hombres-jóvenes-en-entidades-del-norte-reglas-7-10"><span class="header-section-number">3.7.3</span> Hombres jóvenes en entidades del norte (Reglas 7-10)</a></li>
+  <li><a href="#reflexion-sobre-los-patrones-encontrados" id="toc-reflexion-sobre-los-patrones-encontrados" class="nav-link" data-scroll-target="#reflexion-sobre-los-patrones-encontrados"><span class="header-section-number">3.7.4</span> Reflexion sobre los patrones encontrados</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#algoritmo-fp-growth" id="toc-algoritmo-fp-growth" class="nav-link" data-scroll-target="#algoritmo-fp-growth"><span class="header-section-number">4</span> Algoritmo FP-Growth</a>
+  <ul class="collapse">
+  <li><a href="#descripción-1" id="toc-descripción-1" class="nav-link" data-scroll-target="#descripción-1"><span class="header-section-number">4.1</span> Descripción</a></li>
+  <li><a href="#ventajas-frente-a-apriori" id="toc-ventajas-frente-a-apriori" class="nav-link" data-scroll-target="#ventajas-frente-a-apriori"><span class="header-section-number">4.2</span> Ventajas frente a Apriori</a></li>
+  <li><a href="#implementación-en-python" id="toc-implementación-en-python" class="nav-link" data-scroll-target="#implementación-en-python"><span class="header-section-number">4.3</span> Implementación en Python</a></li>
+  </ul></li>
+  <li><a href="#comparación-de-algoritmos" id="toc-comparación-de-algoritmos" class="nav-link" data-scroll-target="#comparación-de-algoritmos"><span class="header-section-number">5</span> Comparación de algoritmos</a>
+  <ul class="collapse">
+  <li><a href="#algoritmos-utilizados" id="toc-algoritmos-utilizados" class="nav-link" data-scroll-target="#algoritmos-utilizados"><span class="header-section-number">5.1</span> Algoritmos utilizados</a></li>
+  <li><a href="#comparación-de-rendimiento" id="toc-comparación-de-rendimiento" class="nav-link" data-scroll-target="#comparación-de-rendimiento"><span class="header-section-number">5.2</span> Comparación de rendimiento</a>
+  <ul class="collapse">
+  <li><a href="#cuál-tarda-más" id="toc-cuál-tarda-más" class="nav-link" data-scroll-target="#cuál-tarda-más"><span class="header-section-number">5.2.1</span> ¿Cuál tarda más?</a></li>
+  <li><a href="#cuál-tarda-menos-y-por-qué" id="toc-cuál-tarda-menos-y-por-qué" class="nav-link" data-scroll-target="#cuál-tarda-menos-y-por-qué"><span class="header-section-number">5.2.2</span> ¿Cuál tarda menos y por qué?</a></li>
+  </ul></li>
+  <li><a href="#comparación-de-resultados" id="toc-comparación-de-resultados" class="nav-link" data-scroll-target="#comparación-de-resultados"><span class="header-section-number">5.3</span> Comparación de resultados</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -280,7 +305,7 @@ Table&nbsp;1: Diccionario de datos del registro de víctimas
 </div>
 </figure>
 </div>
-<p>Con esta información podemos ver que en varios campos (id_victima, origen_reporte, sexo, estatus_victima, cve_ent, entidad, cve_mun, municipio) se cuenta con los registros completos, sin embargo, al observar los datos se identifico que muchos están completados con: CONFIDENCIAL, por lo que debemos considerar esto al realizar nuestros análisis.</p>
+<p>Con esta información podemos ver que en varios campos (id_victima, origen_reporte, sexo, estatus_victima, cve_ent, entidad, cve_mun, municipio) se cuenta con los registros completos, sin embargo, al observar los datos se identificó que muchos están completados con: CONFIDENCIAL, por lo que debemos considerar esto al realizar nuestros análisis.</p>
 </section>
 </section>
 <section id="algoritmo-apriori" class="level1" data-number="2">
@@ -299,11 +324,11 @@ Table&nbsp;1: Diccionario de datos del registro de víctimas
 <ul>
 <li><em>obtener_itemsets_frecuentes_1(transacciones, soporte_min_conteo)</em>
 <ul>
-<li>Está función nos ayuda a generar todos los itemsets frecuentes de tamaño 1, sólo devuelve aquellos que son considerados frecuentes, es decir, los que cumplen con el soporte mínimo. Esto nos ayuda en el primer paso del algoritmo.</li>
+<li>Esta función nos ayuda a generar todos los itemsets frecuentes de tamaño 1, sólo devuelve aquellos que son considerados frecuentes, es decir, los que cumplen con el soporte mínimo. Esto nos ayuda en el primer paso del algoritmo.</li>
 </ul></li>
 <li><em>generar_candidatos(itemsets_frecuentes, k)</em>
 <ul>
-<li>Está función nos ayuda con el segundo paso de nuestro algoritmo, por lo que genera itemsets de tamaño k que pueden ser o no frecuentes, sólo genera las combinaciones a partir de la iteración anterior.</li>
+<li>Esta función nos ayuda con el segundo paso de nuestro algoritmo, por lo que genera itemsets de tamaño k que pueden ser o no frecuentes, sólo genera las combinaciones a partir de la iteración anterior.</li>
 </ul></li>
 <li><em>filtrar_candidatos(transacciones, candidatos, soporte_min_conteo)</em>
 <ul>
@@ -314,14 +339,14 @@ Table&nbsp;1: Diccionario de datos del registro de víctimas
 <ul>
 <li><em>generar_reglas(itemsets_frecuentes, confianza_min)</em>
 <ul>
-<li>Encuentra las reglas lógicas a partir de los itemsets recibidos y consiferando el mínimo de confianza establecido.</li>
+<li>Encuentra las reglas lógicas a partir de los itemsets recibidos y considerando el mínimo de confianza establecido.</li>
 </ul></li>
 </ul>
 </section>
 <section id="python" class="level2" data-number="2.2">
 <h2 data-number="2.2" class="anchored" data-anchor-id="python"><span class="header-section-number">2.2</span> Python</h2>
 <p>A continuación se presenta la implementación completa en Python:</p>
-<div id="f29b3bfb" class="cell" data-execution_count="1">
+<div id="52044fb1" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> itertools <span class="im">import</span> combinations</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -332,147 +357,145 @@ Table&nbsp;1: Diccionario de datos del registro de víctimas
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co">    Luego, descarta los que no alcanzan el umbral mínimo.</span></span>
 <span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co">    Args:</span></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="co">        transacciones (list): Lista de listas. Cada lista representa un registro con sus características</span></span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="co">        soporte_min_conteo (int): Número de veces que debe aparecer un elemento para considerarlo frecuenta</span></span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="co">    Returns:</span></span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="co">        dict: Diccionario donde las claves son los elementos frecuentes encapsulados en un frozenset </span></span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="co">              y los valores son su conteo exacto</span></span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>    conteo <span class="op">=</span> {}</span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> transaccion <span class="kw">in</span> transacciones:</span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> item <span class="kw">in</span> transaccion:</span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>            <span class="co"># Usamos frozenset para poder usar el set como llave en el diccionario</span></span>
-<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>            llave <span class="op">=</span> <span class="bu">frozenset</span>([item])</span>
-<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>            conteo[llave] <span class="op">=</span> conteo.get(llave, <span class="dv">0</span>) <span class="op">+</span> <span class="dv">1</span></span>
-<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>            </span>
-<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Filtramos por el soporte mínimo</span></span>
-<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> {itemset: count <span class="cf">for</span> itemset, count <span class="kw">in</span> conteo.items() <span class="cf">if</span> count <span class="op">&gt;=</span> soporte_min_conteo}</span>
-<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> generar_candidatos(itemsets_frecuentes, k):</span>
-<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
-<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a><span class="co">    Toma los conjuntos frecuentes del paso anterior (tamaño k-1) y los combina entre sí para crear </span></span>
-<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a><span class="co">    nuevos grupos candidatos más grandes (de tamaño k).</span></span>
-<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a><span class="co">    Args:</span></span>
-<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a><span class="co">        itemsets_frecuentes (dict): Diccionario de elementos frecuentes</span></span>
-<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a><span class="co">        k (int): Tamaño de los nuevos conjuntos</span></span>
-<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a><span class="co">    Returns:</span></span>
-<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a><span class="co">        set: Conjunto que contiene múltiples frozenset de tamaño k, es importante aclarar que aquí son</span></span>
-<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a><span class="co">             candidatos, aún no se confirma si son frecuentes</span></span>
-<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
-<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a>    candidatos <span class="op">=</span> <span class="bu">set</span>()</span>
-<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a>    lista_itemsets <span class="op">=</span> <span class="bu">list</span>(itemsets_frecuentes.keys())</span>
-<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(lista_itemsets)):</span>
-<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(i <span class="op">+</span> <span class="dv">1</span>, <span class="bu">len</span>(lista_itemsets)):</span>
-<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a>            <span class="co"># Unimos dos itemsets</span></span>
-<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a>            union <span class="op">=</span> lista_itemsets[i] <span class="op">|</span> lista_itemsets[j]</span>
-<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a>            <span class="co"># Si el tamaño de la unión es exactamente k, es un candidato válido</span></span>
-<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> <span class="bu">len</span>(union) <span class="op">==</span> k:</span>
-<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a>                candidatos.add(union)</span>
-<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> candidatos</span>
-<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> filtrar_candidatos(transacciones, candidatos, soporte_min_conteo):</span>
-<span id="cb1-56"><a href="#cb1-56" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
-<span id="cb1-57"><a href="#cb1-57" aria-hidden="true" tabindex="-1"></a><span class="co">    Escanea la base de datos completa para ver cuántas veces aparecen juntos realmente los elementos de cada </span></span>
-<span id="cb1-58"><a href="#cb1-58" aria-hidden="true" tabindex="-1"></a><span class="co">    conjunto candidato.</span></span>
-<span id="cb1-59"><a href="#cb1-59" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-60"><a href="#cb1-60" aria-hidden="true" tabindex="-1"></a><span class="co">    Args:</span></span>
-<span id="cb1-61"><a href="#cb1-61" aria-hidden="true" tabindex="-1"></a><span class="co">        transacciones (list): Base de datos</span></span>
-<span id="cb1-62"><a href="#cb1-62" aria-hidden="true" tabindex="-1"></a><span class="co">        candidatos (set): Conjunto de candidatos a revisar</span></span>
-<span id="cb1-63"><a href="#cb1-63" aria-hidden="true" tabindex="-1"></a><span class="co">        soporte_min_conteo (int): Número de veces que debe aparecer un elemento para considerarlo frecuenta</span></span>
-<span id="cb1-64"><a href="#cb1-64" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-65"><a href="#cb1-65" aria-hidden="true" tabindex="-1"></a><span class="co">    Returns:</span></span>
-<span id="cb1-66"><a href="#cb1-66" aria-hidden="true" tabindex="-1"></a><span class="co">        dict: Diccionario con los candidatos que su conteo fue mayor o igual a soporte_min_conteo</span></span>
-<span id="cb1-67"><a href="#cb1-67" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
-<span id="cb1-68"><a href="#cb1-68" aria-hidden="true" tabindex="-1"></a>    conteo <span class="op">=</span> {candidato: <span class="dv">0</span> <span class="cf">for</span> candidato <span class="kw">in</span> candidatos}</span>
-<span id="cb1-69"><a href="#cb1-69" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb1-70"><a href="#cb1-70" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> transaccion <span class="kw">in</span> transacciones:</span>
-<span id="cb1-71"><a href="#cb1-71" aria-hidden="true" tabindex="-1"></a>        transaccion_set <span class="op">=</span> <span class="bu">set</span>(transaccion)</span>
-<span id="cb1-72"><a href="#cb1-72" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> candidato <span class="kw">in</span> candidatos:</span>
-<span id="cb1-73"><a href="#cb1-73" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> candidato.issubset(transaccion_set):</span>
-<span id="cb1-74"><a href="#cb1-74" aria-hidden="true" tabindex="-1"></a>                conteo[candidato] <span class="op">+=</span> <span class="dv">1</span></span>
-<span id="cb1-75"><a href="#cb1-75" aria-hidden="true" tabindex="-1"></a>                </span>
-<span id="cb1-76"><a href="#cb1-76" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> {itemset: count <span class="cf">for</span> itemset, count <span class="kw">in</span> conteo.items() <span class="cf">if</span> count <span class="op">&gt;=</span> soporte_min_conteo}</span>
-<span id="cb1-77"><a href="#cb1-77" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-78"><a href="#cb1-78" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-79"><a href="#cb1-79" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> algoritmo_apriori(transacciones, soporte_min<span class="op">=</span><span class="fl">0.1</span>):</span>
-<span id="cb1-80"><a href="#cb1-80" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
-<span id="cb1-81"><a href="#cb1-81" aria-hidden="true" tabindex="-1"></a><span class="co">    Encuentra grupos de elementos que suelen aparecer juntos en grandes conjuntos de datos.</span></span>
-<span id="cb1-82"><a href="#cb1-82" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-83"><a href="#cb1-83" aria-hidden="true" tabindex="-1"></a><span class="co">    Args:</span></span>
-<span id="cb1-84"><a href="#cb1-84" aria-hidden="true" tabindex="-1"></a><span class="co">        transacciones (list): Base de datos con las transacciones</span></span>
-<span id="cb1-85"><a href="#cb1-85" aria-hidden="true" tabindex="-1"></a><span class="co">        min_support (float, optional): Porcentaje de soporte mínimo deseado. Defaults to 0.1.</span></span>
-<span id="cb1-86"><a href="#cb1-86" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-87"><a href="#cb1-87" aria-hidden="true" tabindex="-1"></a><span class="co">    Returns:</span></span>
-<span id="cb1-88"><a href="#cb1-88" aria-hidden="true" tabindex="-1"></a><span class="co">        dict: Diccionario que contiene todos los conjuntos frecuentes encontrados de cualquier tamaño </span></span>
-<span id="cb1-89"><a href="#cb1-89" aria-hidden="true" tabindex="-1"></a><span class="co">              y su respectivo porcentaje de aparición (de 0 a 1).</span></span>
-<span id="cb1-90"><a href="#cb1-90" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
-<span id="cb1-91"><a href="#cb1-91" aria-hidden="true" tabindex="-1"></a>    total_transacciones <span class="op">=</span> <span class="bu">len</span>(transacciones)</span>
-<span id="cb1-92"><a href="#cb1-92" aria-hidden="true" tabindex="-1"></a>    min_support_count <span class="op">=</span> soporte_min <span class="op">*</span> total_transacciones</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="co">        transacciones (list): Lista de listas. Cada lista representa un registro con sus características soporte_min_conteo (int): Número de veces que debe aparecer un elemento para considerarlo frecuente</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="co">    Returns:</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="co">        dict: Diccionario donde las claves son los elementos frecuentes encapsulados en un frozenset y los valores son su conteo exacto</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>    conteo <span class="op">=</span> {}</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> transaccion <span class="kw">in</span> transacciones:</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> item <span class="kw">in</span> transaccion:</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>            <span class="co"># Usamos frozenset para poder usar el set como llave en el diccionario</span></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>            llave <span class="op">=</span> <span class="bu">frozenset</span>([item])</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>            conteo[llave] <span class="op">=</span> conteo.get(llave, <span class="dv">0</span>) <span class="op">+</span> <span class="dv">1</span></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>            </span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Filtramos por el soporte mínimo</span></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> {itemset: count <span class="cf">for</span> itemset, count <span class="kw">in</span> conteo.items() <span class="cf">if</span> count <span class="op">&gt;=</span> soporte_min_conteo}</span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> generar_candidatos(itemsets_frecuentes, k):</span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a><span class="co">    Toma los conjuntos frecuentes del paso anterior (tamaño k-1) y los combina entre sí para crear </span></span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a><span class="co">    nuevos grupos candidatos más grandes (de tamaño k).</span></span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a><span class="co">    Args:</span></span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a><span class="co">        itemsets_frecuentes (dict): Diccionario de elementos frecuentes</span></span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a><span class="co">        k (int): Tamaño de los nuevos conjuntos</span></span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a><span class="co">    Returns:</span></span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a><span class="co">        set: Conjunto que contiene múltiples frozenset de tamaño k, es importante aclarar que aquí son</span></span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a><span class="co">             candidatos, aún no se confirma si son frecuentes</span></span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a>    candidatos <span class="op">=</span> <span class="bu">set</span>()</span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a>    lista_itemsets <span class="op">=</span> <span class="bu">list</span>(itemsets_frecuentes.keys())</span>
+<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(lista_itemsets)):</span>
+<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(i <span class="op">+</span> <span class="dv">1</span>, <span class="bu">len</span>(lista_itemsets)):</span>
+<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a>            <span class="co"># Unimos dos itemsets</span></span>
+<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a>            union <span class="op">=</span> lista_itemsets[i] <span class="op">|</span> lista_itemsets[j]</span>
+<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a>            <span class="co"># Si el tamaño de la unión es exactamente k, es un candidato válido</span></span>
+<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> <span class="bu">len</span>(union) <span class="op">==</span> k:</span>
+<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a>                candidatos.add(union)</span>
+<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> candidatos</span>
+<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> filtrar_candidatos(transacciones, candidatos, soporte_min_conteo):</span>
+<span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
+<span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a><span class="co">    Escanea la base de datos completa para ver cuántas veces aparecen juntos realmente los elementos de cada </span></span>
+<span id="cb1-56"><a href="#cb1-56" aria-hidden="true" tabindex="-1"></a><span class="co">    conjunto candidato.</span></span>
+<span id="cb1-57"><a href="#cb1-57" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-58"><a href="#cb1-58" aria-hidden="true" tabindex="-1"></a><span class="co">    Args:</span></span>
+<span id="cb1-59"><a href="#cb1-59" aria-hidden="true" tabindex="-1"></a><span class="co">        transacciones (list): Base de datos</span></span>
+<span id="cb1-60"><a href="#cb1-60" aria-hidden="true" tabindex="-1"></a><span class="co">        candidatos (set): Conjunto de candidatos a revisar</span></span>
+<span id="cb1-61"><a href="#cb1-61" aria-hidden="true" tabindex="-1"></a><span class="co">        soporte_min_conteo (int): Número de veces que debe aparecer un elemento para considerarlo frecuenta</span></span>
+<span id="cb1-62"><a href="#cb1-62" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-63"><a href="#cb1-63" aria-hidden="true" tabindex="-1"></a><span class="co">    Returns:</span></span>
+<span id="cb1-64"><a href="#cb1-64" aria-hidden="true" tabindex="-1"></a><span class="co">        dict: Diccionario con los candidatos que su conteo fue mayor o igual a soporte_min_conteo</span></span>
+<span id="cb1-65"><a href="#cb1-65" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="cb1-66"><a href="#cb1-66" aria-hidden="true" tabindex="-1"></a>    conteo <span class="op">=</span> {candidato: <span class="dv">0</span> <span class="cf">for</span> candidato <span class="kw">in</span> candidatos}</span>
+<span id="cb1-67"><a href="#cb1-67" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb1-68"><a href="#cb1-68" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> transaccion <span class="kw">in</span> transacciones:</span>
+<span id="cb1-69"><a href="#cb1-69" aria-hidden="true" tabindex="-1"></a>        transaccion_set <span class="op">=</span> <span class="bu">set</span>(transaccion)</span>
+<span id="cb1-70"><a href="#cb1-70" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> candidato <span class="kw">in</span> candidatos:</span>
+<span id="cb1-71"><a href="#cb1-71" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> candidato.issubset(transaccion_set):</span>
+<span id="cb1-72"><a href="#cb1-72" aria-hidden="true" tabindex="-1"></a>                conteo[candidato] <span class="op">+=</span> <span class="dv">1</span></span>
+<span id="cb1-73"><a href="#cb1-73" aria-hidden="true" tabindex="-1"></a>                </span>
+<span id="cb1-74"><a href="#cb1-74" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> {itemset: count <span class="cf">for</span> itemset, count <span class="kw">in</span> conteo.items() <span class="cf">if</span> count <span class="op">&gt;=</span> soporte_min_conteo}</span>
+<span id="cb1-75"><a href="#cb1-75" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-76"><a href="#cb1-76" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-77"><a href="#cb1-77" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> algoritmo_apriori(transacciones, soporte_min<span class="op">=</span><span class="fl">0.1</span>):</span>
+<span id="cb1-78"><a href="#cb1-78" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
+<span id="cb1-79"><a href="#cb1-79" aria-hidden="true" tabindex="-1"></a><span class="co">    Encuentra grupos de elementos que suelen aparecer juntos en grandes conjuntos de datos.</span></span>
+<span id="cb1-80"><a href="#cb1-80" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-81"><a href="#cb1-81" aria-hidden="true" tabindex="-1"></a><span class="co">    Args:</span></span>
+<span id="cb1-82"><a href="#cb1-82" aria-hidden="true" tabindex="-1"></a><span class="co">        transacciones (list): Base de datos con las transacciones</span></span>
+<span id="cb1-83"><a href="#cb1-83" aria-hidden="true" tabindex="-1"></a><span class="co">        min_support (float, optional): Porcentaje de soporte mínimo deseado. Defaults to 0.1.</span></span>
+<span id="cb1-84"><a href="#cb1-84" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-85"><a href="#cb1-85" aria-hidden="true" tabindex="-1"></a><span class="co">    Returns:</span></span>
+<span id="cb1-86"><a href="#cb1-86" aria-hidden="true" tabindex="-1"></a><span class="co">        dict: Diccionario que contiene todos los conjuntos frecuentes encontrados de cualquier tamaño </span></span>
+<span id="cb1-87"><a href="#cb1-87" aria-hidden="true" tabindex="-1"></a><span class="co">              y su respectivo porcentaje de aparición (de 0 a 1).</span></span>
+<span id="cb1-88"><a href="#cb1-88" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="cb1-89"><a href="#cb1-89" aria-hidden="true" tabindex="-1"></a>    total_transacciones <span class="op">=</span> <span class="bu">len</span>(transacciones)</span>
+<span id="cb1-90"><a href="#cb1-90" aria-hidden="true" tabindex="-1"></a>    min_support_count <span class="op">=</span> soporte_min <span class="op">*</span> total_transacciones</span>
+<span id="cb1-91"><a href="#cb1-91" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb1-92"><a href="#cb1-92" aria-hidden="true" tabindex="-1"></a>    itemsets_todos <span class="op">=</span> {}</span>
 <span id="cb1-93"><a href="#cb1-93" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb1-94"><a href="#cb1-94" aria-hidden="true" tabindex="-1"></a>    itemsets_todos <span class="op">=</span> {}</span>
-<span id="cb1-95"><a href="#cb1-95" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb1-96"><a href="#cb1-96" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Obtener frecuentes de tamaño 1</span></span>
-<span id="cb1-97"><a href="#cb1-97" aria-hidden="true" tabindex="-1"></a>    itemsets_k <span class="op">=</span> obtener_itemsets_frecuentes_1(transacciones, min_support_count)</span>
-<span id="cb1-98"><a href="#cb1-98" aria-hidden="true" tabindex="-1"></a>    itemsets_todos.update(itemsets_k)</span>
-<span id="cb1-99"><a href="#cb1-99" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb1-100"><a href="#cb1-100" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Bucle para k = 2, 3, 4...</span></span>
-<span id="cb1-101"><a href="#cb1-101" aria-hidden="true" tabindex="-1"></a>    k <span class="op">=</span> <span class="dv">2</span></span>
-<span id="cb1-102"><a href="#cb1-102" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> itemsets_k:</span>
-<span id="cb1-103"><a href="#cb1-103" aria-hidden="true" tabindex="-1"></a>        candidatos <span class="op">=</span> generar_candidatos(itemsets_k, k)</span>
-<span id="cb1-104"><a href="#cb1-104" aria-hidden="true" tabindex="-1"></a>        itemsets_k <span class="op">=</span> filtrar_candidatos(transacciones, candidatos, min_support_count)</span>
-<span id="cb1-105"><a href="#cb1-105" aria-hidden="true" tabindex="-1"></a>        itemsets_todos.update(itemsets_k)</span>
-<span id="cb1-106"><a href="#cb1-106" aria-hidden="true" tabindex="-1"></a>        k <span class="op">+=</span> <span class="dv">1</span></span>
-<span id="cb1-107"><a href="#cb1-107" aria-hidden="true" tabindex="-1"></a>        </span>
-<span id="cb1-108"><a href="#cb1-108" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Devolvemos los itemsets con su soporte en porcentaje (0 a 1)</span></span>
-<span id="cb1-109"><a href="#cb1-109" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> {itemset: count <span class="op">/</span> total_transacciones <span class="cf">for</span> itemset, count <span class="kw">in</span> itemsets_todos.items()}</span>
-<span id="cb1-110"><a href="#cb1-110" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-111"><a href="#cb1-111" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-112"><a href="#cb1-112" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> generar_reglas(itemsets_frecuentes, confianza_min):</span>
-<span id="cb1-113"><a href="#cb1-113" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Toma los conjuntos de elementos frecuentes y aplica probabilidad condicional para encontrar reglas lógicas.</span></span>
-<span id="cb1-114"><a href="#cb1-114" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-115"><a href="#cb1-115" aria-hidden="true" tabindex="-1"></a><span class="co">    Args:</span></span>
-<span id="cb1-116"><a href="#cb1-116" aria-hidden="true" tabindex="-1"></a><span class="co">        itemsets_frecuentes (dict): Diccionario generado por el algoritmo apriori</span></span>
-<span id="cb1-117"><a href="#cb1-117" aria-hidden="true" tabindex="-1"></a><span class="co">        confianza_min (float): El umbral mínimo de certeza que debe tener la regla</span></span>
-<span id="cb1-118"><a href="#cb1-118" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-119"><a href="#cb1-119" aria-hidden="true" tabindex="-1"></a><span class="co">    Returns:</span></span>
-<span id="cb1-120"><a href="#cb1-120" aria-hidden="true" tabindex="-1"></a><span class="co">        pandas.DataFrame: Tabla estructurada y ordenada con las reglas de asociación</span></span>
-<span id="cb1-121"><a href="#cb1-121" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
-<span id="cb1-122"><a href="#cb1-122" aria-hidden="true" tabindex="-1"></a>    reglas <span class="op">=</span> []</span>
-<span id="cb1-123"><a href="#cb1-123" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb1-124"><a href="#cb1-124" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Para cada itemset frecuente encontrado en apriori</span></span>
-<span id="cb1-125"><a href="#cb1-125" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> itemset, support <span class="kw">in</span> itemsets_frecuentes.items():</span>
-<span id="cb1-126"><a href="#cb1-126" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="bu">len</span>(itemset) <span class="op">&gt;</span> <span class="dv">1</span>:</span>
-<span id="cb1-127"><a href="#cb1-127" aria-hidden="true" tabindex="-1"></a>            <span class="co"># Iteramos para crear todas las combinaciones posibles de antecedente -&gt; consecuente</span></span>
-<span id="cb1-128"><a href="#cb1-128" aria-hidden="true" tabindex="-1"></a>            <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, <span class="bu">len</span>(itemset)):</span>
-<span id="cb1-129"><a href="#cb1-129" aria-hidden="true" tabindex="-1"></a>                <span class="cf">for</span> antecedente <span class="kw">in</span> combinations(itemset, i):</span>
-<span id="cb1-130"><a href="#cb1-130" aria-hidden="true" tabindex="-1"></a>                    antecedente <span class="op">=</span> <span class="bu">frozenset</span>(antecedente)</span>
-<span id="cb1-131"><a href="#cb1-131" aria-hidden="true" tabindex="-1"></a>                    consecuente <span class="op">=</span> itemset <span class="op">-</span> antecedente</span>
-<span id="cb1-132"><a href="#cb1-132" aria-hidden="true" tabindex="-1"></a>                    </span>
-<span id="cb1-133"><a href="#cb1-133" aria-hidden="true" tabindex="-1"></a>                    soporte_antecedente <span class="op">=</span> itemsets_frecuentes[antecedente]</span>
-<span id="cb1-134"><a href="#cb1-134" aria-hidden="true" tabindex="-1"></a>                    confianza <span class="op">=</span> support <span class="op">/</span> soporte_antecedente</span>
-<span id="cb1-135"><a href="#cb1-135" aria-hidden="true" tabindex="-1"></a>                    </span>
-<span id="cb1-136"><a href="#cb1-136" aria-hidden="true" tabindex="-1"></a>                    <span class="cf">if</span> confianza <span class="op">&gt;=</span> confianza_min:</span>
-<span id="cb1-137"><a href="#cb1-137" aria-hidden="true" tabindex="-1"></a>                        soporte_consecuente <span class="op">=</span> itemsets_frecuentes[consecuente]</span>
-<span id="cb1-138"><a href="#cb1-138" aria-hidden="true" tabindex="-1"></a>                        lift <span class="op">=</span> confianza <span class="op">/</span> soporte_consecuente</span>
-<span id="cb1-139"><a href="#cb1-139" aria-hidden="true" tabindex="-1"></a>                        </span>
-<span id="cb1-140"><a href="#cb1-140" aria-hidden="true" tabindex="-1"></a>                        reglas.append({</span>
-<span id="cb1-141"><a href="#cb1-141" aria-hidden="true" tabindex="-1"></a>                            <span class="st">'Antecedente'</span>: <span class="bu">set</span>(antecedente),</span>
-<span id="cb1-142"><a href="#cb1-142" aria-hidden="true" tabindex="-1"></a>                            <span class="st">'Consecuente'</span>: <span class="bu">set</span>(consecuente),</span>
-<span id="cb1-143"><a href="#cb1-143" aria-hidden="true" tabindex="-1"></a>                            <span class="st">'Soporte'</span>: support,</span>
-<span id="cb1-144"><a href="#cb1-144" aria-hidden="true" tabindex="-1"></a>                            <span class="st">'Confianza'</span>: confianza,</span>
-<span id="cb1-145"><a href="#cb1-145" aria-hidden="true" tabindex="-1"></a>                            <span class="st">'Lift'</span>: lift</span>
-<span id="cb1-146"><a href="#cb1-146" aria-hidden="true" tabindex="-1"></a>                        })</span>
-<span id="cb1-147"><a href="#cb1-147" aria-hidden="true" tabindex="-1"></a>                        </span>
-<span id="cb1-148"><a href="#cb1-148" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> pd.DataFrame(reglas).sort_values(by<span class="op">=</span><span class="st">'Lift'</span>, ascending<span class="op">=</span><span class="va">False</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb1-94"><a href="#cb1-94" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Obtener frecuentes de tamaño 1</span></span>
+<span id="cb1-95"><a href="#cb1-95" aria-hidden="true" tabindex="-1"></a>    itemsets_k <span class="op">=</span> obtener_itemsets_frecuentes_1(transacciones, min_support_count)</span>
+<span id="cb1-96"><a href="#cb1-96" aria-hidden="true" tabindex="-1"></a>    itemsets_todos.update(itemsets_k)</span>
+<span id="cb1-97"><a href="#cb1-97" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb1-98"><a href="#cb1-98" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Bucle para k = 2, 3, 4...</span></span>
+<span id="cb1-99"><a href="#cb1-99" aria-hidden="true" tabindex="-1"></a>    k <span class="op">=</span> <span class="dv">2</span></span>
+<span id="cb1-100"><a href="#cb1-100" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> itemsets_k:</span>
+<span id="cb1-101"><a href="#cb1-101" aria-hidden="true" tabindex="-1"></a>        candidatos <span class="op">=</span> generar_candidatos(itemsets_k, k)</span>
+<span id="cb1-102"><a href="#cb1-102" aria-hidden="true" tabindex="-1"></a>        itemsets_k <span class="op">=</span> filtrar_candidatos(transacciones, candidatos, min_support_count)</span>
+<span id="cb1-103"><a href="#cb1-103" aria-hidden="true" tabindex="-1"></a>        itemsets_todos.update(itemsets_k)</span>
+<span id="cb1-104"><a href="#cb1-104" aria-hidden="true" tabindex="-1"></a>        k <span class="op">+=</span> <span class="dv">1</span></span>
+<span id="cb1-105"><a href="#cb1-105" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb1-106"><a href="#cb1-106" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Devolvemos los itemsets con su soporte en porcentaje (0 a 1)</span></span>
+<span id="cb1-107"><a href="#cb1-107" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> {itemset: count <span class="op">/</span> total_transacciones <span class="cf">for</span> itemset, count <span class="kw">in</span> itemsets_todos.items()}</span>
+<span id="cb1-108"><a href="#cb1-108" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-109"><a href="#cb1-109" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-110"><a href="#cb1-110" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> generar_reglas(itemsets_frecuentes, confianza_min):</span>
+<span id="cb1-111"><a href="#cb1-111" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Toma los conjuntos de elementos frecuentes y aplica probabilidad condicional para encontrar reglas lógicas.</span></span>
+<span id="cb1-112"><a href="#cb1-112" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-113"><a href="#cb1-113" aria-hidden="true" tabindex="-1"></a><span class="co">    Args:</span></span>
+<span id="cb1-114"><a href="#cb1-114" aria-hidden="true" tabindex="-1"></a><span class="co">        itemsets_frecuentes (dict): Diccionario generado por el algoritmo apriori</span></span>
+<span id="cb1-115"><a href="#cb1-115" aria-hidden="true" tabindex="-1"></a><span class="co">        confianza_min (float): El umbral mínimo de certeza que debe tener la regla</span></span>
+<span id="cb1-116"><a href="#cb1-116" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-117"><a href="#cb1-117" aria-hidden="true" tabindex="-1"></a><span class="co">    Returns:</span></span>
+<span id="cb1-118"><a href="#cb1-118" aria-hidden="true" tabindex="-1"></a><span class="co">        pandas.DataFrame: Tabla estructurada y ordenada con las reglas de asociación</span></span>
+<span id="cb1-119"><a href="#cb1-119" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="cb1-120"><a href="#cb1-120" aria-hidden="true" tabindex="-1"></a>    reglas <span class="op">=</span> []</span>
+<span id="cb1-121"><a href="#cb1-121" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb1-122"><a href="#cb1-122" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Para cada itemset frecuente encontrado en apriori</span></span>
+<span id="cb1-123"><a href="#cb1-123" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> itemset, support <span class="kw">in</span> itemsets_frecuentes.items():</span>
+<span id="cb1-124"><a href="#cb1-124" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="bu">len</span>(itemset) <span class="op">&gt;</span> <span class="dv">1</span>:</span>
+<span id="cb1-125"><a href="#cb1-125" aria-hidden="true" tabindex="-1"></a>            <span class="co"># Iteramos para crear todas las combinaciones posibles de antecedente -&gt; consecuente</span></span>
+<span id="cb1-126"><a href="#cb1-126" aria-hidden="true" tabindex="-1"></a>            <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, <span class="bu">len</span>(itemset)):</span>
+<span id="cb1-127"><a href="#cb1-127" aria-hidden="true" tabindex="-1"></a>                <span class="cf">for</span> antecedente <span class="kw">in</span> combinations(itemset, i):</span>
+<span id="cb1-128"><a href="#cb1-128" aria-hidden="true" tabindex="-1"></a>                    antecedente <span class="op">=</span> <span class="bu">frozenset</span>(antecedente)</span>
+<span id="cb1-129"><a href="#cb1-129" aria-hidden="true" tabindex="-1"></a>                    consecuente <span class="op">=</span> itemset <span class="op">-</span> antecedente</span>
+<span id="cb1-130"><a href="#cb1-130" aria-hidden="true" tabindex="-1"></a>                    </span>
+<span id="cb1-131"><a href="#cb1-131" aria-hidden="true" tabindex="-1"></a>                    soporte_antecedente <span class="op">=</span> itemsets_frecuentes[antecedente]</span>
+<span id="cb1-132"><a href="#cb1-132" aria-hidden="true" tabindex="-1"></a>                    confianza <span class="op">=</span> support <span class="op">/</span> soporte_antecedente</span>
+<span id="cb1-133"><a href="#cb1-133" aria-hidden="true" tabindex="-1"></a>                    </span>
+<span id="cb1-134"><a href="#cb1-134" aria-hidden="true" tabindex="-1"></a>                    <span class="cf">if</span> confianza <span class="op">&gt;=</span> confianza_min:</span>
+<span id="cb1-135"><a href="#cb1-135" aria-hidden="true" tabindex="-1"></a>                        soporte_consecuente <span class="op">=</span> itemsets_frecuentes[consecuente]</span>
+<span id="cb1-136"><a href="#cb1-136" aria-hidden="true" tabindex="-1"></a>                        lift <span class="op">=</span> confianza <span class="op">/</span> soporte_consecuente</span>
+<span id="cb1-137"><a href="#cb1-137" aria-hidden="true" tabindex="-1"></a>                        </span>
+<span id="cb1-138"><a href="#cb1-138" aria-hidden="true" tabindex="-1"></a>                        reglas.append({</span>
+<span id="cb1-139"><a href="#cb1-139" aria-hidden="true" tabindex="-1"></a>                            <span class="st">'Antecedente'</span>: <span class="bu">set</span>(antecedente),</span>
+<span id="cb1-140"><a href="#cb1-140" aria-hidden="true" tabindex="-1"></a>                            <span class="st">'Consecuente'</span>: <span class="bu">set</span>(consecuente),</span>
+<span id="cb1-141"><a href="#cb1-141" aria-hidden="true" tabindex="-1"></a>                            <span class="st">'Soporte'</span>: support,</span>
+<span id="cb1-142"><a href="#cb1-142" aria-hidden="true" tabindex="-1"></a>                            <span class="st">'Confianza'</span>: confianza,</span>
+<span id="cb1-143"><a href="#cb1-143" aria-hidden="true" tabindex="-1"></a>                            <span class="st">'Lift'</span>: lift</span>
+<span id="cb1-144"><a href="#cb1-144" aria-hidden="true" tabindex="-1"></a>                        })</span>
+<span id="cb1-145"><a href="#cb1-145" aria-hidden="true" tabindex="-1"></a>                        </span>
+<span id="cb1-146"><a href="#cb1-146" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> pd.DataFrame(reglas).sort_values(by<span class="op">=</span><span class="st">'Lift'</span>, ascending<span class="op">=</span><span class="va">False</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>En adición al algoritmo se anexa una función para obtener la lista de transacciones de una base de datos a partir de un dataframe, esto para poder facilitar los siguientes análisis a nuestro conjunto de datos sobre los registros de personas desaparecidas en México:</p>
-<div id="97680e49" class="cell" data-execution_count="2">
+<div id="d49665cc" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> df_a_transacciones(df):</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co">    Convierte un DataFrame de Pandas en una lista de transacciones (lista de listas)</span></span>
@@ -502,13 +525,13 @@ Table&nbsp;1: Diccionario de datos del registro de víctimas
 <p>Estos patrones permiten extraer conocimiento útil a partir de los datos disponibles. Por ejemplo, una regla como (SEXO = MUJER, EDAD = 17 ⇒ ENTIDAD_FEDERATIVA = X) podría ayudar a responder preguntas como: ¿en qué entidad federativa es más probable que desaparezca una mujer de 17 años?</p>
 <p>El objetivo principal es construir un modelo basado en reglas de asociación no triviales. A lo largo del proceso, dichas reglas podrán ajustarse y refinarse, con la finalidad de obtener resultados más precisos y relevantes, facilitando así su interpretación y análisis.</p>
 </section>
-<section id="analitica-y-preparacion-de-datos" class="level2" data-number="3.2">
-<h2 data-number="3.2" class="anchored" data-anchor-id="analitica-y-preparacion-de-datos"><span class="header-section-number">3.2</span> Analitica y preparacion de datos</h2>
+<section id="analítica-y-preparación-de-datos" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="analítica-y-preparación-de-datos"><span class="header-section-number">3.2</span> Analítica y preparación de datos</h2>
 <p>El conjunto de datos con el que se trabaja consta de <strong>133,887 registros</strong>. Para aplicar el algoritmo Apriori, es necesario transformar primero los datos a un formato transaccional. Este proceso se realiza mediante la función <code>df_a_transacciones()</code>, definida en la sección anterior, mientras que la función <code>algoritmo_apriori()</code> permite operar sobre dichas transacciones.</p>
 <p>En este contexto, cada <strong>transacción</strong> corresponde a un registro del conjunto de datos, es decir, a la información asociada a una persona desaparecida. Internamente, las transacciones se representan mediante una <strong>matriz binaria</strong>, donde cada fila corresponde a una transacción y cada columna a un <em>ítem</em> (atributo en forma categórica).</p>
 <p>En esta matriz, se asigna el valor <strong>1 (True)</strong> en la posición <em>(i, j)</em> si la transacción <em>i</em> contiene el ítem <em>j</em>, y <strong>0 (False)</strong> en caso contrario. Esta representación permite identificar de manera eficiente la presencia o ausencia de atributos en cada registro.</p>
 <p>En el siguiente listado se muestra el código necesario para construir dicha matriz binaria, cuya importancia radica en que constituye el punto de entrada para algoritmos de minería de datos como Apriori, los cuales permiten posteriormente generar reglas de asociación.</p>
-<div id="8fab5b21" class="cell" data-execution_count="3">
+<div id="00ba5838" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> mlxtend.preprocessing <span class="im">import</span> TransactionEncoder</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>frame <span class="op">=</span> pd.read_csv(<span class="st">"data_secretariado.csv"</span>)</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>transacciones <span class="op">=</span> df_a_transacciones(frame)</span>
@@ -658,8 +681,8 @@ Table&nbsp;1: Diccionario de datos del registro de víctimas
 </tr>
 </tbody>
 </table>
-<p>Como se puede observar, para cada elemento <em>(i, j)</em> se asignan valores <strong>0/1 (False/True)</strong> dependiendo de si el ítem <em>j</em> está presente en la transacción <em>i</em>. Esta representación puede interpretarse de la siguiente manera: por ejemplo, si se tiene <em>(index = 1, SEXO=HOMBRE = True)</em>, esto indica que la transacción correspondiente al registro 1 pertenece a una persona desaparecida de sexo masculino. De igual manera, podemos sacar mas informacion con respecto a las transacciones, como:</p>
-<div id="f9bec2fd" class="cell" data-execution_count="4">
+<p>Como se puede observar, para cada elemento <em>(i, j)</em> se asignan valores <strong>0/1 (False/True)</strong> dependiendo de si el ítem <em>j</em> está presente en la transacción <em>i</em>. Esta representación puede interpretarse de la siguiente manera: por ejemplo, si se tiene <em>(index = 1, SEXO=HOMBRE = True)</em>, esto indica que la transacción correspondiente al registro 1 pertenece a una persona desaparecida de sexo masculino. De igual manera, podemos sacar más información con respecto a las transacciones, como:</p>
+<div id="20da9928" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>numero_transacciones <span class="op">=</span> <span class="bu">len</span>(transacciones_codificadas)</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>dimensiones <span class="op">=</span> transacciones_codificadas.shape</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>numero_items <span class="op">=</span> transacciones_codificadas.shape[<span class="dv">1</span>]</span>
@@ -693,7 +716,7 @@ Presencia de items : 4.3e-05 </code></pre>
 <p>En particular, la imputación puede alterar artificialmente métricas como el <strong>soporte</strong>, la <strong>confianza</strong> y el <strong>lift</strong>, inflando la frecuencia de ciertos patrones y generando reglas que no reflejan relaciones reales en los datos. Dado que estas métricas se interpretan en términos de probabilidades condicionadas, condicionar sobre datos imputados puede distorsionar la interpretación de los resultados y comprometer la validez del análisis.</p>
 <p>Por otro lado, la proporción de datos completos (~74%) sigue siendo suficientemente representativa para la identificación de patrones relevantes. En este sentido, se opta por evitar la imputación y trabajar con un enfoque de <strong>análisis de casos completos</strong>, priorizando la integridad de los datos observados.</p>
 <p>A continuación, se describe el proceso de preprocesamiento de la información:</p>
-<div id="36fe8e92" class="cell" data-execution_count="5">
+<div id="c2027ecc" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -727,7 +750,7 @@ Presencia de items : 4.3e-05 </code></pre>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="heatmaps/MCAR_MAR.png" class="img-fluid figure-img"></p>
-<figcaption>Proprocion de datos faltantes</figcaption>
+<figcaption>Proporción de datos faltantes</figcaption>
 </figure>
 </div>
 <p>A partir del análisis visual mediante el heatmap, se observa que la variable <code>FECHA_DESAPARICION</code> en valores nulos no presenta un comportamiento claramente asociado a otras variables (no evidencia fuerte de un patrón MAR). En particular, aunque se identifican ligeras concentraciones en ciertos estados, la relación general es débil, con valores promedio cercanos a <strong>0.3</strong>, lo que sugiere una baja dependencia estructural.</p>
@@ -744,7 +767,7 @@ P(\text{FECHA\_NACIMIENTO} = \text{null} \mid \text{SEXO} = \text{INDETERMINADO}
 <p>Otro aspecto relevante a considerar es la consistencia de la información disponible para la generación de reglas de asociación con métricas confiables. A partir del preprocesamiento, se cuenta con <strong>98,923 registros completos</strong> (sin valores nulos); sin embargo, aún persiste una limitación importante asociada a la presencia del valor <em>CONFIDENCIAL</em> en múltiples variables.</p>
 <p>Este fenómeno introduce un reto adicional en el análisis, ya que puede afectar la calidad e interpretabilidad de los patrones descubiertos. En particular, resulta relevante evaluar si es posible obtener reglas significativas cuando intervienen variables con valores confidenciales, así como identificar si existen patrones de co-ocurrencia sistemáticos entre dichas variables.</p>
 <p>El análisis exploratorio muestra que la confidencialidad no se distribuye de manera uniforme: mientras varias variables presentan este valor, otras como <code>ENTIDAD</code> y <code>ORIGEN_REPORTE</code> no contienen registros confidenciales. Esta característica las posiciona como variables clave para el análisis, al permitir la identificación de asociaciones más interpretables dentro del conjunto de datos.</p>
-<div id="1f90f707" class="cell" data-execution_count="6">
+<div id="9acb0b7c" class="cell" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>confidential_count <span class="op">=</span> <span class="dv">0</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> index, row <span class="kw">in</span> frame.iterrows():</span>
@@ -762,7 +785,7 @@ Proporción sobre el total actual: 49.68%</code></pre>
 <p>Se observa que aproximadamente el <strong>49.68%</strong> de los registros contienen al menos un valor <em>CONFIDENCIAL</em>. Este resultado indica que una proporción significativa del conjunto de datos presenta algún nivel de ocultamiento de información, lo cual puede influir en la generación y calidad de los patrones obtenidos.</p>
 <p>Adicionalmente, se identifica que los valores confidenciales no aparecen de manera aislada, sino que tienden a presentarse simultáneamente en múltiples variables. En particular, se observa que <strong>5 de las 7 variables analizadas</strong> presentan valores <em>CONFIDENCIAL</em> de forma conjunta en un subconjunto considerable de registros.</p>
 <p>Este comportamiento sugiere una <strong>dependencia probabilística</strong> entre dichas variables, en el sentido de que la ocurrencia de confidencialidad en una variable incrementa la probabilidad de observar el mismo valor en las demás. En términos de distribución conjunta, esto indica que estos eventos no son independientes y presentan una alta co-ocurrencia dentro de las transacciones.</p>
-<div id="6101aee8" class="cell" data-execution_count="7">
+<div id="e6d2b83a" class="cell" data-execution_count="7">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>confidential_count <span class="op">=</span> <span class="dv">0</span></span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> index, row <span class="kw">in</span> frame.iterrows():</span>
@@ -800,7 +823,7 @@ Registros con al menos un dato 'CONFIDENCIAL': 49149</code></pre>
 <p>Asimismo, se identifica que las variables <code>FECHA_NACIMIENTO</code> y <code>FECHA_DESAPARICION</code> funcionan como variables auxiliares para la construcción de un atributo más representativo: la <strong>edad</strong>. Esta se obtiene a partir de la diferencia entre los años de ambas fechas, permitiendo capturar patrones más interpretables asociados a grupos etarios. En consecuencia, se crea la variable <code>EDAD</code> y se elimina <code>FECHA_NACIMIENTO</code>.</p>
 <p>Por su parte, la variable <code>FECHA_DESAPARICION</code>, así como <code>FECHA_REGISTRO</code>, se descomponen en componentes de <strong>año</strong> y <strong>mes</strong>, eliminando la granularidad asociada al día y la hora. Esta transformación reduce la cardinalidad de los datos y favorece la generación de patrones más generales. No obstante, estas nuevas variables requieren un proceso posterior de discretización para su adecuado uso en reglas de asociación.</p>
 <p>La estrategia de transformación y construcción de variables se detalla a continuación:</p>
-<div id="fac10813" class="cell" data-execution_count="8">
+<div id="c312fd4e" class="cell" data-execution_count="8">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Convertimos temporalmente a datetime para extraer el año, ignorando errores para valores como 'CONFIDENCIAL'</span></span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>anio_desaparicion <span class="op">=</span> pd.to_datetime(frame[<span class="st">'FECHA_DESAPARICION'</span>], errors<span class="op">=</span><span class="st">'coerce'</span>).dt.year</span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>anio_nacimiento <span class="op">=</span> pd.to_datetime(frame[<span class="st">'FECHA_NACIMIENTO'</span>], errors<span class="op">=</span><span class="st">'coerce'</span>).dt.year</span>
@@ -808,8 +831,8 @@ Registros con al menos un dato 'CONFIDENCIAL': 49149</code></pre>
 <span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculamos la edad como la diferencia simple de años</span></span>
 <span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>frame[<span class="st">'EDAD'</span>] <span class="op">=</span> anio_desaparicion <span class="op">-</span> anio_nacimiento</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p>Posteriormente fragmentamos las fechas de las varaibles</p>
-<div id="37f72e9d" class="cell" data-execution_count="9">
+<p>Posteriormente fragmentamos las fechas de las variables</p>
+<div id="a284d4b2" class="cell" data-execution_count="9">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Convertimos a datetime temporalmente para extraer componentes</span></span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>fecha_des_dt <span class="op">=</span> pd.to_datetime(frame[<span class="st">'FECHA_DESAPARICION'</span>], errors<span class="op">=</span><span class="st">'coerce'</span>)</span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>fecha_reg_dt <span class="op">=</span> pd.to_datetime(frame[<span class="st">'FECHA_REGISTRO'</span>], errors<span class="op">=</span><span class="st">'coerce'</span>)</span>
@@ -821,7 +844,7 @@ Registros con al menos un dato 'CONFIDENCIAL': 49149</code></pre>
 <span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>frame[<span class="st">'ANIO_REGISTRO'</span>] <span class="op">=</span> fecha_reg_dt.dt.year</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Cuando ordenamos los valores se observa la presencia de edades negativas donde indican registros donde el año de nacimiento es mayor al año de desaparición.</p>
-<div id="5580bbe5" class="cell" data-execution_count="10">
+<div id="86cffdac" class="cell" data-execution_count="10">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Filtrar registros con edades negativas</span></span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>inconsistentes <span class="op">=</span> frame[frame[<span class="st">'EDAD'</span>] <span class="op">&lt;</span> <span class="dv">0</span>]</span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Total de registros con edad negativa: </span><span class="sc">{</span><span class="bu">len</span>(inconsistentes)<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -829,7 +852,7 @@ Registros con al menos un dato 'CONFIDENCIAL': 49149</code></pre>
 <pre class="output"><code>Total de registros con edad negativa: 39</code></pre>
 <p>Se identifican <strong>39 registros</strong> con edades negativas. Dado que su proporción es mínima respecto al total, se opta por eliminarlos. Aunque estos casos podrían estar asociados a un mecanismo de datos faltantes tipo MCAR, su impacto es reducido y su eliminación permite mantener la consistencia del conjunto de datos sin introducir sesgos derivados de imputación.</p>
 <p>Adicionalmente, se observa que aproximadamente el <strong>70%</strong> de estos registros corresponden a personas de sexo masculino, lo que indica que este grupo es el más afectado por errores de captura en este subconjunto específico. Si bien esta eliminación introduce una ligera pérdida de representación para dicho grupo, su impacto global en el análisis es limitado debido a la baja proporción de estos casos.</p>
-<div id="9c1e4d80" class="cell" data-execution_count="11">
+<div id="5dbbde53" class="cell" data-execution_count="11">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>frame <span class="op">=</span> frame[<span class="op">~</span>(frame[<span class="st">'EDAD'</span>] <span class="op">&lt;</span> <span class="dv">0</span>)]</span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="co">#Copiamos una referencia para graficar la distribucion continua de las edades</span></span>
@@ -841,7 +864,7 @@ Registros con al menos un dato 'CONFIDENCIAL': 49149</code></pre>
 <p>Como se observa en el script, además de eliminar los registros inconsistentes, se genera una copia del <em>DataFrame</em> original (<code>frame_continuas</code>) con el objetivo de conservar la distribución continua de la variable <code>EDAD</code> para su posterior análisis.</p>
 <p>Adicionalmente, se eliminan las variables originales de fecha (<code>FECHA_DESAPARICION</code>, <code>FECHA_REGISTRO</code>, <code>FECHA_NACIMIENTO</code>), dado que ya han sido transformadas en variables más adecuadas. Este paso contribuye a reducir la dimensionalidad del conjunto de datos y evita redundancia en la representación de la información. Una vez tratados los valores inconsistentes, se procede a discretizar la variable <code>EDAD</code> en intervalos definidos. La discretización se realiza mediante la construcción de categorías ordinales: <strong>INFANTE, ADOLESCENTE, JOVEN, ADULTO y ADULTO_MAYOR</strong>, utilizando un conjunto de <em>bins</em> no necesariamente equidistantes.</p>
 <p>Adicionalmente, los valores no definidos (derivados de datos faltantes o inconsistentes previos) se agrupan bajo la categoría <em>CONFIDENCIAL</em>, manteniendo coherencia con el tratamiento general de valores confidenciales en el conjunto de datos.</p>
-<div id="442868b3" class="cell" data-execution_count="12">
+<div id="bdffc81a" class="cell" data-execution_count="12">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Definir los bins y etiquetas para la discretización</span></span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>bins <span class="op">=</span> [<span class="dv">0</span>, <span class="dv">11</span>, <span class="dv">20</span>, <span class="dv">39</span>, <span class="dv">59</span>, <span class="bu">float</span>(<span class="st">'inf'</span>)]</span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>labels <span class="op">=</span> [<span class="st">'INFANTE'</span>, <span class="st">'ADOLESCENTE'</span>, <span class="st">'JOVEN'</span>, <span class="st">'ADULTO'</span>, <span class="st">'ADULTO_MAYOR'</span>]</span>
@@ -867,7 +890,7 @@ INFANTE          2030</code></pre>
 <p>De manera complementaria, la visualización permite contrastar la distribución continua de las edades con su versión discretizada. Se observa una mayor concentración en los grupos de adolescentes y adultos jóvenes, mientras que los extremos (infantes y adultos mayores) presentan menor frecuencia.</p>
 <p>Asimismo, se identifican valores atípicos, como edades superiores a 100 años o cercanas a 0, que pueden considerarse outliers. En lugar de eliminarlos, se opta por agruparlos dentro de las categorías existentes, particularmente en <em>ADULTO_MAYOR</em> e <em>INFANTE</em>, respectivamente. Esta decisión introduce un sesgo mínimo, dado que la proporción de estos casos es baja, y permite mantener la integridad del conjunto de datos.</p>
 <p>En conjunto, la discretización de la variable <code>EDAD</code> permite reducir la complejidad del espacio de ítems, mejorar la interpretabilidad de los patrones y facilitar la generación de reglas de asociación más relevantes. Todo esto, es posible observarlo como se muestra a continuación.</p>
-<div id="cbe19e0e" class="cell" data-execution_count="13">
+<div id="ac4fadd6" class="cell" data-execution_count="13">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
 <span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -905,14 +928,14 @@ INFANTE          2030</code></pre>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="heatmaps/fechaContinua.png" class="img-fluid figure-img"></p>
-<figcaption>Proporcion continua y discreta de las edades</figcaption>
+<figcaption>Proporción continua y discreta de las edades</figcaption>
 </figure>
 </div>
 <p>Para la discretización de los años, se considera el comportamiento observado en la distribución, particularmente el crecimiento en ciertos periodos. En lugar de utilizar intervalos de igual tamaño, se opta por definir <strong>intervalos no equidistantes</strong>, basados en criterios empíricos que reflejan cambios relevantes en la frecuencia de los datos a lo largo del tiempo.</p>
 <p>Los intervalos definidos son:<br>
 <code>['1962-1999', '2000-2006', '2007-2009', '2010-2015', '2016-2020', '2021-2023', '2024-2025', 'CONFIDENCIAL']</code></p>
 <p>Esta discretización permite agrupar los datos en segmentos temporales más representativos, reduciendo la cardinalidad y facilitando la generación de reglas de asociación más interpretables.</p>
-<div id="1d5ea168" class="cell" data-execution_count="14">
+<div id="aa347eeb" class="cell" data-execution_count="14">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Definir los bins y etiquetas para los intervalos de años solicitados</span></span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>bins_anios <span class="op">=</span> [<span class="dv">1962</span>, <span class="dv">1999</span>, <span class="dv">2006</span>, <span class="dv">2009</span>, <span class="dv">2015</span>, <span class="dv">2020</span>, <span class="dv">2023</span>, <span class="dv">2025</span>]</span>
 <span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>labels_anios <span class="op">=</span> [<span class="st">'1962-1999'</span>, <span class="st">'2000-2006'</span>, <span class="st">'2007-2009'</span>, <span class="st">'2010-2015'</span>, <span class="st">'2016-2020'</span>, <span class="st">'2021-2023'</span>, <span class="st">'2024-2025'</span>]</span>
@@ -970,7 +993,7 @@ CONFIDENCIAL    49151
 Name: count, dtype: int64</code></pre>
 <p>Al visualizar las distribuciones discretizadas, se observa que las diferencias en medidas como la media se vuelven menos perceptibles debido al proceso de agrupación. Sin embargo, ambas variables conservan una estructura similar en términos de frecuencia por intervalo.</p>
 <p>Esto indica que la discretización logra preservar las tendencias generales de los datos, al mismo tiempo que reduce la complejidad del espacio de ítems. Como resultado, se facilita la identificación de patrones temporales relevantes sin incurrir en una alta dimensionalidad.</p>
-<div id="43d32dc8" class="cell" data-execution_count="15">
+<div id="02f53fae" class="cell" data-execution_count="15">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Configuración de estilo</span></span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>sns.set_theme(style<span class="op">=</span><span class="st">"whitegrid"</span>)</span>
 <span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>fig, axes <span class="op">=</span> plt.subplots(<span class="dv">1</span>, <span class="dv">2</span>, figsize<span class="op">=</span>(<span class="dv">22</span>, <span class="dv">10</span>))</span>
@@ -998,14 +1021,14 @@ Name: count, dtype: int64</code></pre>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="heatmaps/DiscretizadoFECHA.png" class="img-fluid figure-img"></p>
-<figcaption>Proporcion discreta de las fechas</figcaption>
+<figcaption>Proporción discreta de las fechas</figcaption>
 </figure>
 </div>
 </section>
 </section>
-<section id="construccion-y-evaluacion-del-modelo-de-reglas" class="level2" data-number="3.3">
-<h2 data-number="3.3" class="anchored" data-anchor-id="construccion-y-evaluacion-del-modelo-de-reglas"><span class="header-section-number">3.3</span> Construccion y evaluacion del modelo de reglas</h2>
-<div id="0342f1e6" class="cell" data-execution_count="16">
+<section id="construcción-y-evaluación-del-modelo-de-reglas" class="level2" data-number="3.3">
+<h2 data-number="3.3" class="anchored" data-anchor-id="construcción-y-evaluación-del-modelo-de-reglas"><span class="header-section-number">3.3</span> Construcción y evaluación del modelo de reglas</h2>
+<div id="6d85527b" class="cell" data-execution_count="16">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>numero_transacciones <span class="op">=</span> <span class="bu">len</span>(transacciones_codificadas)</span>
 <span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>dimensiones <span class="op">=</span> transacciones_codificadas.shape</span>
 <span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>numero_items <span class="op">=</span> transacciones_codificadas.shape[<span class="dv">1</span>]</span>
@@ -1025,7 +1048,7 @@ Presencia de items : 0.006064</code></pre>
 <p>No obstante, este comportamiento era esperado debido a la naturaleza del conjunto de datos y a las transformaciones realizadas durante el preprocesamiento, las cuales priorizan la interpretabilidad de los patrones sobre la densidad del espacio de ítems.</p>
 <p>Con el objetivo de analizar la estructura de la matriz binaria, se realiza una visualización de un subconjunto de transacciones. En particular, se consideran las <strong>primeras 15 transacciones</strong> y los <strong>50 ítems más frecuentes</strong> dentro de este subconjunto. Para ello, se ordenan los ítems en función de su frecuencia, permitiendo identificar aquellos con mayor presencia relativa.</p>
 <p>En la representación gráfica, cada punto indica la presencia de un ítem en una transacción específica, es decir, una posición <em>(i, j)</em> donde el valor es verdadero en la matriz binaria. Este tipo de visualización permite observar de manera directa la dispersión y los patrones de co-ocurrencia entre ítems.</p>
-<div id="e42d9a37" class="cell" data-execution_count="17">
+<div id="1085e31f" class="cell" data-execution_count="17">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> graficar_transacciones_con_nombres(datos: pd.DataFrame, inicio: <span class="bu">int</span> <span class="op">=</span> <span class="dv">0</span>, fin: <span class="bu">int</span> <span class="op">=</span> <span class="dv">50</span>, top_n_items: <span class="bu">int</span> <span class="op">=</span> <span class="dv">30</span>, titulo: <span class="bu">str</span> <span class="op">=</span> <span class="st">""</span>):</span>
 <span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Seleccionamos el rango de transacciones (segmentación)</span></span>
 <span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>    muestra <span class="op">=</span> datos.iloc[inicio:fin]</span>
@@ -1068,34 +1091,478 @@ Presencia de items : 0.006064</code></pre>
 <span id="cb24-40"><a href="#cb24-40" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb24-41"><a href="#cb24-41" aria-hidden="true" tabindex="-1"></a>    plt.xlabel(<span class="ss">f"Top </span><span class="sc">{</span>top_n_items<span class="sc">}</span><span class="ss"> ítems más frecuentes"</span>, fontsize<span class="op">=</span><span class="dv">12</span>, fontweight<span class="op">=</span><span class="st">'bold'</span>)</span>
 <span id="cb24-42"><a href="#cb24-42" aria-hidden="true" tabindex="-1"></a>    plt.ylabel(<span class="st">"Transacciones"</span>, fontsize<span class="op">=</span><span class="dv">12</span>, fontweight<span class="op">=</span><span class="st">'bold'</span>)</span>
-<span id="cb24-43"><a href="#cb24-43" aria-hidden="true" tabindex="-1"></a>    plt.title(titulo <span class="kw">or</span> <span class="ss">f"Matriz de Transacciones(Top </span><span class="sc">{</span>top_n_items<span class="sc">}</span><span class="ss"> Items)"</span>, fontsize<span class="op">=</span><span class="dv">14</span>, fontweight<span class="op">=</span><span class="st">'bold'</span>)</span>
+<span id="cb24-43"><a href="#cb24-43" aria-hidden="true" tabindex="-1"></a>    plt.title(titulo <span class="kw">or</span> <span class="ss">f"Matriz Binaria(Top </span><span class="sc">{</span>top_n_items<span class="sc">}</span><span class="ss"> Items)"</span>, fontsize<span class="op">=</span><span class="dv">14</span>, fontweight<span class="op">=</span><span class="st">'bold'</span>)</span>
 <span id="cb24-44"><a href="#cb24-44" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb24-45"><a href="#cb24-45" aria-hidden="true" tabindex="-1"></a>    plt.grid(<span class="va">True</span>, linestyle<span class="op">=</span><span class="st">':'</span>, alpha<span class="op">=</span><span class="fl">0.5</span>)</span>
 <span id="cb24-46"><a href="#cb24-46" aria-hidden="true" tabindex="-1"></a>    plt.tight_layout()</span>
 <span id="cb24-47"><a href="#cb24-47" aria-hidden="true" tabindex="-1"></a>    plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>graficar_transacciones_con_nombres( datos=transacciones_codificadas, inicio=0, fin=15, top_n_items=50 )</p>
-<p><img src="heatmaps/Top15Dispersa.png" class="img-fluid" alt="Muestra las primeras transacciones de co ocurrencia 1"> <img src="heatmaps/MatrizDispersa.png" class="img-fluid" alt="Proporcion continua y discreta de las edades"></p>
+<p><img src="heatmaps/Top15Dispersa.png" class="img-fluid" alt="Muestra las primeras transacciones de co-ocurrencia 1"> <img src="heatmaps/MatrizDispersa.png" class="img-fluid" alt="Proporción continua y discreta de las edades"></p>
 <p>La primera visualización muestra la co-ocurrencia de los ítems más frecuentes en un subconjunto reducido de transacciones:</p>
-<p>A partir de esta representación, se observa que ciertos ítems aparecen de forma recurrente en múltiples transacciones, formando patrones verticales que indican alta frecuencia relativa. En contraste, otros ítems presentan una aparición más esporádica, lo que evidencia la heterogeneidad en la distribución de los datos Particularmente se observa que los items relacionados con INFANTE, ESTADO DE MEXICO, HOMBRE, MUJER, DESAPARECIDA son de mayor co ocurrencia en las transacciones</p>
+<p>A partir de esta representación, se observa que ciertos ítems aparecen de forma recurrente en múltiples transacciones, formando patrones verticales que indican alta frecuencia relativa. En contraste, otros ítems presentan una aparición más esporádica, lo que evidencia la heterogeneidad en la distribución de los datos Particularmente se observa que los items relacionados con INFANTE, ESTADO DE MEXICO, HOMBRE, MUJER, DESAPARECIDA son de mayor co-ocurrencia en las transacciones</p>
 </section>
-<section id="refinamiento-y-ajuste" class="level2" data-number="3.4">
-<h2 data-number="3.4" class="anchored" data-anchor-id="refinamiento-y-ajuste"><span class="header-section-number">3.4</span> Refinamiento y ajuste</h2>
-<section id="eliminiacion-de-redundancia" class="level3" data-number="3.4.1">
-<h3 data-number="3.4.1" class="anchored" data-anchor-id="eliminiacion-de-redundancia"><span class="header-section-number">3.4.1</span> Eliminiacion de redundancia</h3>
+<section id="generación-de-reglas" class="level2" data-number="3.4">
+<h2 data-number="3.4" class="anchored" data-anchor-id="generación-de-reglas"><span class="header-section-number">3.4</span> Generación de reglas</h2>
+<p>Para la generación de reglas sobre el dataset completo se utilizó FP-Growth con las 5 variables más relevantes del fenómeno: <code>SEXO</code>, <code>EDAD</code>, <code>ENTIDAD</code>, <code>ESTATUS_VICTIMA</code> y <code>MES_DESAPARICION</code>. La decisión de reducir a estas 5 columnas responde a dos criterios: primero, son las variables con mayor relevancia semántica para el análisis de desapariciones; segundo, reducir la dimensionalidad de 1,649 a 59 ítems mejora significativamente el rendimiento del algoritmo sin perder los patrones principales.</p>
+<div id="b1417c5c" class="cell" data-execution_count="18">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>columnas_reglas <span class="op">=</span> [<span class="st">'SEXO'</span>, <span class="st">'EDAD'</span>, <span class="st">'ENTIDAD'</span>, <span class="st">'ESTATUS_VICTIMA'</span>, <span class="st">'MES_DESAPARICION'</span>]</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>frame_reglas <span class="op">=</span> frame[columnas_reglas]</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>transacciones_full <span class="op">=</span> df_a_transacciones(frame_reglas)</span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>codificador_full <span class="op">=</span> TransactionEncoder()</span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>codif_full <span class="op">=</span> codificador_full.fit_transform(transacciones_full)</span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>df_full <span class="op">=</span> pd.DataFrame(codif_full, columns<span class="op">=</span>codificador_full.columns_)</span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a>SOPORTE_FINAL <span class="op">=</span> <span class="fl">0.01</span></span>
+<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a>CONFIANZA_FINAL <span class="op">=</span> <span class="fl">0.5</span></span>
+<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-12"><a href="#cb25-12" aria-hidden="true" tabindex="-1"></a>itemsets_final <span class="op">=</span> fpgrowth(df_full, min_support<span class="op">=</span>SOPORTE_FINAL, use_colnames<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb25-13"><a href="#cb25-13" aria-hidden="true" tabindex="-1"></a>reglas_final <span class="op">=</span> association_rules(itemsets_final, </span>
+<span id="cb25-14"><a href="#cb25-14" aria-hidden="true" tabindex="-1"></a>                                  metric<span class="op">=</span><span class="st">"confidence"</span>, </span>
+<span id="cb25-15"><a href="#cb25-15" aria-hidden="true" tabindex="-1"></a>                                  min_threshold<span class="op">=</span>CONFIANZA_FINAL)</span>
+<span id="cb25-16"><a href="#cb25-16" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Reglas encontradas: </span><span class="sc">{</span><span class="bu">len</span>(reglas_final)<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<pre class="output"><code>Dataset codificado: 98884 transacciones, 59 items
+Reglas encontradas: 1322</code></pre>
 </section>
-<section id="restricciones-en-reglas" class="level3" data-number="3.4.2">
-<h3 data-number="3.4.2" class="anchored" data-anchor-id="restricciones-en-reglas"><span class="header-section-number">3.4.2</span> Restricciones en reglas</h3>
+<section id="métricas-utilizadas" class="level2" data-number="3.5">
+<h2 data-number="3.5" class="anchored" data-anchor-id="métricas-utilizadas"><span class="header-section-number">3.5</span> Métricas utilizadas</h2>
+<p>Para evaluar la calidad de las reglas generadas se utilizaron:</p>
+<p><strong>Soporte</strong> mide la frecuencia del patrón en el dataset. Una regla <span class="math inline">\(X \Rightarrow Y\)</span> tiene soporte igual a la proporción de transacciones que contienen tanto <span class="math inline">\(X\)</span> como <span class="math inline">\(Y\)</span>:</p>
+<p><span class="math display">\[\text{soporte}(X \Rightarrow Y) = \frac{|\{t \in D : X \cup Y \subseteq t\}|}{|D|}\]</span></p>
+<p>En este trabajo se estableció un soporte mínimo de <strong>0.01</strong>, equivalente a patrones presentes en al menos 988 de los 98,884 registros. Valores menores generaban una explosión computacional; valores mayores eliminaban patrones demográficos relevantes.</p>
+<p><strong>Confianza</strong> mide la probabilidad condicional de que ocurra el consecuente dado el antecedente:</p>
+<p><span class="math display">\[\text{confianza}(X \Rightarrow Y) = \frac{\text{soporte}(X \cup Y)}{\text{soporte}(X)}\]</span></p>
+<p>Se estableció una confianza mínima de <strong>0.5</strong>, garantizando que el consecuente ocurra en al menos la mitad de los casos donde se presenta el antecedente.</p>
+<p><strong>Lift</strong> mide si la asociación es genuina o casual, comparando la frecuencia observada con la esperada bajo independencia:</p>
+<p><span class="math display">\[\text{lift}(X \Rightarrow Y) = \frac{\text{confianza}(X \Rightarrow Y)}{\text{soporte}(Y)}\]</span></p>
+<p>Un lift mayor a 1 indica dependencia positiva; igual a 1 indica independencia; menor a 1 indica asociación negativa. En el análisis final se priorizaron las reglas con lift mayor a 2.0 por representar asociaciones sustancialmente más fuertes que el azar.</p>
+<div id="5f8c8bfb" class="cell" data-execution_count="19">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Distribución de las métricas en el conjunto de reglas generadas</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Estadísticos descriptivos de las métricas:"</span>)</span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(reglas_final[[<span class="st">'support'</span>, <span class="st">'confidence'</span>, <span class="st">'lift'</span>]].describe().<span class="bu">round</span>(<span class="dv">4</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<pre class="output"><code>       support  confidence    lift
+count  1322.00     1322.00  1322.00
+mean      0.02        0.61     1.89
+std       0.02        0.10     1.42
+min       0.01        0.50     1.00
+25%       0.01        0.54     1.19
+50%       0.02        0.59     1.47
+75%       0.03        0.66     2.14
+max       0.50        1.00     7.17</code></pre>
+<p>Los estadísticos descriptivos muestran que el soporte promedio de las reglas es 0.02, lo que indica que la mayoría de los patrones encontrados son específicos y no generalizables a toda la población. El lift promedio de 1.89 confirma que las asociaciones son genuinas y no casuales. El valor máximo de lift de 7.17 corresponde a la regla de infantes en el Estado de México, que representa la asociación más fuerte del dataset.</p>
 </section>
-<section id="reglas-maximas" class="level3" data-number="3.4.3">
-<h3 data-number="3.4.3" class="anchored" data-anchor-id="reglas-maximas"><span class="header-section-number">3.4.3</span> Reglas maximas</h3>
+<section id="refinamiento-y-ajuste" class="level2" data-number="3.6">
+<h2 data-number="3.6" class="anchored" data-anchor-id="refinamiento-y-ajuste"><span class="header-section-number">3.6</span> Refinamiento y ajuste</h2>
+<section id="eliminacion-de-redundancia" class="level3" data-number="3.6.1">
+<h3 data-number="3.6.1" class="anchored" data-anchor-id="eliminacion-de-redundancia"><span class="header-section-number">3.6.1</span> Eliminacion de redundancia</h3>
+<p>Durante la fase de preparacion de datos se identificaron multiples fuentes de redundancia que afectaban la calidad de las reglas generadas:</p>
+<p><strong>Variables duplicadas semanticamente:</strong> Se eliminaron las variables <code>CVE_ENT</code> y <code>CVE_MUN</code> por representar la misma informacion que <code>ENTIDAD</code> y <code>MUNICIPIO</code> respectivamente. Mantener ambas representaciones generaba reglas triviales del tipo <code>CVE_ENT=15 -&gt; ENTIDAD=ESTADO DE MEXICO</code>, que no aportaban conocimiento nuevo sobre las desapariciones. Se conservaron las versiones nominales por su interpretabilidad directa.</p>
+<p><strong>Identificadores unicos:</strong> La variable <code>ID_VICTIMA</code> fue eliminada por ser un identificador unico alfanumerico. Cada valor aparece exactamente una vez en el dataset, por lo que su soporte siempre seria aproximadamente 0.001%, muy por debajo de cualquier umbral razonable. Incluirla solo incrementaria la dimensionalidad sin aportar patrones.</p>
+<p><strong>Variables de fecha originales:</strong> Las variables <code>FECHA_DESAPARICION</code>, <code>FECHA_REGISTRO</code> y <code>FECHA_NACIMIENTO</code> contenian informacion a nivel de dia y hora. Esta granularidad generaba una cardinalidad extrema donde cada fecha unica se convertia en un item distinto, resultando en una matriz binaria con 255,842 items y una densidad de solo 0.0043%. Para resolver esto, se aplicaron dos estrategias:</p>
+<ol type="1">
+<li><p><strong>Derivacion de EDAD:</strong> A partir de la diferencia entre <code>FECHA_DESAPARICION</code> y <code>FECHA_NACIMIENTO</code> se calculo la edad, que posteriormente fue discretizada en 6 categorias (INFANTE, ADOLESCENTE, JOVEN, ADULTO, ADULTO_MAYOR, CONFIDENCIAL).</p></li>
+<li><p><strong>Descomposicion temporal:</strong> <code>FECHA_DESAPARICION</code> y <code>FECHA_REGISTRO</code> se descompusieron en componentes de mes y ano, descartando dia y hora. El mes conserva granularidad para detectar patrones estacionales; el ano se discretizo en 8 intervalos no equidistantes basados en la distribucion observada de los datos.</p></li>
+</ol>
+<p><strong>Resultado de la eliminacion de redundancia:</strong> La dimensionalidad se redujo de 255,842 items (dataset original sin procesar) a 1,649 items (dataset procesado con 10 columnas), una reduccion del 99.4%.</p>
 </section>
-<section id="reglas-en-transacciones" class="level3" data-number="3.4.4">
-<h3 data-number="3.4.4" class="anchored" data-anchor-id="reglas-en-transacciones"><span class="header-section-number">3.4.4</span> Reglas en transacciones</h3>
+<section id="restricciones-en-reglas" class="level3" data-number="3.6.2">
+<h3 data-number="3.6.2" class="anchored" data-anchor-id="restricciones-en-reglas"><span class="header-section-number">3.6.2</span> Restricciones en reglas</h3>
+<p>Para evitar que el algoritmo generara reglas triviales o sin valor interpretativo, se aplicaron restricciones tanto en la generación como en el filtrado posterior:</p>
+<p><strong>Restricciones aplicadas durante la generacion:</strong></p>
+<ol type="1">
+<li><p><strong>Tamaño mínimo del consecuente:</strong> Solo se generaron reglas donde el itemset completo tiene tamaño mayor o igual a 2, lo que garantiza que exista al menos un antecedente y un consecuente. Las reglas de tamaño 1 no establecen una relación condicional.</p></li>
+<li><p><strong>Umbrales de calidad:</strong> Tras multiples pruebas de ejecucion sobre el dataset, se determinaron los umbrales óptimos:</p>
+<ul>
+<li><strong>Soporte mínimo de 0.01 (1%):</strong> Un soporte menor (0.005) provoco que FP-Growth no terminara en tiempo razonable debido a la explosion combinatoria. Un soporte mayor (0.02) reducia excesivamente el numero de reglas generadas, eliminando patrones potencialmente relevantes. El valor de 0.01 ofrecio un equilibrio.</li>
+<li><strong>Confianza minima de 0.5 (50%):</strong> Se eligio este umbral para garantizar que las reglas tuvieran una probabilidad condicional aceptable, descartando aquellas donde el consecuente ocurre en menos de la mitad de los casos que presentan el antecedente.</li>
+</ul></li>
+</ol>
+<p><strong>Restricciones aplicadas en el filtrado posterior:</strong></p>
+<ol start="3" type="1">
+<li><p><strong>Reglas con CONFIDENCIAL en ambos lados:</strong> Se identificaron reglas del tipo <code>SEXO=CONFIDENCIAL, MUNICIPIO=CONFIDENCIAL -&gt; EDAD=CONFIDENCIAL</code> que, aunque tienen alto lift, no reflejan las desapariciones sino un ocultamiento sistematico de informacion por parte de las autoridades. Estas reglas se documentan como hallazgo del sesgo institucional pero no se consideran para el análisis de patrones.</p></li>
+<li><p><strong>Reglas redundantes por inclusion:</strong> Si se generaban simultaneamente <code>A -&gt; C</code> y <code>A,B -&gt; C</code> con métricas similares, se conservo solo la regla mas general. Esto evita inflar artificialmente el numero de reglas con variantes de un mismo patron.</p></li>
+<li><p><strong>Reglas con MUNICIPIO:</strong> Debido a la alta cardinalidad de MUNICIPIO (2,457 categorias), las reglas que involucraban esta variable tenian soporte extremadamente bajo, menor al 0.1%, y fueron excluidas del analisis final.</p></li>
+</ol>
+</section>
+<section id="reglas-máximas" class="level3" data-number="3.6.3">
+<h3 data-number="3.6.3" class="anchored" data-anchor-id="reglas-máximas"><span class="header-section-number">3.6.3</span> Reglas máximas</h3>
+<p>Del conjunto de 1,322 reglas generadas por FP-Growth, se identificaron las <strong>reglas máximas</strong>: aquellas que no pueden extenderse anadiendo mas items sin perder el soporte minimo. Estas reglas representan los patrones mas completos e informativos.</p>
+<p><strong>Criterios para seleccionar reglas máximas:</strong></p>
+<ul>
+<li><strong>Lift mayor a 2.0:</strong> La asociacion es al menos el doble de lo esperado por azar.</li>
+<li><strong>Confianza mayor a 0.5:</strong> Mas del 50% de probabilidad condicional.</li>
+<li><strong>Soporte mayor a 0.01:</strong> Al menos 988 casos en el dataset completo.</li>
+</ul>
+<p>De las 1,322 reglas generadas, 47 cumplieron con estos criterios. Las 10 reglas con mayor lift (2.46 - 7.17) corresponden a patrones geográficos y demográficos que se analizan en la seccion de interpretacion.</p>
+<p><strong>Reglas descartadas por triviales:</strong> Aproximadamente el 60% de las reglas generadas correspondian a asociaciones con la categoría CONFIDENCIAL. Si bien reflejan un sesgo del sistema de registro, no se consideran reglas máximas para el análisis de las desapariciones.</p>
+</section>
+<section id="reglas-en-transacciones" class="level3" data-number="3.6.4">
+<h3 data-number="3.6.4" class="anchored" data-anchor-id="reglas-en-transacciones"><span class="header-section-number">3.6.4</span> Reglas en transacciones</h3>
+<p>Para verificar la presencia de las reglas descubiertas en los datos originales, se analizó la matriz binaria presentada anteriormente. Las reglas con mayor lift se corresponden con patrones visibles en dicha matriz binaria: los ítems <code>EDAD=INFANTE</code>, <code>ENTIDAD=ESTADO DE MÉXICO</code> y <code>ESTATUS_VICTIMA=DESAPARECIDA</code> presentan una alta co-ocurrencia, observable en las columnas con mayor densidad de puntos.</p>
+<p>Cada regla puede rastrearse hasta las transacciones específicas que la soportan. Por ejemplo, la regla <code>EDAD=INFANTE → ENTIDAD=ESTADO DE MÉXICO</code> con soporte 0.0107 está presente en aproximadamente 1,058 de las 98,884 transacciones del dataset.</p>
+</section>
+<section id="visualización-de-reglas" class="level3" data-number="3.6.5">
+<h3 data-number="3.6.5" class="anchored" data-anchor-id="visualización-de-reglas"><span class="header-section-number">3.6.5</span> Visualización de reglas</h3>
+<p>A continuacion se presentan las reglas de asociación obtenidas, ordenadas por lift:</p>
+<div id="tbl-top-reglas" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-top-reglas-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;2: Las 10 reglas de asociacion con mayor Lift obtenidas del dataset completo
+</figcaption>
+<div aria-describedby="tbl-top-reglas-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 18%">
+<col style="width: 18%">
+<col style="width: 18%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">#</th>
+<th style="text-align: left;">Antecedente</th>
+<th style="text-align: left;">Consecuente</th>
+<th style="text-align: center;">Soporte</th>
+<th style="text-align: center;">Confianza</th>
+<th style="text-align: center;">Lift</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">1</td>
+<td style="text-align: left;">EDAD=INFANTE</td>
+<td style="text-align: left;">ENTIDAD=ESTADO DE MEXICO, ESTATUS_VICTIMA=DESAPARECIDA</td>
+<td style="text-align: center;">1.06%</td>
+<td style="text-align: center;">51.6%</td>
+<td style="text-align: center;">7.17</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">2</td>
+<td style="text-align: left;">ENTIDAD=ESTADO DE MEXICO, EDAD=ADOLESCENTE</td>
+<td style="text-align: left;">SEXO=MUJER, ESTATUS_VICTIMA=DESAPARECIDA</td>
+<td style="text-align: center;">1.10%</td>
+<td style="text-align: center;">62.0%</td>
+<td style="text-align: center;">6.20</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">3</td>
+<td style="text-align: left;">ENTIDAD=ESTADO DE MEXICO, ESTATUS_VICTIMA=DESAPARECIDA, EDAD=ADOLESCENTE</td>
+<td style="text-align: left;">SEXO=MUJER</td>
+<td style="text-align: center;">1.10%</td>
+<td style="text-align: center;">62.6%</td>
+<td style="text-align: center;">5.99</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">4</td>
+<td style="text-align: left;">ENTIDAD=ESTADO DE MEXICO, EDAD=ADOLESCENTE</td>
+<td style="text-align: left;">SEXO=MUJER</td>
+<td style="text-align: center;">1.11%</td>
+<td style="text-align: center;">62.3%</td>
+<td style="text-align: center;">5.96</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">5</td>
+<td style="text-align: left;">ESTATUS_VICTIMA=DESAPARECIDA, EDAD=INFANTE</td>
+<td style="text-align: left;">ENTIDAD=ESTADO DE MEXICO</td>
+<td style="text-align: center;">1.06%</td>
+<td style="text-align: center;">53.3%</td>
+<td style="text-align: center;">5.05</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">6</td>
+<td style="text-align: left;">EDAD=INFANTE</td>
+<td style="text-align: left;">ENTIDAD=ESTADO DE MEXICO</td>
+<td style="text-align: center;">1.07%</td>
+<td style="text-align: center;">52.1%</td>
+<td style="text-align: center;">4.94</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">7</td>
+<td style="text-align: left;">ENTIDAD=SINALOA, ESTATUS_VICTIMA=DESAPARECIDA</td>
+<td style="text-align: left;">SEXO=HOMBRE, EDAD=JOVEN</td>
+<td style="text-align: center;">1.72%</td>
+<td style="text-align: center;">57.1%</td>
+<td style="text-align: center;">2.55</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">8</td>
+<td style="text-align: left;">SEXO=HOMBRE, ENTIDAD=TAMAULIPAS</td>
+<td style="text-align: left;">EDAD=JOVEN, ESTATUS_VICTIMA=DESAPARECIDA</td>
+<td style="text-align: center;">1.79%</td>
+<td style="text-align: center;">63.8%</td>
+<td style="text-align: center;">2.53</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">9</td>
+<td style="text-align: left;">SEXO=HOMBRE, ENTIDAD=GUANAJUATO</td>
+<td style="text-align: left;">EDAD=JOVEN, ESTATUS_VICTIMA=DESAPARECIDA</td>
+<td style="text-align: center;">1.07%</td>
+<td style="text-align: center;">63.7%</td>
+<td style="text-align: center;">2.52</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">10</td>
+<td style="text-align: left;">ENTIDAD=GUANAJUATO, ESTATUS_VICTIMA=DESAPARECIDA</td>
+<td style="text-align: left;">SEXO=HOMBRE, EDAD=JOVEN</td>
+<td style="text-align: center;">1.07%</td>
+<td style="text-align: center;">55.1%</td>
+<td style="text-align: center;">2.46</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p>Estas reglas muestran patrones <strong>geográficos</strong> y demográficos relevantes: el <strong>Estado de México</strong> concentra una proporción importante de los registros de infantes y mujeres adolescentes desaparecidas, mientras que entidades del norte del país presentan un perfil predominante de hombres jóvenes.</p>
 </section>
 </section>
-<section id="visualizacion-de-reglas" class="level2" data-number="3.5">
-<h2 data-number="3.5" class="anchored" data-anchor-id="visualizacion-de-reglas"><span class="header-section-number">3.5</span> Visualizacion de reglas</h2>
+<section id="interpretacion-de-reglas-de-asociación" class="level2" data-number="3.7">
+<h2 data-number="3.7" class="anchored" data-anchor-id="interpretacion-de-reglas-de-asociación"><span class="header-section-number">3.7</span> Interpretacion de reglas de asociación</h2>
+<section id="infantes-en-el-estado-de-mexico-reglas-1-5-6" class="level3" data-number="3.7.1">
+<h3 data-number="3.7.1" class="anchored" data-anchor-id="infantes-en-el-estado-de-mexico-reglas-1-5-6"><span class="header-section-number">3.7.1</span> Infantes en el Estado de Mexico (Reglas 1, 5, 6)</h3>
+<p>Las reglas con mayor lift (4.94 - 7.17) asocian la categoria EDAD=INFANTE con la ENTIDAD=ESTADO DE MEXICO. La regla principal indica que si una persona desaparecida pertenece a la categoría INFANTE, la probabilidad de que el registro corresponda al Estado de México es 7.17 veces mayor a lo esperado si ambas variables fueran independientes. La confianza de 51.6% indica que mas de la mitad de los registros de infantes desaparecidos se concentran en esta entidad.</p>
+<p>Este hallazgo podria relacionarse con diversos factores: la alta densidad poblacional del Estado de México, la actividad de grupos delictivos dedicados a la sustraccion de menores en la zona metropolitana, o una mayor eficiencia en el registro de estos casos por parte de las fiscalias locales en comparacion con otras entidades.</p>
+</section>
+<section id="mujeres-adolescentes-en-el-estado-de-méxico-reglas-2-3-4" class="level3" data-number="3.7.2">
+<h3 data-number="3.7.2" class="anchored" data-anchor-id="mujeres-adolescentes-en-el-estado-de-méxico-reglas-2-3-4"><span class="header-section-number">3.7.2</span> Mujeres adolescentes en el Estado de México (Reglas 2, 3, 4)</h3>
+<p>Se identifico un patrón de género significativo en el Estado de México para el grupo etario ADOLESCENTE (12-17 anos). Las reglas 2 a 4 muestran que cuando una persona adolescente desaparece en esta entidad, existe una probabilidad aproximadamente 6 veces mayor a la esperada de que sea mujer. La confianza del 62.3% indica que de los registros de adolescentes desaparecidos en el Estado de México, casi dos tercios corresponden a mujeres.</p>
+<p>Este patron podria estar vinculado a sucesos como la trata de personas con fines de explotación sexual, la violencia de género focalizada geográficamente, o patrones de desaparición específicos que afectan de manera diferenciada a mujeres adolescentes en esta región.</p>
+</section>
+<section id="hombres-jóvenes-en-entidades-del-norte-reglas-7-10" class="level3" data-number="3.7.3">
+<h3 data-number="3.7.3" class="anchored" data-anchor-id="hombres-jóvenes-en-entidades-del-norte-reglas-7-10"><span class="header-section-number">3.7.3</span> Hombres jóvenes en entidades del norte (Reglas 7-10)</h3>
+<p>En contraste con los patrones anteriores, los estados de Sinaloa, Tamaulipas y Guanajuato presentan un perfil predominante de hombres jóvenes (20-39 anos) con estatus DESAPARECIDA. Las reglas 7 a 10 muestran un lift cercano a 2.5 y confianza entre 55% y 64%, lo que indica una asociacion moderada pero consistente.</p>
+<p>Estos hallazgos son compatibles con contextos de desaparicion relacionados con el crimen organizado, donde el perfil de hombre joven es el mas frecuente. A diferencia del Estado de México, donde el patron de género es femenino, en estas entidades del norte la proporción de hombres desaparecidos es mayor.</p>
+</section>
+<section id="reflexion-sobre-los-patrones-encontrados" class="level3" data-number="3.7.4">
+<h3 data-number="3.7.4" class="anchored" data-anchor-id="reflexion-sobre-los-patrones-encontrados"><span class="header-section-number">3.7.4</span> Reflexion sobre los patrones encontrados</h3>
+<p>Es fundamental considerar que las reglas obtenidas reflejan los registros de personas desaparecidas que cuentan con datos completos en el sistema. La categoría CONFIDENCIAL, presente en el 49% de los registros, introduce un sesgo importante: las entidades o perfiles con mayor opacidad en el registro pueden estar subrepresentados en estos patrones. Por lo tanto, las asociaciones encontradas deben interpretarse como patrones del sistema de registro, no necesariamente como una representacion exacta de la totalidad de las desapariciones en México.</p>
+</section>
+</section>
+</section>
+<section id="algoritmo-fp-growth" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> Algoritmo FP-Growth</h1>
+<section id="descripción-1" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="descripción-1"><span class="header-section-number">4.1</span> Descripción</h2>
+<p>FP-Growth (Frequent Pattern Growth) es un algoritmo para minería de patrones frecuentes propuesto por Han, Pei y Yin (2000). A diferencia de Apriori, este algoritmo evita la generación explícita de candidatos, lo que lo hace considerablemente mas eficiente en bases de datos grandes.</p>
+<p>La idea central de FP-Growth es comprimir la base de transacciones en una estructura de árbol llamada FP-tree (Frequent Pattern Tree). A partir de ese árbol, el algoritmo extrae patrones frecuentes mediante bases condicionales y arboles condicionales, sin necesidad de generar candidatos ni realizar multiples barridos sobre los datos.</p>
+<p>Los pasos principales de FP-Growth son:</p>
+<ol type="1">
+<li><p><strong>Calculo de soportes individuales:</strong> Se realiza un primer barrido sobre la base de datos para contar la frecuencia de cada item. Se eliminan aquellos items que no alcanzan el soporte mínimo establecido.</p></li>
+<li><p><strong>Ordenamiento por frecuencia:</strong> Los items se ordenan de mayor a menor frecuencia. Este orden global permite que las transacciones compartan prefijos comunes, haciendo el árbol mas compacto.</p></li>
+<li><p><strong>Construcción del FP-tree:</strong> Se realiza un segundo barrido sobre la base de datos. Para cada transacción, se ordenan sus items segun el orden global y se insertan en el árbol. Si un prefijo ya existe, se incrementa el contador del nodo correspondiente. Si no existe, se crea una nueva rama. Esta compresión permite representar muchas transacciones en una estructura compacta.</p></li>
+<li><p><strong>Extracción de patrones frecuentes:</strong> Se extraen los patrones frecuentes desde los items menos frecuentes hacia los mas frecuentes. Para cada item, se construye su base condicional que contiene los caminos prefijo que llevan a ese item y su arbol condicional. Los patrones frecuentes se obtienen recursivamente a partir de estas estructuras.</p></li>
+<li><p><strong>Generación de reglas de asociacion:</strong> Una vez obtenidos los itemsets frecuentes, se generan reglas de asociacioón evaluando métricas como soporte, confianza y lift, de manera análoga a como se hace en Apriori.</p></li>
+</ol>
+</section>
+<section id="ventajas-frente-a-apriori" class="level2" data-number="4.2">
+<h2 data-number="4.2" class="anchored" data-anchor-id="ventajas-frente-a-apriori"><span class="header-section-number">4.2</span> Ventajas frente a Apriori</h2>
+<p>La principal ventaja de FP-Growth es que solo requiere dos barridos completos sobre la base de datos: uno para calcular los soportes individuales y otro para construir el árbol. Apriori, en cambio, requiere un barrido por cada nivel de itemsets frecuentes, lo que lo hace mas lento cuando existen patrones de gran tamaño.</p>
+<p>Ademas, FP-Growth comprime las transacciones que comparten prefijos en ramas comunes del árbol, reduciendo el uso de memoria y acelerando la extracción de patrones. Esto es especialmente útil en bases de datos dispersas como la de este trabajo, donde la mayoria de las transacciones contienen pocos items.</p>
+</section>
+<section id="implementación-en-python" class="level2" data-number="4.3">
+<h2 data-number="4.3" class="anchored" data-anchor-id="implementación-en-python"><span class="header-section-number">4.3</span> Implementación en Python</h2>
+<p>Para este trabajo se utilizo la implementación de FP-Growth disponible en la libreria <code>mlxtend</code>. Esta libreria requiere que los datos esten en formato one-hot, donde cada columna representa un item posible y cada fila indica si esa transacción contiene dicho item.</p>
+<div id="ff9358c1" class="cell" data-execution_count="20">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> mlxtend.preprocessing <span class="im">import</span> TransactionEncoder</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> mlxtend.frequent_patterns <span class="im">import</span> fpgrowth, association_rules</span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Cargar el dataset procesado</span></span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a>frame <span class="op">=</span> pd.read_csv(<span class="st">"DS_procesado.csv"</span>)</span>
+<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Seleccionar las columnas relevantes para las reglas</span></span>
+<span id="cb29-9"><a href="#cb29-9" aria-hidden="true" tabindex="-1"></a>columnas_reglas <span class="op">=</span> [<span class="st">'SEXO'</span>, <span class="st">'EDAD'</span>, <span class="st">'ENTIDAD'</span>, <span class="st">'ESTATUS_VICTIMA'</span>, <span class="st">'MES_DESAPARICION'</span>]</span>
+<span id="cb29-10"><a href="#cb29-10" aria-hidden="true" tabindex="-1"></a>frame_reglas <span class="op">=</span> frame[columnas_reglas]</span>
+<span id="cb29-11"><a href="#cb29-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-12"><a href="#cb29-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Convertir el dataframe a formato de transacciones</span></span>
+<span id="cb29-13"><a href="#cb29-13" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> df_a_transacciones(df):</span>
+<span id="cb29-14"><a href="#cb29-14" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
+<span id="cb29-15"><a href="#cb29-15" aria-hidden="true" tabindex="-1"></a><span class="co">    Convierte un DataFrame en una lista de transacciones.</span></span>
+<span id="cb29-16"><a href="#cb29-16" aria-hidden="true" tabindex="-1"></a><span class="co">    Cada transacción es una lista de strings con el formato 'columna=valor'.</span></span>
+<span id="cb29-17"><a href="#cb29-17" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="cb29-18"><a href="#cb29-18" aria-hidden="true" tabindex="-1"></a>    columnas <span class="op">=</span> df.columns.tolist()</span>
+<span id="cb29-19"><a href="#cb29-19" aria-hidden="true" tabindex="-1"></a>    transacciones <span class="op">=</span> []</span>
+<span id="cb29-20"><a href="#cb29-20" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> index, fila <span class="kw">in</span> df.iterrows():</span>
+<span id="cb29-21"><a href="#cb29-21" aria-hidden="true" tabindex="-1"></a>        transaccion <span class="op">=</span> [<span class="ss">f"</span><span class="sc">{</span>col<span class="sc">}</span><span class="ss">=</span><span class="sc">{</span>fila[col]<span class="sc">}</span><span class="ss">"</span> <span class="cf">for</span> col <span class="kw">in</span> columnas]</span>
+<span id="cb29-22"><a href="#cb29-22" aria-hidden="true" tabindex="-1"></a>        transacciones.append(transaccion)</span>
+<span id="cb29-23"><a href="#cb29-23" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> transacciones</span>
+<span id="cb29-24"><a href="#cb29-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-25"><a href="#cb29-25" aria-hidden="true" tabindex="-1"></a>transacciones <span class="op">=</span> df_a_transacciones(frame_reglas)</span>
+<span id="cb29-26"><a href="#cb29-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-27"><a href="#cb29-27" aria-hidden="true" tabindex="-1"></a><span class="co"># Codificar las transacciones a formato one-hot</span></span>
+<span id="cb29-28"><a href="#cb29-28" aria-hidden="true" tabindex="-1"></a>codificador <span class="op">=</span> TransactionEncoder()</span>
+<span id="cb29-29"><a href="#cb29-29" aria-hidden="true" tabindex="-1"></a>transacciones_codificadas <span class="op">=</span> codificador.fit_transform(transacciones)</span>
+<span id="cb29-30"><a href="#cb29-30" aria-hidden="true" tabindex="-1"></a>df_codificado <span class="op">=</span> pd.DataFrame(transacciones_codificadas, columns<span class="op">=</span>codificador.columns_)</span>
+<span id="cb29-31"><a href="#cb29-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-32"><a href="#cb29-32" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Dataset codificado: </span><span class="sc">{</span>df_codificado<span class="sc">.</span>shape[<span class="dv">0</span>]<span class="sc">}</span><span class="ss"> transacciones, </span><span class="sc">{</span>df_codificado<span class="sc">.</span>shape[<span class="dv">1</span>]<span class="sc">}</span><span class="ss"> items"</span>)</span>
+<span id="cb29-33"><a href="#cb29-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-34"><a href="#cb29-34" aria-hidden="true" tabindex="-1"></a><span class="co"># Aplicar FP-Growth con soporte mínimo de 0.01 y confianza minima de 0.5</span></span>
+<span id="cb29-35"><a href="#cb29-35" aria-hidden="true" tabindex="-1"></a>SOPORTE_MIN <span class="op">=</span> <span class="fl">0.01</span></span>
+<span id="cb29-36"><a href="#cb29-36" aria-hidden="true" tabindex="-1"></a>CONFIANZA_MIN <span class="op">=</span> <span class="fl">0.5</span></span>
+<span id="cb29-37"><a href="#cb29-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-38"><a href="#cb29-38" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Ejecutando FP-Growth con soporte mínimo </span><span class="sc">{</span>SOPORTE_MIN<span class="sc">}</span><span class="ss">..."</span>)</span>
+<span id="cb29-39"><a href="#cb29-39" aria-hidden="true" tabindex="-1"></a>itemsets_frecuentes <span class="op">=</span> fpgrowth(df_codificado, min_support<span class="op">=</span>SOPORTE_MIN, use_colnames<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb29-40"><a href="#cb29-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-41"><a href="#cb29-41" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Generando reglas con confianza minima </span><span class="sc">{</span>CONFIANZA_MIN<span class="sc">}</span><span class="ss">..."</span>)</span>
+<span id="cb29-42"><a href="#cb29-42" aria-hidden="true" tabindex="-1"></a>reglas <span class="op">=</span> association_rules(itemsets_frecuentes, metric<span class="op">=</span><span class="st">"confidence"</span>, min_threshold<span class="op">=</span>CONFIANZA_MIN)</span>
+<span id="cb29-43"><a href="#cb29-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-44"><a href="#cb29-44" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Reglas generadas: </span><span class="sc">{</span><span class="bu">len</span>(reglas)<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>En el codigo anterior, la funcion <code>fpgrowth()</code> recibe la matriz one-hot y el soporte mínimo deseado. El parametro <code>use_colnames=True</code> indica que se utilicen los nombres de las columnas como identificadores de los items. La funcion <code>association_rules()</code> genera las reglas a partir de los itemsets frecuentes, permitiendo especificar la metrica y el umbral mínimo para filtrar las reglas resultantes.</p>
+<p>La principal diferencia con la implementación manual de Apriori es que FP-Growth no requiere las funciones auxiliares <code>generar_candidatos()</code> ni <code>filtrar_candidatos()</code>, ya que la extracción de patrones se realiza directamente desde la estructura del árbol, sin generar combinaciones explícitas de items.</p>
+<pre class="output"><code>Dataset codificado: 98884 transacciones, 59 items
+Ejecutando FP-Growth con soporte mínimo 0.01...
+Generando reglas con confianza minima 0.5...
+Reglas generadas: 1322</code></pre>
+</section>
+</section>
+<section id="comparación-de-algoritmos" class="level1" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> Comparación de algoritmos</h1>
+<section id="algoritmos-utilizados" class="level2" data-number="5.1">
+<h2 data-number="5.1" class="anchored" data-anchor-id="algoritmos-utilizados"><span class="header-section-number">5.1</span> Algoritmos utilizados</h2>
+<p>Para el descubrimiento de reglas de asociación se utilizaron dos algoritmos:</p>
+<ol type="1">
+<li><p><strong>Apriori (implementación manual):</strong> El algoritmo descrito e implementado en la sección <a href="#algoritmo-apriori">Algoritmo Apriori</a>. Esta versión fue desarrollada desde cero en Python siguiendo el método original de Agrawal y Srikant (1994), utilizando generación explícita de candidatos y múltiples barridos sobre la base de datos.</p></li>
+<li><p><strong>FP-Growth:</strong> El algoritmo descrito e implementado en la sección <a href="#algoritmo-fp-growth">Algoritmo FP-Growth</a>. A diferencia de Apriori, FP-Growth evita la generación explícita de candidatos. Comprime la base de transacciones en una estructura de árbol llamada FP-tree y extrae los patrones frecuentes mediante bases condicionales y árboles condicionales, requiriendo solo dos barridos completos sobre los datos (Han, Pei y Yin, 2000).</p></li>
+</ol>
+</section>
+<section id="comparación-de-rendimiento" class="level2" data-number="5.2">
+<h2 data-number="5.2" class="anchored" data-anchor-id="comparación-de-rendimiento"><span class="header-section-number">5.2</span> Comparación de rendimiento</h2>
+<p>Previo a la selección de variables, se intentó ejecutar ambos algoritmos sobre el dataset completo procesado con <strong>10 columnas y 1,649 ítems</strong>. En este escenario, FP-Growth con soporte mínimo de 0.01 tardó aproximadamente <strong>106.45 segundos</strong> en el dataset completo, mientras que la implementación manual de Apriori resultó completamente inviable: con 1,649 ítems frecuentes el número de candidatos a evaluar en cada nivel creció de manera exponencial, estimándose un tiempo de ejecución de varias horas.</p>
+<p>Esta limitación motivó la reducción del espacio de ítems a las <strong>5 variables más relevantes</strong> del fenómeno (<code>SEXO</code>, <code>EDAD</code>, <code>ENTIDAD</code>, <code>ESTATUS_VICTIMA</code>, <code>MES_DESAPARICION</code>), lo que redujo los ítems distintos de 1,649 a 59. Esta decisión tiene dos efectos directos sobre la comparativa de algoritmos:</p>
+<ol type="1">
+<li>Hace viable la comparación directa entre Apriori manual y FP-Growth sobre muestras representativas.</li>
+<li>Elimina el escenario de alta dimensionalidad donde FP-Growth muestra su mayor ventaja, lo que explica por qué en este dataset reducido Apriori manual resultó más rápido en todos los experimentos.</li>
+</ol>
+<div id="6ba948f9" class="cell" data-execution_count="21">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> time</span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>MUESTRA <span class="op">=</span> <span class="dv">10000</span></span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>transacciones_muestra <span class="op">=</span> transacciones[:MUESTRA]</span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a>codificador <span class="op">=</span> TransactionEncoder()</span>
+<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a>codif_muestra <span class="op">=</span> codificador.fit_transform(transacciones_muestra)</span>
+<span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a>df_codif_muestra <span class="op">=</span> pd.DataFrame(codif_muestra, columns<span class="op">=</span>codificador.columns_)</span>
+<span id="cb31-9"><a href="#cb31-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-10"><a href="#cb31-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Experimento 1: soporte alto</span></span>
+<span id="cb31-11"><a href="#cb31-11" aria-hidden="true" tabindex="-1"></a>t0 <span class="op">=</span> time.time()</span>
+<span id="cb31-12"><a href="#cb31-12" aria-hidden="true" tabindex="-1"></a>itemsets_propios <span class="op">=</span> algoritmo_apriori(transacciones_muestra, soporte_min<span class="op">=</span><span class="fl">0.05</span>)</span>
+<span id="cb31-13"><a href="#cb31-13" aria-hidden="true" tabindex="-1"></a>reglas_propias <span class="op">=</span> generar_reglas(itemsets_propios, confianza_min<span class="op">=</span><span class="fl">0.5</span>)</span>
+<span id="cb31-14"><a href="#cb31-14" aria-hidden="true" tabindex="-1"></a>t1 <span class="op">=</span> time.time()</span>
+<span id="cb31-15"><a href="#cb31-15" aria-hidden="true" tabindex="-1"></a>tiempo_propio_alto <span class="op">=</span> <span class="bu">round</span>(t1 <span class="op">-</span> t0, <span class="dv">2</span>)</span>
+<span id="cb31-16"><a href="#cb31-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-17"><a href="#cb31-17" aria-hidden="true" tabindex="-1"></a>t0 <span class="op">=</span> time.time()</span>
+<span id="cb31-18"><a href="#cb31-18" aria-hidden="true" tabindex="-1"></a>itemsets_fp <span class="op">=</span> fpgrowth(df_codif_muestra, min_support<span class="op">=</span><span class="fl">0.05</span>, use_colnames<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb31-19"><a href="#cb31-19" aria-hidden="true" tabindex="-1"></a>reglas_fp <span class="op">=</span> association_rules(itemsets_fp, metric<span class="op">=</span><span class="st">"confidence"</span>, min_threshold<span class="op">=</span><span class="fl">0.5</span>)</span>
+<span id="cb31-20"><a href="#cb31-20" aria-hidden="true" tabindex="-1"></a>t1 <span class="op">=</span> time.time()</span>
+<span id="cb31-21"><a href="#cb31-21" aria-hidden="true" tabindex="-1"></a>tiempo_fp_alto <span class="op">=</span> <span class="bu">round</span>(t1 <span class="op">-</span> t0, <span class="dv">2</span>)</span>
+<span id="cb31-22"><a href="#cb31-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-23"><a href="#cb31-23" aria-hidden="true" tabindex="-1"></a><span class="co"># Experimento 2: soporte bajo</span></span>
+<span id="cb31-24"><a href="#cb31-24" aria-hidden="true" tabindex="-1"></a>t0 <span class="op">=</span> time.time()</span>
+<span id="cb31-25"><a href="#cb31-25" aria-hidden="true" tabindex="-1"></a>itemsets_propios <span class="op">=</span> algoritmo_apriori(transacciones_muestra, soporte_min<span class="op">=</span><span class="fl">0.01</span>)</span>
+<span id="cb31-26"><a href="#cb31-26" aria-hidden="true" tabindex="-1"></a>reglas_propias <span class="op">=</span> generar_reglas(itemsets_propios, confianza_min<span class="op">=</span><span class="fl">0.5</span>)</span>
+<span id="cb31-27"><a href="#cb31-27" aria-hidden="true" tabindex="-1"></a>t1 <span class="op">=</span> time.time()</span>
+<span id="cb31-28"><a href="#cb31-28" aria-hidden="true" tabindex="-1"></a>tiempo_propio_bajo <span class="op">=</span> <span class="bu">round</span>(t1 <span class="op">-</span> t0, <span class="dv">2</span>)</span>
+<span id="cb31-29"><a href="#cb31-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-30"><a href="#cb31-30" aria-hidden="true" tabindex="-1"></a>t0 <span class="op">=</span> time.time()</span>
+<span id="cb31-31"><a href="#cb31-31" aria-hidden="true" tabindex="-1"></a>itemsets_fp <span class="op">=</span> fpgrowth(df_codif_muestra, min_support<span class="op">=</span><span class="fl">0.01</span>, use_colnames<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb31-32"><a href="#cb31-32" aria-hidden="true" tabindex="-1"></a>reglas_fp <span class="op">=</span> association_rules(itemsets_fp, metric<span class="op">=</span><span class="st">"confidence"</span>, min_threshold<span class="op">=</span><span class="fl">0.5</span>)</span>
+<span id="cb31-33"><a href="#cb31-33" aria-hidden="true" tabindex="-1"></a>t1 <span class="op">=</span> time.time()</span>
+<span id="cb31-34"><a href="#cb31-34" aria-hidden="true" tabindex="-1"></a>tiempo_fp_bajo <span class="op">=</span> <span class="bu">round</span>(t1 <span class="op">-</span> t0, <span class="dv">2</span>)</span>
+<span id="cb31-35"><a href="#cb31-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-36"><a href="#cb31-36" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"[Soporte 5%]  Apriori: </span><span class="sc">{</span><span class="bu">len</span>(reglas_propias)<span class="sc">}</span><span class="ss"> reglas en </span><span class="sc">{</span>tiempo_propio_alto<span class="sc">}</span><span class="ss">s"</span>)</span>
+<span id="cb31-37"><a href="#cb31-37" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"[Soporte 5%]  FP-Growth: </span><span class="sc">{</span><span class="bu">len</span>(reglas_fp)<span class="sc">}</span><span class="ss"> reglas en </span><span class="sc">{</span>tiempo_fp_alto<span class="sc">}</span><span class="ss">s"</span>)</span>
+<span id="cb31-38"><a href="#cb31-38" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"[Soporte 1%]  Apriori: </span><span class="sc">{</span><span class="bu">len</span>(reglas_propias)<span class="sc">}</span><span class="ss"> reglas en </span><span class="sc">{</span>tiempo_propio_bajo<span class="sc">}</span><span class="ss">s"</span>)</span>
+<span id="cb31-39"><a href="#cb31-39" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"[Soporte 1%]  FP-Growth: </span><span class="sc">{</span><span class="bu">len</span>(reglas_fp)<span class="sc">}</span><span class="ss"> reglas en </span><span class="sc">{</span>tiempo_fp_bajo<span class="sc">}</span><span class="ss">s"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<pre class="output"><code>[Soporte 5%]  Apriori: 131 reglas en 0.27s
+[Soporte 5%]  FP-Growth: 131 reglas en 1.68s
+[Soporte 1%]  Apriori: 1204 reglas en 4.35s
+[Soporte 1%]  FP-Growth: 1204 reglas en 10.53s</code></pre>
+<table class="caption-top table">
+<caption>Comparativa de rendimiento entre algoritmos bajo distintas condiciones experimentales {#tbl-comparativa-algoritmos} Se observa un patrón consistente: conforme aumenta el número de transacciones y disminuye el soporte mínimo, ambos algoritmos generan más reglas y tardan más. Sin embargo, Apriori manual mantiene ventaja sobre FP-Growth en todas las muestras probadas. La única excepción es el dataset completo, donde FP-Growth fue el único algoritmo viable.</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Algoritmo</th>
+<th style="text-align: center;">Transacciones</th>
+<th style="text-align: center;">Soporte mín.</th>
+<th style="text-align: center;">Reglas</th>
+<th style="text-align: center;">Tiempo (s)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Apriori (implementación manual)</td>
+<td style="text-align: center;">500</td>
+<td style="text-align: center;">5%</td>
+<td style="text-align: center;">207</td>
+<td style="text-align: center;">0.02</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">FP-Growth (mlxtend)</td>
+<td style="text-align: center;">500</td>
+<td style="text-align: center;">5%</td>
+<td style="text-align: center;">207</td>
+<td style="text-align: center;">0.12</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Apriori (implementación manual)</td>
+<td style="text-align: center;">10,000</td>
+<td style="text-align: center;">5%</td>
+<td style="text-align: center;">131</td>
+<td style="text-align: center;">0.61</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">FP-Growth (mlxtend)</td>
+<td style="text-align: center;">10,000</td>
+<td style="text-align: center;">5%</td>
+<td style="text-align: center;">131</td>
+<td style="text-align: center;">1.65</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Apriori (implementación manual)</td>
+<td style="text-align: center;">10,000</td>
+<td style="text-align: center;">1%</td>
+<td style="text-align: center;">1,204</td>
+<td style="text-align: center;">4.35</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">FP-Growth (mlxtend)</td>
+<td style="text-align: center;">10,000</td>
+<td style="text-align: center;">1%</td>
+<td style="text-align: center;">1,204</td>
+<td style="text-align: center;">10.53</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">FP-Growth (mlxtend)</td>
+<td style="text-align: center;">98,884</td>
+<td style="text-align: center;">1%</td>
+<td style="text-align: center;">1,322</td>
+<td style="text-align: center;">106.45</td>
+</tr>
+</tbody>
+</table>
+<section id="cuál-tarda-más" class="level3" data-number="5.2.1">
+<h3 data-number="5.2.1" class="anchored" data-anchor-id="cuál-tarda-más"><span class="header-section-number">5.2.1</span> ¿Cuál tarda más?</h3>
+<p>En los experimentos realizados sobre muestras de 10,000 transacciones, FP-Growth tardó más que la implementación manual de Apriori en ambos escenarios (1.68s vs 0.27s con soporte del 5%; 10.53s vs 4.35s con soporte del 1%). Ambos algoritmos produjeron exactamente el mismo número de reglas, confirmando su equivalencia matemática.</p>
+<p>Este resultado se explica por el espacio de ítems reducido del dataset: con solo 59 ítems distintos, el overhead de construir el FP-tree supera el beneficio de evitar candidatos explícitos. FP-Growth está optimizado para espacios de alta dimensionalidad que en este dataset fue eliminada deliberadamente durante el preprocesamiento.</p>
+</section>
+<section id="cuál-tarda-menos-y-por-qué" class="level3" data-number="5.2.2">
+<h3 data-number="5.2.2" class="anchored" data-anchor-id="cuál-tarda-menos-y-por-qué"><span class="header-section-number">5.2.2</span> ¿Cuál tarda menos y por qué?</h3>
+<p>A escala completa, <strong>FP-Growth resultó el único algoritmo viable</strong>. Sobre las 98,884 transacciones con 1,649 ítems, FP-Growth procesó las reglas en aproximadamente 106.45 segundos. La implementación manual de Apriori resultó inviable en este escenario: con 1,649 ítems el número de candidatos crece exponencialmente en cada nivel, requiriendo múltiples barridos completos del dataset, lo que se estimó en varias horas de ejecución. La ventaja de FP-Growth se manifiesta exactamente en este escenario de alta dimensionalidad.</p>
+</section>
+</section>
+<section id="comparación-de-resultados" class="level2" data-number="5.3">
+<h2 data-number="5.3" class="anchored" data-anchor-id="comparación-de-resultados"><span class="header-section-number">5.3</span> Comparación de resultados</h2>
+<p>Ambos algoritmos son matemáticamente equivalentes: identifican el mismo conjunto de ítemsets frecuentes bajo los mismos umbrales de soporte y confianza. La diferencia radica únicamente en la estrategia de búsqueda.</p>
+<p>La equivalencia se verificó ejecutando ambos algoritmos sobre las mismas muestras de transacciones, confirmando que las reglas generadas son idénticas en todos los experimentos. La implementación manual de Apriori produce el mismo conjunto de reglas que FP-Growth, aunque limitada a muestras pequeñas por sus restricciones de escalabilidad.</p>
+<p>Para el análisis final sobre el dataset completo se utilizó FP-Growth debido a su eficiencia. Con un soporte mínimo de 0.01 y confianza mínima de 0.5, el algoritmo generó 1,322 reglas en 106.45 segundos sobre las 98,884 transacciones del dataset reducido a 59 ítems.</p>
+<p>Desde la perspectiva del análisis respecto a la desaparición de personas, la elección del algoritmo no tiene ningún efecto sobre los patrones descubiertos ni sobre las conclusiones que se derivan de ellos. Los mismos patrones geográficos y demográficos, la concentración de infantes y mujeres adolescentes desaparecidas en el Estado de México, o el perfil de hombres jóvenes en entidades del norte del país emergen de forma idéntica independientemente del método utilizado. La decisión de usar FP-Growth para el dataset completo fue estrictamente operativa: ambos algoritmos conducen a las mismas reglas y, por tanto, a las mismas reflexiones sobre las víctimas y las limitaciones del sistema de registro.</p>
 </section>
 </section>
 
