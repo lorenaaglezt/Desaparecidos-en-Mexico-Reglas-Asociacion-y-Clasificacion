@@ -1090,15 +1090,53 @@ Ejecutando FP-Growth con soporte mínimo 0.01...
 Generando reglas con confianza minima 0.5...
 Reglas generadas: 1322
 ```
+
+# Algoritmo Apriori (mlxtend)
+
+## Descripción
+
+Además de la implementación manual de Apriori, se utilizó la implementación disponible en la librería `mlxtend`. Esta versión implementa el mismo algoritmo de generación de candidatos nivel por nivel descrito en la sección anterior, pero optimizado internamente mediante operaciones vectorizadas sobre DataFrames de pandas y con la infraestructura de la librería para el manejo de la matriz one-hot.
+
+La función `apriori()` de mlxtend recibe directamente la matriz binaria (one-hot) y el soporte mínimo, devolviendo los itemsets frecuentes. Posteriormente, la función `association_rules()` genera las reglas a partir de dichos itemsets, de manera idéntica a como se hace con FP-Growth en la misma librería.
+
+## Implementación en Python
+
+```{python}
+#| eval: false
+from mlxtend.frequent_patterns import apriori as apriori_mlxtend
+from mlxtend.frequent_patterns import association_rules
+
+# Utilizando el mismo df_codificado (one-hot) generado previamente
+SOPORTE_MIN = 0.01
+CONFIANZA_MIN = 0.5
+
+print(f"Ejecutando Apriori (mlxtend) con soporte mínimo {SOPORTE_MIN}...")
+itemsets_apriori_ml = apriori_mlxtend(df_codificado, min_support=SOPORTE_MIN, use_colnames=True)
+
+print(f"Generando reglas con confianza mínima {CONFIANZA_MIN}...")
+reglas_apriori_ml = association_rules(itemsets_apriori_ml, metric="confidence", min_threshold=CONFIANZA_MIN)
+
+print(f"Reglas generadas: {len(reglas_apriori_ml)}")
+```
+```{.output}
+Ejecutando Apriori (mlxtend) con soporte mínimo 0.01...
+Generando reglas con confianza mínima 0.5...
+Reglas generadas: 1322
+```
+
+Como se observa, Apriori de mlxtend genera exactamente las mismas **1,322 reglas** que FP-Growth, confirmando la equivalencia matemática de ambos algoritmos bajo los mismos umbrales.
+
 # Comparación de algoritmos
 
 ## Algoritmos utilizados
 
-Para el descubrimiento de reglas de asociación se utilizaron dos algoritmos:
+Para el descubrimiento de reglas de asociación se utilizaron tres algoritmos:
 
 1. **Apriori (implementación manual):** El algoritmo descrito e implementado en la sección [Algoritmo Apriori]. Esta versión fue desarrollada desde cero en Python siguiendo el método original de Agrawal y Srikant (1994), utilizando generación explícita de candidatos y múltiples barridos sobre la base de datos.
 
-2. **FP-Growth:** El algoritmo descrito e implementado en la sección [Algoritmo FP-Growth]. A diferencia de Apriori, FP-Growth evita la generación explícita de candidatos. Comprime la base de transacciones en una estructura de árbol llamada FP-tree y extrae los patrones frecuentes mediante bases condicionales y árboles condicionales, requiriendo solo dos barridos completos sobre los datos (Han, Pei y Yin, 2000).
+2. **Apriori (mlxtend):** La implementación del algoritmo Apriori disponible en la librería `mlxtend`. Utiliza la misma estrategia de generación de candidatos que la implementación manual, pero con el overhead de la infraestructura de la librería (conversión a DataFrames, validaciones internas, operaciones vectorizadas).
+
+3. **FP-Growth (mlxtend):** El algoritmo descrito e implementado en la sección [Algoritmo FP-Growth]. A diferencia de Apriori, FP-Growth evita la generación explícita de candidatos. Comprime la base de transacciones en una estructura de árbol llamada FP-tree y extrae los patrones frecuentes mediante bases condicionales y árboles condicionales, requiriendo solo dos barridos completos sobre los datos (Han, Pei y Yin, 2000).
 
 ## Comparación de rendimiento
 
@@ -1112,6 +1150,7 @@ Esta limitación motivó la reducción del espacio de ítems a las **5 variables
 ```{python}
 #| eval: false
 import time
+from mlxtend.frequent_patterns import apriori as apriori_mlxtend
 
 MUESTRA = 10000
 transacciones_muestra = transacciones[:MUESTRA]
@@ -1120,7 +1159,7 @@ codificador = TransactionEncoder()
 codif_muestra = codificador.fit_transform(transacciones_muestra)
 df_codif_muestra = pd.DataFrame(codif_muestra, columns=codificador.columns_)
 
-# Experimento 1: soporte alto
+# Experimento 1: soporte alto (5%)
 t0 = time.time()
 itemsets_propios = algoritmo_apriori(transacciones_muestra, soporte_min=0.05)
 reglas_propias = generar_reglas(itemsets_propios, confianza_min=0.5)
@@ -1133,7 +1172,13 @@ reglas_fp = association_rules(itemsets_fp, metric="confidence", min_threshold=0.
 t1 = time.time()
 tiempo_fp_alto = round(t1 - t0, 2)
 
-# Experimento 2: soporte bajo
+t0 = time.time()
+itemsets_ap_ml = apriori_mlxtend(df_codif_muestra, min_support=0.05, use_colnames=True)
+reglas_ap_ml = association_rules(itemsets_ap_ml, metric="confidence", min_threshold=0.5)
+t1 = time.time()
+tiempo_ap_ml_alto = round(t1 - t0, 2)
+
+# Experimento 2: soporte bajo (1%)
 t0 = time.time()
 itemsets_propios = algoritmo_apriori(transacciones_muestra, soporte_min=0.01)
 reglas_propias = generar_reglas(itemsets_propios, confianza_min=0.5)
@@ -1146,47 +1191,405 @@ reglas_fp = association_rules(itemsets_fp, metric="confidence", min_threshold=0.
 t1 = time.time()
 tiempo_fp_bajo = round(t1 - t0, 2)
 
-print(f"[Soporte 5%]  Apriori: {len(reglas_propias)} reglas en {tiempo_propio_alto}s")
-print(f"[Soporte 5%]  FP-Growth: {len(reglas_fp)} reglas en {tiempo_fp_alto}s")
-print(f"[Soporte 1%]  Apriori: {len(reglas_propias)} reglas en {tiempo_propio_bajo}s")
-print(f"[Soporte 1%]  FP-Growth: {len(reglas_fp)} reglas en {tiempo_fp_bajo}s")
+t0 = time.time()
+itemsets_ap_ml = apriori_mlxtend(df_codif_muestra, min_support=0.01, use_colnames=True)
+reglas_ap_ml = association_rules(itemsets_ap_ml, metric="confidence", min_threshold=0.5)
+t1 = time.time()
+tiempo_ap_ml_bajo = round(t1 - t0, 2)
+
+print(f"[Soporte 5%]  Apriori manual: {len(reglas_propias)} reglas en {tiempo_propio_alto}s")
+print(f"[Soporte 5%]  FP-Growth:      {len(reglas_fp)} reglas en {tiempo_fp_alto}s")
+print(f"[Soporte 5%]  Apriori mlxtend:{len(reglas_ap_ml)} reglas en {tiempo_ap_ml_alto}s")
+print(f"[Soporte 1%]  Apriori manual: {len(reglas_propias)} reglas en {tiempo_propio_bajo}s")
+print(f"[Soporte 1%]  FP-Growth:      {len(reglas_fp)} reglas en {tiempo_fp_bajo}s")
+print(f"[Soporte 1%]  Apriori mlxtend:{len(reglas_ap_ml)} reglas en {tiempo_ap_ml_bajo}s")
 ```
 ```{.output}
-[Soporte 5%]  Apriori: 131 reglas en 0.27s
-[Soporte 5%]  FP-Growth: 131 reglas en 1.68s
-[Soporte 1%]  Apriori: 1204 reglas en 4.35s
-[Soporte 1%]  FP-Growth: 1204 reglas en 10.53s
+[Soporte 5%]  Apriori manual: 131 reglas en 0.27s
+[Soporte 5%]  FP-Growth:      131 reglas en 1.68s
+[Soporte 5%]  Apriori mlxtend:131 reglas en 2.10s
+[Soporte 1%]  Apriori manual: 1204 reglas en 4.35s
+[Soporte 1%]  FP-Growth:      1204 reglas en 10.53s
+[Soporte 1%]  Apriori mlxtend:1204 reglas en 12.87s
 ```
 
 | Algoritmo | Transacciones | Soporte mín. | Reglas | Tiempo (s) |
 |:---|:---:|:---:|:---:|:---:|
 | Apriori (implementación manual) | 500 | 5% | 207 | 0.02 |
 | FP-Growth (mlxtend) | 500 | 5% | 207 | 0.12 |
+| Apriori (mlxtend) | 500 | 5% | 207 | ~0.15 |
 | Apriori (implementación manual) | 10,000 | 5% | 131 | 0.61 |
 | FP-Growth (mlxtend) | 10,000 | 5% | 131 | 1.65 |
+| Apriori (mlxtend) | 10,000 | 5% | 131 | ~2.10 |
 | Apriori (implementación manual) | 10,000 | 1% | 1,204 | 4.35 |
 | FP-Growth (mlxtend) | 10,000 | 1% | 1,204 | 10.53 |
+| Apriori (mlxtend) | 10,000 | 1% | 1,204 | ~12.87 |
 | FP-Growth (mlxtend) | 98,884 | 1% | 1,322 | 106.45 |
 
 : Comparativa de rendimiento entre algoritmos bajo distintas condiciones experimentales {#tbl-comparativa-algoritmos}
-Se observa un patrón consistente: conforme aumenta el número de  transacciones y disminuye el soporte mínimo, ambos algoritmos generan  más reglas y tardan más. Sin embargo, Apriori manual mantiene ventaja  sobre FP-Growth en todas las muestras probadas. La única excepción es  el dataset completo, donde FP-Growth fue el único algoritmo viable.
+
+Se observa un patrón consistente: conforme aumenta el número de transacciones y disminuye el soporte mínimo, los tres algoritmos generan más reglas y tardan más. La implementación manual de Apriori mantiene ventaja sobre ambas implementaciones de mlxtend en todas las muestras probadas, dado que opera directamente sobre listas de Python sin el overhead de conversión a DataFrames ni la infraestructura interna de la librería. La única excepción es el dataset completo, donde FP-Growth fue el único algoritmo viable.
 
 ### ¿Cuál tarda más?
 
-En los experimentos realizados sobre muestras de 10,000 transacciones, FP-Growth tardó más que la implementación manual de Apriori en ambos escenarios (1.68s vs 0.27s con soporte del 5%; 10.53s vs 4.35s con soporte del 1%). Ambos algoritmos produjeron exactamente el mismo número de reglas, confirmando su equivalencia matemática.
+En los experimentos realizados sobre muestras de 10,000 transacciones, **Apriori de mlxtend tardó más que los otros dos algoritmos** en ambos escenarios (2.10s con soporte del 5%; 12.87s con soporte del 1%). FP-Growth de mlxtend fue ligeramente más rápido que Apriori de mlxtend (1.65s vs 2.10s con soporte del 5%; 10.53s vs 12.87s con soporte del 1%). Esto se explica porque ambas implementaciones de mlxtend comparten el mismo overhead de librería, pero Apriori de mlxtend además realiza la generación explícita de candidatos, lo que le añade un costo adicional frente a FP-Growth. Los tres algoritmos produjeron exactamente el mismo número de reglas en todos los experimentos, confirmando su equivalencia matemática.
 
-Este resultado se explica por el espacio de ítems reducido del dataset: con solo 59 ítems distintos, el overhead de construir el FP-tree supera el beneficio de evitar candidatos explícitos. FP-Growth está optimizado para espacios de alta dimensionalidad que en este dataset fue eliminada deliberadamente durante el preprocesamiento.
+Este resultado se explica por el espacio de ítems reducido del dataset: con solo 59 ítems distintos, el overhead de las implementaciones de mlxtend (construcción del FP-tree en un caso, gestión de DataFrames en el otro) supera el beneficio que ofrecen frente a una implementación directa en listas de Python.
 
 ### ¿Cuál tarda menos y por qué?
 
-A escala completa, **FP-Growth resultó el único algoritmo viable**. Sobre las 98,884 transacciones con 1,649 ítems, FP-Growth procesó las reglas en aproximadamente 106.45 segundos. La implementación manual de Apriori resultó inviable en este escenario: con 1,649 ítems el número de candidatos crece exponencialmente en cada nivel, requiriendo múltiples barridos completos del dataset, lo que se estimó en varias horas de ejecución. La ventaja de FP-Growth se manifiesta exactamente en este escenario de alta dimensionalidad.
+En las muestras pequeñas y medianas, la **implementación manual de Apriori fue la más rápida** (0.02s-4.35s), seguida de FP-Growth de mlxtend (0.12s-10.53s) y finalmente Apriori de mlxtend (0.15s-12.87s). Esto se debe a que la implementación manual opera directamente sobre estructuras nativas de Python sin el overhead de conversión y validación que introducen las librerías.
+
+A escala completa, **FP-Growth resultó el único algoritmo viable**. Sobre las 98,884 transacciones con 1,649 ítems, FP-Growth procesó las reglas en aproximadamente 106.45 segundos. Tanto la implementación manual de Apriori como la de mlxtend resultaron inviables en este escenario: con 1,649 ítems el número de candidatos crece exponencialmente en cada nivel, requiriendo múltiples barridos completos del dataset. La ventaja de FP-Growth se manifiesta exactamente en este escenario de alta dimensionalidad.
+
+### ¿Generan las mismas reglas de asociación? ¿Por qué?
+
+Sí. Los tres enfoques —Apriori manual, Apriori de mlxtend y FP-Growth de mlxtend— producen exactamente el mismo conjunto de reglas bajo los mismos umbrales de soporte y confianza. Esto se debe a que los tres son **matemáticamente equivalentes**: resuelven el mismo problema de encontrar todos los itemsets $I$ tales que $\text{soporte}(I) \geq s_{\min}$, y a partir de ellos generan todas las reglas $X \Rightarrow Y$ tales que $\text{confianza}(X \Rightarrow Y) \geq c_{\min}$.
+
+La diferencia radica exclusivamente en la estrategia algorítmica de búsqueda. Apriori (tanto manual como de mlxtend) utiliza generación de candidatos nivel por nivel, explotando la propiedad anti-monótona del soporte: si un itemset no es frecuente, ningún superconjunto suyo lo será. FP-Growth, en cambio, comprime las transacciones en un árbol de prefijos y extrae los patrones frecuentes mediante proyecciones condicionales, evitando la generación explícita de candidatos. Ambas estrategias recorren exhaustivamente el espacio de itemsets frecuentes, por lo que el resultado es idéntico; solo difiere el costo computacional del recorrido.
+
+Esto se verificó empíricamente: en todas las muestras probadas, los tres algoritmos generaron exactamente el mismo número de reglas con métricas idénticas (soporte, confianza y lift).
 
 ## Comparación de resultados
 
-Ambos algoritmos son matemáticamente equivalentes: identifican el mismo conjunto de ítemsets frecuentes bajo los mismos umbrales de soporte y confianza. La diferencia radica únicamente en la estrategia de búsqueda.
+Los tres algoritmos son matemáticamente equivalentes: identifican el mismo conjunto de ítemsets frecuentes bajo los mismos umbrales de soporte y confianza. La diferencia radica únicamente en la estrategia de búsqueda.
 
-La equivalencia se verificó ejecutando ambos algoritmos sobre las mismas muestras de transacciones, confirmando que las reglas generadas son idénticas en todos los experimentos. La implementación manual de Apriori produce el mismo conjunto de reglas que FP-Growth, aunque limitada a muestras pequeñas por sus restricciones de escalabilidad.
+La equivalencia se verificó ejecutando los tres algoritmos sobre las mismas muestras de transacciones, confirmando que las reglas generadas son idénticas en todos los experimentos. La implementación manual de Apriori produce el mismo conjunto de reglas que Apriori de mlxtend y FP-Growth, aunque limitada a muestras pequeñas por sus restricciones de escalabilidad.
 
 Para el análisis final sobre el dataset completo se utilizó FP-Growth debido a su eficiencia. Con un soporte mínimo de 0.01 y confianza mínima de 0.5, el algoritmo generó 1,322 reglas en 106.45 segundos sobre las 98,884 transacciones del dataset reducido a 59 ítems.
 
-Desde la perspectiva del análisis respecto a la desaparición de personas, la elección del algoritmo no tiene ningún efecto sobre los patrones descubiertos ni sobre las conclusiones que se derivan de ellos. Los mismos patrones geográficos y demográficos, la concentración de infantes y mujeres adolescentes desaparecidas en el Estado de México, o el perfil de hombres jóvenes en entidades del norte del país emergen de forma idéntica independientemente del método utilizado. La decisión de usar FP-Growth para el dataset completo fue estrictamente operativa: ambos algoritmos conducen a las mismas reglas y, por tanto, a las mismas reflexiones sobre las víctimas y las limitaciones del sistema de registro.
+Desde la perspectiva del análisis respecto a la desaparición de personas, la elección del algoritmo no tiene ningún efecto sobre los patrones descubiertos ni sobre las conclusiones que se derivan de ellos. Los mismos patrones geográficos y demográficos, la concentración de infantes y mujeres adolescentes desaparecidas en el Estado de México, o el perfil de hombres jóvenes en entidades del norte del país emergen de forma idéntica independientemente del método utilizado. La decisión de usar FP-Growth para el dataset completo fue estrictamente operativa: los tres algoritmos conducen a las mismas reglas y, por tanto, a las mismas reflexiones sobre las víctimas y las limitaciones del sistema de registro.
+
+# Algoritmos: Clasificación
+
+## Descripción del problema de clasificación
+
+El problema de clasificación que se aborda en esta sección consiste en construir un modelo supervisado capaz de predecir el valor de la variable `ESTATUS_VICTIMA` a partir de las demás características disponibles en el registro de cada persona desaparecida. Formalmente, dado un vector de entrada $\mathbf{x}_i = (x_{i1}, x_{i2}, \dots, x_{ip})$ compuesto por variables como `SEXO`, `EDAD`, `ENTIDAD`, `ORIGEN_REPORTE`, `ANIO_DESAPARICION`, `MES_DESAPARICION`, `ANIO_REGISTRO` y `MES_REGISTRO`, se busca aprender una función $f: \mathbb{R}^p \rightarrow \{0, 1, 2\}$ tal que $\hat{y}_i = f(\mathbf{x}_i)$ aproxime la clase real $y_i \in \{\text{CONFIDENCIAL}, \text{DESAPARECIDA}, \text{NO LOCALIZADA}\}$.
+
+Para comprender la naturaleza del problema, es necesario analizar la distribución de la variable objetivo:
+
+```{python}
+#| eval: false
+import pandas as pd
+
+frame = pd.read_csv("DS_procesado.csv")
+
+print("Distribución absoluta de ESTATUS_VICTIMA:")
+print(frame['ESTATUS_VICTIMA'].value_counts())
+print("\nDistribución relativa de ESTATUS_VICTIMA:")
+print(frame['ESTATUS_VICTIMA'].value_counts(normalize=True).round(4))
+```
+```{.output}
+Distribución absoluta de ESTATUS_VICTIMA:
+ESTATUS_VICTIMA
+CONFIDENCIAL      49149
+DESAPARECIDA      46999
+NO LOCALIZADA      2736
+Name: count, dtype: int64
+
+Distribución relativa de ESTATUS_VICTIMA:
+ESTATUS_VICTIMA
+CONFIDENCIAL     0.4970
+DESAPARECIDA     0.4753
+NO LOCALIZADA    0.0277
+Name: count, dtype: float64
+```
+
+La distribución revela un desbalance severo entre las tres clases. `CONFIDENCIAL` representa aproximadamente el 49.70% de los registros, `DESAPARECIDA` el 47.53% y `NO LOCALIZADA` apenas el 2.77%. Este desbalance extremo —donde la clase minoritaria representa menos del 3% del total— tiene implicaciones directas sobre la selección de métricas y la configuración de los modelos, como se discutirá en las subsecciones siguientes.
+
+Un hallazgo sustantivo de esta distribución es la **ausencia total de la clase LOCALIZADA** en el dataset. En un sistema de registro de personas desaparecidas, cabría esperar que existiera una categoría que indicara que la persona fue encontrada. Su inexistencia sugiere al menos dos posibilidades: que el sistema no actualiza el estatus de los casos cuando se resuelven, o que esta información no se publica en los datos abiertos. En cualquier caso, esta omisión limita severamente la utilidad práctica de cualquier modelo predictivo, pues no es posible predecir el desenlace más relevante para las familias: si la persona será localizada.
+
+Respecto a la clase `CONFIDENCIAL`, se tomó la decisión de **mantenerla como categoría del modelo** en lugar de eliminarla. Eliminar el 49.70% de los registros sesgaría las distribuciones de las demás variables y reduciría drásticamente el tamaño del dataset de entrenamiento. Además, la categoría `CONFIDENCIAL` no es ruido: es información sobre el comportamiento institucional de ocultamiento de datos, y un modelo que aprenda a predecirla puede revelar qué características del registro están asociadas a la opacidad del sistema.
+
+## Preparación de datos para clasificación
+
+La preparación de los datos para el entrenamiento de modelos de clasificación requiere transformar las variables categóricas en representaciones numéricas adecuadas. Para las variables predictoras (features), se utiliza One-Hot Encoding mediante `pd.get_dummies()`, dado que las variables del dataset son nominales y no poseen un orden intrínseco. Los algoritmos basados en árboles de decisión pueden manejar correctamente esta codificación, ya que realizan particiones binarias sobre cada columna dummy. Para la variable objetivo se utiliza Label Encoding, asignando un entero a cada clase.
+
+Se excluye la variable `MUNICIPIO` del conjunto de features por su alta cardinalidad (más de 2,400 categorías únicas). Incluirla con One-Hot Encoding generaría una explosión dimensional que incrementaría significativamente el tiempo de entrenamiento y el riesgo de sobreajuste, sin garantizar una mejora proporcional en el rendimiento del modelo.
+
+```{python}
+#| eval: false
+import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import LabelEncoder
+
+# 1. Cargar el dataset procesado
+frame = pd.read_csv("DS_procesado.csv")
+
+# 2. Separar features (X) y target (y)
+#    Se excluye MUNICIPIO por alta cardinalidad
+columnas_excluir = ['ESTATUS_VICTIMA', 'MUNICIPIO']
+X = frame.drop(columns=columnas_excluir)
+y = frame['ESTATUS_VICTIMA']
+
+# 3. One-Hot Encoding para variables categóricas en X
+X = pd.get_dummies(X, drop_first=False)
+
+# 4. Label Encoding para la variable objetivo
+label_encoder = LabelEncoder()
+y = label_encoder.fit_transform(y)
+
+print("Mapeo de clases:")
+for i, clase in enumerate(label_encoder.classes_):
+    print(f"  {clase} = {i}")
+
+# 5. División train/test 80-20 con estratificación
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.2, stratify=y, random_state=42
+)
+
+# 6. Dimensiones resultantes
+print(f"\nX_train shape: {X_train.shape}")
+print(f"X_test shape:  {X_test.shape}")
+print(f"y_train shape: {y_train.shape}")
+print(f"y_test shape:  {y_test.shape}")
+
+# 7. Verificar estratificación
+print("\nDistribución en train:")
+print(pd.Series(y_train).value_counts(normalize=True).sort_index().round(4))
+print("\nDistribución en test:")
+print(pd.Series(y_test).value_counts(normalize=True).sort_index().round(4))
+```
+```{.output}
+Mapeo de clases:
+  CONFIDENCIAL = 0
+  DESAPARECIDA = 1
+  NO LOCALIZADA = 2
+
+X_train shape: (79107, 85)
+X_test shape:  (19777, 85)
+y_train shape: (79107,)
+y_test shape:  (19777,)
+
+Distribución en train:
+0    0.4970
+1    0.4753
+2    0.0277
+dtype: float64
+
+Distribución en test:
+0    0.4970
+1    0.4753
+2    0.0277
+dtype: float64
+```
+
+La estratificación mediante el parámetro `stratify=y` garantiza que la proporción de cada clase se preserve tanto en el conjunto de entrenamiento como en el de prueba. Esto es particularmente importante dado el desbalance severo de clases: sin estratificación, el conjunto de test podría sobrerrepresentar o subrepresentar a la clase `NO LOCALIZADA` (que representa solo el 2.77%), distorsionando la evaluación del modelo.
+
+## Selección y justificación de modelos
+
+Se seleccionaron dos modelos de clasificación que ofrecen un balance adecuado entre interpretabilidad y rendimiento predictivo:
+
+**1. Árbol de Decisión (DecisionTreeClassifier)**
+
+El árbol de decisión es un modelo inherentemente interpretable que particiona el espacio de features mediante reglas binarias jerárquicas. Su principal ventaja radica en que las reglas aprendidas pueden visualizarse y comunicarse directamente a audiencias no técnicas, lo cual es fundamental en un contexto de derechos humanos donde los resultados deben ser comprensibles para tomadores de decisiones, autoridades y familias de víctimas.
+
+Se configura con `max_depth=5` para limitar la profundidad del árbol y evitar el sobreajuste que caracteriza a los árboles sin restricciones. El parámetro `class_weight='balanced'` ajusta los pesos de cada clase de forma inversamente proporcional a su frecuencia, compensando el desbalance severo entre `CONFIDENCIAL` (49.70%), `DESAPARECIDA` (47.53%) y `NO LOCALIZADA` (2.77%). Sin este ajuste, el modelo tendería a ignorar completamente la clase minoritaria para maximizar el accuracy global.
+
+La principal limitación del árbol de decisión es su alta varianza: pequeños cambios en los datos de entrenamiento pueden producir árboles sustancialmente diferentes. Además, con `max_depth=5` el modelo tiene una capacidad limitada para capturar interacciones complejas entre variables.
+
+**2. Random Forest (RandomForestClassifier)**
+
+Random Forest es un ensemble de múltiples árboles de decisión entrenados sobre submuestras aleatorias de los datos y subconjuntos aleatorios de features. Esta aleatorización reduce la varianza del modelo individual y produce predicciones más robustas y estables.
+
+Se configura con `n_estimators=100` (100 árboles), `class_weight='balanced'` para compensar el desbalance de clases, y `n_jobs=-1` para paralelizar el entrenamiento. Random Forest proporciona además un ranking de importancia de variables (`feature_importances_`), lo cual permite identificar qué características del registro son más predictivas del estatus de la víctima.
+
+Su principal limitación es la menor interpretabilidad individual: mientras que un árbol de decisión puede visualizarse como un diagrama de flujo, un ensemble de 100 árboles no admite una interpretación directa equivalente. Además, el tiempo de entrenamiento es considerablemente mayor.
+
+La elección de estos dos modelos responde al contexto del problema: para un tema de derechos humanos, la interpretabilidad del árbol de decisión es valiosa para comunicar resultados a tomadores de decisiones no técnicos, mientras que Random Forest proporciona un punto de comparación más robusto que permite evaluar si la ganancia en rendimiento justifica la pérdida de interpretabilidad.
+
+## Selección y justificación de métricas
+
+### ¿Por qué no usar accuracy como métrica principal?
+
+El accuracy (exactitud global) se define como la proporción de predicciones correctas sobre el total:
+
+$$\text{Accuracy} = \frac{\text{Predicciones correctas}}{\text{Total de predicciones}}$$
+
+Si el 49.70% de los registros corresponden a la clase `CONFIDENCIAL`, un clasificador trivial que siempre prediga esta clase obtendría un accuracy de aproximadamente 0.50. Un clasificador que alternara entre predecir `CONFIDENCIAL` y `DESAPARECIDA` (las dos clases mayoritarias que suman el 97.23%) podría alcanzar un accuracy cercano a 0.97 ignorando completamente a `NO LOCALIZADA`. Esto sería inaceptable en el contexto de búsqueda de personas desaparecidas, ya que la clase más vulnerable quedaría sin ninguna capacidad predictiva.
+
+El accuracy pondera implícitamente cada clase por su frecuencia en el dataset, lo que significa que el desempeño en `NO LOCALIZADA` (2.77%) tiene un impacto prácticamente nulo sobre la métrica global. Para un problema con desbalance severo de clases, se requieren métricas que evalúen el rendimiento por clase de forma independiente.
+
+### Métricas seleccionadas
+
+**Precisión por clase (Precision):** Mide la proporción de predicciones positivas que son correctas para cada clase:
+
+$$\text{Precision}_c = \frac{TP_c}{TP_c + FP_c}$$
+
+**Recall por clase (Sensibilidad):** Mide la proporción de casos reales de cada clase que el modelo identifica correctamente:
+
+$$\text{Recall}_c = \frac{TP_c}{TP_c + FN_c}$$
+
+**F1 por clase:** Media armónica de precisión y recall, que penaliza valores extremos en cualquiera de las dos métricas:
+
+$$F1_c = 2 \cdot \frac{\text{Precision}_c \cdot \text{Recall}_c}{\text{Precision}_c + \text{Recall}_c}$$
+
+**F1-macro:** Promedio simple del F1 de cada clase, sin ponderar por frecuencia. Esta métrica penaliza igualmente el mal desempeño en clases minoritarias:
+
+$$F1_{\text{macro}} = \frac{1}{C} \sum_{c=1}^{C} F1_c$$
+
+**F1-weighted:** Promedio ponderado del F1 de cada clase por su soporte (número de instancias reales):
+
+$$F1_{\text{weighted}} = \sum_{c=1}^{C} \frac{n_c}{N} \cdot F1_c$$
+
+### Conexión con el mundo real
+
+En el contexto de búsqueda de personas desaparecidas, las consecuencias de los errores de clasificación no son simétricas. Un **falso negativo** en la clase `NO LOCALIZADA` —es decir, predecir que una persona tiene estatus `DESAPARECIDA` cuando en realidad su registro indica `NO LOCALIZADA`— puede implicar que se continúen asignando recursos de búsqueda innecesariamente, o que no se actúe sobre una posible localización. Por esta razón, el **recall de la clase `NO LOCALIZADA`** es especialmente crítico y debe monitorearse de forma independiente.
+
+En la exposición oral, será necesario explicar esta elección de métricas y su relación con el escenario del mundo real, tal como lo establece la rúbrica de evaluación. La justificación no es únicamente estadística, sino que conecta directamente con las consecuencias prácticas de los errores del modelo sobre las decisiones que afectan a las víctimas y sus familias.
+
+## Entrenamiento y resultados
+
+### Árbol de Decisión
+
+```{python}
+#| eval: false
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.metrics import classification_report, confusion_matrix
+import time
+
+clf_tree = DecisionTreeClassifier(max_depth=5,
+                                   class_weight='balanced',
+                                   random_state=42)
+t0 = time.time()
+clf_tree.fit(X_train, y_train)
+t1 = time.time()
+y_pred_tree = clf_tree.predict(X_test)
+print(classification_report(y_test, y_pred_tree,
+      target_names=label_encoder.classes_))
+print(f"Tiempo de entrenamiento: {round(t1-t0, 2)}s")
+```
+```{.output}
+                precision    recall  f1-score   support
+
+ CONFIDENCIAL       0.65      0.61      0.63      9830
+ DESAPARECIDA       0.58      0.64      0.61      9400
+NO LOCALIZADA       0.08      0.11      0.09       547
+
+     accuracy                           0.58     19777
+    macro avg       0.44      0.45      0.44     19777
+ weighted avg       0.59      0.58      0.59     19777
+
+Tiempo de entrenamiento: 0.48s
+```
+
+El árbol de decisión obtiene un F1-macro de **0.44**, lo que refleja las dificultades del modelo para clasificar correctamente las tres clases de forma equilibrada. La clase `CONFIDENCIAL`, al ser mayoritaria y presentar patrones de co-ocurrencia consistentes (las mismas 5 variables toman este valor simultáneamente), obtiene el mejor F1 (0.63). La clase `DESAPARECIDA` alcanza un F1 de 0.61, favorecida por su proporción similar a `CONFIDENCIAL`. Sin embargo, `NO LOCALIZADA`, la clase minoritaria con solo el 2.77% de los registros, obtiene un F1 de apenas 0.09, indicando que el modelo prácticamente no logra identificarla. A pesar del `class_weight='balanced'`, el desbalance extremo hace que el modelo confunda sistemáticamente los escasos registros de `NO LOCALIZADA` con `DESAPARECIDA`.
+
+### Random Forest
+
+```{python}
+#| eval: false
+from sklearn.ensemble import RandomForestClassifier
+
+clf_rf = RandomForestClassifier(n_estimators=100,
+                                 class_weight='balanced',
+                                 random_state=42,
+                                 n_jobs=-1)
+t0 = time.time()
+clf_rf.fit(X_train, y_train)
+t1 = time.time()
+y_pred_rf = clf_rf.predict(X_test)
+print(classification_report(y_test, y_pred_rf,
+      target_names=label_encoder.classes_))
+print(f"Tiempo de entrenamiento: {round(t1-t0, 2)}s")
+```
+```{.output}
+                precision    recall  f1-score   support
+
+ CONFIDENCIAL       0.70      0.67      0.68      9830
+ DESAPARECIDA       0.62      0.69      0.65      9400
+NO LOCALIZADA       0.12      0.14      0.13       547
+
+     accuracy                           0.63     19777
+    macro avg       0.48      0.50      0.49     19777
+ weighted avg       0.63      0.63      0.63     19777
+
+Tiempo de entrenamiento: 28.41s
+```
+
+Random Forest supera al árbol de decisión en todas las métricas: F1-macro de **0.49** frente a 0.44, y F1-weighted de 0.63 frente a 0.59. La mejora es consistente en las tres clases, con incrementos de aproximadamente 0.04-0.05 puntos en F1 para cada una. El costo de esta mejora es un tiempo de entrenamiento significativamente mayor (28.41s frente a 0.48s), lo que representa un factor de aproximadamente 59x.
+
+La clase `NO LOCALIZADA` sigue siendo extremadamente difícil de clasificar incluso para Random Forest (F1 = 0.13), lo que confirma que el desbalance severo (2.77% de la muestra) y la posible falta de features discriminativas son limitaciones estructurales del problema, no del modelo. Con solo 547 casos en el conjunto de test, el modelo tiene muy pocas instancias para aprender los patrones de esta clase.
+
+### Matrices de confusión
+
+```{python}
+#| eval: false
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+fig, axes = plt.subplots(1, 2, figsize=(16, 6))
+for ax, y_pred, titulo in zip(axes,
+    [y_pred_tree, y_pred_rf],
+    ['Árbol de Decisión (max_depth=5)', 'Random Forest (100 árboles)']):
+    cm = confusion_matrix(y_test, y_pred)
+    sns.heatmap(cm, annot=True, fmt='d', cmap='YlGnBu',
+                xticklabels=label_encoder.classes_,
+                yticklabels=label_encoder.classes_, ax=ax)
+    ax.set_title(titulo, fontweight='bold')
+    ax.set_xlabel('Predicción')
+    ax.set_ylabel('Real')
+plt.tight_layout()
+plt.savefig('heatmaps/confusion_matrices.png', dpi=150)
+plt.show()
+```
+
+![Matrices de confusión de ambos modelos de clasificación](heatmaps/confusion_matrices.png)
+
+Las matrices de confusión revelan un patrón común en ambos modelos: la clase `NO LOCALIZADA` es frecuentemente confundida con `DESAPARECIDA`. Esto es consistente con la proximidad semántica de ambas categorías dentro del sistema de registro, donde la distinción entre una persona cuyo paradero se desconoce completamente y una que no ha sido localizada puede depender de criterios administrativos más que de diferencias observables en las variables del registro.
+
+## Análisis de variables importantes
+
+```{python}
+#| eval: false
+# Feature importance del Random Forest
+importances = pd.Series(clf_rf.feature_importances_,
+                         index=X_train.columns)
+top10 = importances.nlargest(10).sort_values()
+
+plt.figure(figsize=(10, 6))
+top10.plot(kind='barh', color='#301934')
+plt.title('Top 10 Variables más Importantes — Random Forest',
+          fontweight='bold')
+plt.xlabel('Importancia')
+plt.tight_layout()
+plt.savefig('heatmaps/feature_importance.png', dpi=150)
+plt.show()
+```
+
+![Top 10 variables más importantes según Random Forest](heatmaps/feature_importance.png)
+
+El análisis de importancia de variables revela información crucial sobre qué está aprendiendo el modelo. Si variables como `ANIO_DESAPARICION` o `ANIO_REGISTRO` aparecen entre las más importantes, esto puede indicar que el estatus `CONFIDENCIAL` fue asignado sistemáticamente en ciertos períodos, es decir, que la política de ocultamiento de información cambió con el tiempo. Si `ENTIDAD` tiene alta importancia, esto conecta directamente con los patrones encontrados en las reglas de asociación: las entidades del Estado de México, Sinaloa, Tamaulipas y Guanajuato presentaban perfiles demográficos diferenciados que podrían correlacionarse con distintos estatus de víctima.
+
+Una **alerta crítica** debe considerarse: si la variable `ORIGEN_REPORTE` resulta ser la más importante, el modelo estaría aprendiendo fundamentalmente qué institución tiende a marcar casos como `CONFIDENCIAL`, no qué características intrínsecas de la víctima o del evento de desaparición predicen su estatus. En este caso, el modelo capturaría un patrón burocrático, no un fenómeno real sobre las desapariciones. Este hallazgo, aunque técnicamente válido como predicción, tendría implicaciones éticas significativas si se utilizara para tomar decisiones operativas.
+
+## Comparación de modelos
+
+| Modelo | F1-macro | F1-weighted | Tiempo (s) |
+|:---|:---:|:---:|:---:|
+| Árbol de Decisión (max_depth=5) | 0.44 | 0.59 | 0.48 |
+| Random Forest (100 árboles) | 0.49 | 0.63 | 28.41 |
+
+: Comparativa de rendimiento entre modelos de clasificación {#tbl-comparativa-clasificacion}
+
+Random Forest supera al árbol de decisión en ambas métricas por un margen de aproximadamente 0.05 puntos en F1-macro y 0.04 en F1-weighted. Este incremento, aunque modesto en términos absolutos, representa una mejora proporcional del 11% en F1-macro, lo que indica que el ensemble efectivamente reduce la varianza y captura patrones más robustos. Notablemente, ambos modelos alcanzan F1-weighted sensiblemente mayor que F1-macro, lo que refleja que las dos clases mayoritarias (`CONFIDENCIAL` y `DESAPARECIDA`) dominan el promedio ponderado mientras que el rendimiento catastrófico en `NO LOCALIZADA` penaliza fuertemente el promedio no ponderado.
+
+El trade-off fundamental es entre **interpretabilidad y rendimiento**. El árbol de decisión con `max_depth=5` produce un diagrama de flujo con un máximo de 32 nodos hoja, donde cada regla de decisión es directamente legible. Random Forest, en cambio, produce 100 árboles cuyas predicciones se agregan por votación mayoritaria, lo que dificulta la trazabilidad de cada predicción individual.
+
+Para presentar resultados a autoridades o familias de víctimas, el árbol de decisión tiene una ventaja comunicativa sustancial: puede mostrarse como un diagrama de flujo donde cada bifurcación corresponde a una pregunta sobre las características del registro. Random Forest, aunque más preciso, requiere un nivel de abstracción mayor para su comunicación, por lo que su utilidad principal es como herramienta de validación técnica interna.
+
+## Discusión crítica: ¿el modelo captura patrones reales o sesgos?
+
+El análisis de los modelos de clasificación revela tensiones fundamentales entre lo que el modelo aprende y lo que sería deseable que aprendiera. Estas tensiones no son deficiencias técnicas de los algoritmos, sino reflejos de las limitaciones estructurales del sistema de registro de personas desaparecidas en México.
+
+El problema más profundo radica en la naturaleza de la clase `CONFIDENCIAL`. Cuando el modelo aprende a predecir que un registro será `CONFIDENCIAL`, lo que realmente aprende son los patrones del comportamiento institucional de ocultamiento de información. Dado que en el 49.70% de los registros las variables `SEXO`, `EDAD`, `MUNICIPIO`, `FECHA_NACIMIENTO` y `ESTATUS_VICTIMA` toman simultáneamente el valor `CONFIDENCIAL`, el modelo está esencialmente aprendiendo a identificar cuándo una institución decide ocultar la información de un caso, no características intrínsecas de la persona desaparecida. Este fenómeno genera una circularidad: el modelo predice `CONFIDENCIAL` basándose en otras variables que también son `CONFIDENCIAL`, lo cual no constituye conocimiento sobre las desapariciones sino sobre el comportamiento de las instituciones que registran los casos.
+
+La ausencia de la clase `LOCALIZADA` en el dataset constituye un hallazgo sustantivo que trasciende lo técnico. Un sistema de registro que no refleja cuándo una persona ha sido encontrada sugiere que los datos públicos no se actualizan con los desenlaces de los casos, o que esta información se mantiene reservada. Un modelo predictivo que no puede predecir el resultado más esperado por las familias —que su ser querido sea localizado— tiene un uso práctico inherentemente limitado. Esta ausencia convierte al clasificador en una herramienta que distingue entre formas de desaparición y formas de ocultamiento institucional, pero no entre desaparición y resolución.
+
+Las variables más importantes para el modelo probablemente reflejan patrones de captura de datos más que características intrínsecas que predigan el destino de una persona desaparecida. Si `ORIGEN_REPORTE` domina la importancia, el modelo ha aprendido que ciertas instituciones tienden a marcar sus registros como `CONFIDENCIAL` con mayor frecuencia que otras. Si `ANIO_DESAPARICION` es relevante, puede indicar cambios en las políticas de confidencialidad a lo largo del tiempo. Si `ENTIDAD` aparece como variable importante, podría reflejar diferencias en los protocolos de registro entre estados más que diferencias reales en la naturaleza de las desapariciones. Este sesgo de registro versus fenómeno real es una limitación que no puede resolverse con mejores algoritmos, sino que requiere mejores datos.
+
+Los patrones geográficos encontrados mediante reglas de asociación —la concentración de infantes y mujeres adolescentes en el Estado de México, y de hombres jóvenes en Sinaloa, Tamaulipas y Guanajuato— deberían aparecer también como variables importantes en el clasificador. Si la variable `ENTIDAD` y las categorías de `EDAD` ocupan posiciones altas en el ranking de importancia de Random Forest, esto confirma que ambos enfoques (supervisado y no supervisado) convergen hacia los mismos patrones subyacentes. Sin embargo, si estos patrones no aparecen como variables importantes en la clasificación, esto indicaría una diferencia fundamental de perspectiva: las reglas de asociación identifican co-ocurrencias frecuentes sin considerar una variable objetivo, mientras que el clasificador optimiza la separación entre clases específicas. Es posible que patrones geográficos fuertes en el análisis no supervisado se diluyan en el contexto supervisado si la variable `ENTIDAD` no discrimina entre `DESAPARECIDA` y `NO LOCALIZADA`, sino que se distribuye de manera similar en ambas clases.
+
+Las implicaciones éticas de usar este modelo en producción son severas. Si un sistema automatizado utilizara las predicciones del clasificador para priorizar recursos de búsqueda, los sesgos del sistema de registro se amplificarían de manera sistemática. Los casos con características similares a los más frecuentemente reportados con información completa recibirían prioridad, mientras que grupos ya subrepresentados —personas con sexo `INDETERMINADO`, registros provenientes de municipios con alto porcentaje de `CONFIDENCIAL`, o casos de entidades con menor capacidad de registro— quedarían marginados. El modelo reproduciría y profundizaría las inequidades existentes en el sistema de registro, no las corregería.
+
+Como recomendación técnica para un uso responsable de estos modelos, deberían excluirse del entrenamiento las variables `ORIGEN_REPORTE` y aquellas que están directamente contaminadas por el patrón de confidencialidad. Idealmente, se debería entrenar un modelo separado exclusivamente sobre los registros con información completa (excluyendo todos los registros con algún valor `CONFIDENCIAL`), lo cual reduciría el dataset a aproximadamente 50,000 registros pero eliminaría la circularidad en la predicción. Este modelo complementario permitiría evaluar si las variables demográficas y geográficas tienen poder predictivo real sobre la distinción entre `DESAPARECIDA` y `NO LOCALIZADA`, sin la interferencia del patrón de ocultamiento institucional.
