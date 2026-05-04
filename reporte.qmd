@@ -1,6 +1,7 @@
 ---
 title: "Reglas de Asociación y Modelos de Clasificación"
 subtitle: "Descubrimiento de patrones y modelos predictivos en datos de personas desaparecidas en México"
+lightbox: true
 format:
   html:
     theme: simplex
@@ -356,7 +357,7 @@ Por esta razón, se opta por discretizar variables como la edad (agrupándola en
 
 En el análisis de datos es fundamental identificar la naturaleza de los valores faltantes (representados como *NaN* en *pandas*) y definir estrategias adecuadas para su tratamiento. En el conjunto de datos analizado, de un total de **133,887 registros**, aproximadamente **34,964** presentan al menos un valor faltante en variables categóricas relevantes para el descubrimiento de patrones, particularmente aquellas relacionadas con `FECHA_NACIMIENTO`, `FECHA_DESAPARICION` y `FECHA_REGISTRO`.
 
-Considerando que estas variables son clave para la generación de atributos derivados (como la edad o componentes temporales), la imputación de valores —ya sea mediante moda en variables categóricas o técnicas como KNN— puede introducir sesgos significativos. En el contexto de reglas de asociación, este problema es especialmente crítico, ya que dichas técnicas se basan en la frecuencia de co-ocurrencia de los ítems.
+Considerando que estas variables son clave para la generación de atributos derivados (como la edad o componentes temporales), la imputación de valores, ya sea mediante moda en variables categóricas o técnicas como KNN, puede introducir sesgos significativos. En el contexto de reglas de asociación, este problema es especialmente crítico, ya que dichas técnicas se basan en la frecuencia de co-ocurrencia de los ítems.
 
 En particular, la imputación puede alterar artificialmente métricas como el **soporte**, la **confianza** y el **lift**, inflando la frecuencia de ciertos patrones y generando reglas que no reflejan relaciones reales en los datos. Dado que estas métricas se interpretan en términos de probabilidades condicionadas, condicionar sobre datos imputados puede distorsionar la interpretación de los resultados y comprometer la validez del análisis.
 
@@ -408,7 +409,7 @@ $$
 
 Este resultado sugiere un patrón consistente con un mecanismo de datos faltantes tipo MAR (Missing At Random), donde la probabilidad de ausencia depende de otra variable observada. En términos prácticos, implica que los registros correspondientes a personas con sexo indeterminado son significativamente más propensos a carecer de información sobre su fecha de nacimiento.
 
-Dado que en este trabajo se opta por no realizar imputación —con el objetivo de preservar la integridad de los datos observados para el análisis mediante reglas de asociación—, se decide trabajar con un enfoque de **análisis de casos completos**. Sin embargo, esta decisión introduce un sesgo importante, ya que afecta de manera desproporcionada a este grupo específico de registros.
+Dado que en este trabajo se opta por no realizar imputación, con el objetivo de preservar la integridad de los datos observados para el análisis mediante reglas de asociación, se decide trabajar con un enfoque de **análisis de casos completos**. Sin embargo, esta decisión introduce un sesgo importante, ya que afecta de manera desproporcionada a este grupo específico de registros.
 
 Por lo tanto, es importante reconocer esta situación como una de las principales limitaciones del conjunto de datos, ya que ciertos patrones asociados a este grupo podrían quedar subrepresentados en el análisis final.
 
@@ -484,7 +485,7 @@ Por otro lado, las reglas que involucren combinaciones como `{CONFIDENCIAL, CONF
 En este sentido, se opta por **mantener el valor CONFIDENCIAL como una categoría dentro de las variables categóricas**, en lugar de eliminarlo. Esta decisión permite conservar la estructura probabilística de las transacciones y evitar la pérdida de asociaciones entre variables no confidenciales, como `ENTIDAD` y `ORIGEN_REPORTE`. No obstante, se reconoce que esta elección puede introducir limitaciones en la interpretabilidad de las reglas generadas.
 
 ### Discretizacion de variables continuas 
-Como se observa, el umbral de aparición de ítems distintos en la matriz binaria es muy bajo. Esto se debe, en gran medida, al manejo de variables de tipo fecha, ya que pequeñas variaciones —como diferencias en la hora— generan nuevos ítems, incrementando la dimensionalidad del espacio y reduciendo la frecuencia relativa de co-ocurrencia entre ellos.
+Como se observa, el umbral de aparición de ítems distintos en la matriz binaria es muy bajo. Esto se debe, en gran medida, al manejo de variables de tipo fecha, ya que pequeñas variaciones como diferencias en la hora generan nuevos ítems, incrementando la dimensionalidad del espacio y reduciendo la frecuencia relativa de co-ocurrencia entre ellos.
 
 Asimismo, se identifica que las variables `FECHA_NACIMIENTO` y `FECHA_DESAPARICION` funcionan como variables auxiliares para la construcción de un atributo más representativo: la **edad**. Esta se obtiene a partir de la diferencia entre los años de ambas fechas, permitiendo capturar patrones más interpretables asociados a grupos etarios. En consecuencia, se crea la variable `EDAD` y se elimina `FECHA_NACIMIENTO`.
 
@@ -1244,7 +1245,7 @@ A escala completa, **FP-Growth resultó el único algoritmo viable**. Sobre las 
 
 ### ¿Generan las mismas reglas de asociación? ¿Por qué?
 
-Sí. Los tres enfoques —Apriori manual, Apriori de mlxtend y FP-Growth de mlxtend— producen exactamente el mismo conjunto de reglas bajo los mismos umbrales de soporte y confianza. Esto se debe a que los tres son **matemáticamente equivalentes**: resuelven el mismo problema de encontrar todos los itemsets $I$ tales que $\text{soporte}(I) \geq s_{\min}$, y a partir de ellos generan todas las reglas $X \Rightarrow Y$ tales que $\text{confianza}(X \Rightarrow Y) \geq c_{\min}$.
+Sí. Los tres enfoques: Apriori manual, Apriori de mlxtend y FP-Growth de mlxtend producen exactamente el mismo conjunto de reglas bajo los mismos umbrales de soporte y confianza. Esto se debe a que los tres son **matemáticamente equivalentes**: resuelven el mismo problema de encontrar todos los itemsets $I$ tales que $\text{soporte}(I) \geq s_{\min}$, y a partir de ellos generan todas las reglas $X \Rightarrow Y$ tales que $\text{confianza}(X \Rightarrow Y) \geq c_{\min}$.
 
 La diferencia radica exclusivamente en la estrategia algorítmica de búsqueda. Apriori (tanto manual como de mlxtend) utiliza generación de candidatos nivel por nivel, explotando la propiedad anti-monótona del soporte: si un itemset no es frecuente, ningún superconjunto suyo lo será. FP-Growth, en cambio, comprime las transacciones en un árbol de prefijos y extrae los patrones frecuentes mediante proyecciones condicionales, evitando la generación explícita de candidatos. Ambas estrategias recorren exhaustivamente el espacio de itemsets frecuentes, por lo que el resultado es idéntico; solo difiere el costo computacional del recorrido.
 
@@ -1356,8 +1357,8 @@ Mapeo de clases:
   DESAPARECIDA = 1
   NO LOCALIZADA = 2
 
-X_train shape: (79107, 85)
-X_test shape:  (19777, 85)
+X_train shape: (79107, 134)
+X_test shape:  (19777, 134)
 y_train shape: (79107,)
 y_test shape:  (19777,)
 
@@ -1365,13 +1366,13 @@ Distribución en train:
 0    0.4970
 1    0.4753
 2    0.0277
-dtype: float64
+Name: proportion, dtype: float64
 
 Distribución en test:
 0    0.4970
 1    0.4753
 2    0.0277
-dtype: float64
+Name: proportion, dtype: float64
 ```
 
 La estratificación mediante el parámetro `stratify=y` garantiza que la proporción de cada clase se preserve tanto en el conjunto de entrenamiento como en el de prueba. Esto es particularmente importante dado el desbalance severo de clases: sin estratificación, el conjunto de test podría sobrerrepresentar o subrepresentar a la clase `NO LOCALIZADA` (que representa solo el 2.77%), distorsionando la evaluación del modelo.
@@ -1406,7 +1407,7 @@ El accuracy (exactitud global) se define como la proporción de predicciones cor
 
 $$\text{Accuracy} = \frac{\text{Predicciones correctas}}{\text{Total de predicciones}}$$
 
-Si el 49.70% de los registros corresponden a la clase `CONFIDENCIAL`, un clasificador trivial que siempre prediga esta clase obtendría un accuracy de aproximadamente 0.50. Un clasificador que alternara entre predecir `CONFIDENCIAL` y `DESAPARECIDA` (las dos clases mayoritarias que suman el 97.23%) podría alcanzar un accuracy cercano a 0.97 ignorando completamente a `NO LOCALIZADA`. Esto sería inaceptable en el contexto de búsqueda de personas desaparecidas, ya que la clase más vulnerable quedaría sin ninguna capacidad predictiva.
+Si el 49.70% de los registros corresponden a la clase `CONFIDENCIAL`, un clasificador trivial que siempre prediga esta clase obtendría un accuracy de aproximadamente 0.50. Más aún, dado que las variables `SEXO`, `EDAD` y otras toman simultáneamente el valor `CONFIDENCIAL` cuando `ESTATUS_VICTIMA` es `CONFIDENCIAL`, un modelo basado en árboles puede detectar esta señal trivial y alcanzar un accuracy cercano al 97% clasificando correctamente `CONFIDENCIAL` y `DESAPARECIDA` pero ignorando completamente a `NO LOCALIZADA`. Un accuracy del 96% podría parecer excelente, pero sería inaceptable si la clase más vulnerable, personas no localizadas, queda sin ninguna capacidad predictiva.
 
 El accuracy pondera implícitamente cada clase por su frecuencia en el dataset, lo que significa que el desempeño en `NO LOCALIZADA` (2.77%) tiene un impacto prácticamente nulo sobre la métrica global. Para un problema con desbalance severo de clases, se requieren métricas que evalúen el rendimiento por clase de forma independiente.
 
@@ -1434,9 +1435,7 @@ $$F1_{\text{weighted}} = \sum_{c=1}^{C} \frac{n_c}{N} \cdot F1_c$$
 
 ### Conexión con el mundo real
 
-En el contexto de búsqueda de personas desaparecidas, las consecuencias de los errores de clasificación no son simétricas. Un **falso negativo** en la clase `NO LOCALIZADA` —es decir, predecir que una persona tiene estatus `DESAPARECIDA` cuando en realidad su registro indica `NO LOCALIZADA`— puede implicar que se continúen asignando recursos de búsqueda innecesariamente, o que no se actúe sobre una posible localización. Por esta razón, el **recall de la clase `NO LOCALIZADA`** es especialmente crítico y debe monitorearse de forma independiente.
-
-En la exposición oral, será necesario explicar esta elección de métricas y su relación con el escenario del mundo real, tal como lo establece la rúbrica de evaluación. La justificación no es únicamente estadística, sino que conecta directamente con las consecuencias prácticas de los errores del modelo sobre las decisiones que afectan a las víctimas y sus familias.
+En el contexto de búsqueda de personas desaparecidas, las consecuencias de los errores de clasificación no son simétricas. Un **falso negativo** en la clase `NO LOCALIZADA` es decir, predecir que una persona tiene estatus `DESAPARECIDA` cuando en realidad su registro indica `NO LOCALIZADA` puede implicar que se continúen asignando recursos de búsqueda innecesariamente, o que no se actúe sobre una posible localización. Por esta razón, el **recall de la clase `NO LOCALIZADA`** es especialmente crítico y debe monitorearse de forma independiente.
 
 ## Entrenamiento y resultados
 
@@ -1462,18 +1461,18 @@ print(f"Tiempo de entrenamiento: {round(t1-t0, 2)}s")
 ```{.output}
                 precision    recall  f1-score   support
 
- CONFIDENCIAL       0.65      0.61      0.63      9830
- DESAPARECIDA       0.58      0.64      0.61      9400
-NO LOCALIZADA       0.08      0.11      0.09       547
+ CONFIDENCIAL       1.00      1.00      1.00      9830
+ DESAPARECIDA       0.97      0.95      0.96      9400
+NO LOCALIZADA       0.32      0.41      0.36       547
 
-     accuracy                           0.58     19777
-    macro avg       0.44      0.45      0.44     19777
- weighted avg       0.59      0.58      0.59     19777
+     accuracy                           0.96     19777
+    macro avg       0.76      0.79      0.77     19777
+ weighted avg       0.96      0.96      0.96     19777
 
-Tiempo de entrenamiento: 0.48s
+Tiempo de entrenamiento: 0.26s
 ```
 
-El árbol de decisión obtiene un F1-macro de **0.44**, lo que refleja las dificultades del modelo para clasificar correctamente las tres clases de forma equilibrada. La clase `CONFIDENCIAL`, al ser mayoritaria y presentar patrones de co-ocurrencia consistentes (las mismas 5 variables toman este valor simultáneamente), obtiene el mejor F1 (0.63). La clase `DESAPARECIDA` alcanza un F1 de 0.61, favorecida por su proporción similar a `CONFIDENCIAL`. Sin embargo, `NO LOCALIZADA`, la clase minoritaria con solo el 2.77% de los registros, obtiene un F1 de apenas 0.09, indicando que el modelo prácticamente no logra identificarla. A pesar del `class_weight='balanced'`, el desbalance extremo hace que el modelo confunda sistemáticamente los escasos registros de `NO LOCALIZADA` con `DESAPARECIDA`.
+El árbol de decisión obtiene un F1-macro de **0.77** y un accuracy del 96%, un resultado que a primera vista parece excelente. Sin embargo, este rendimiento requiere un análisis crítico cuidadoso. La clase `CONFIDENCIAL` se clasifica con F1 perfecto de 1.00, lo cual se explica por la circularidad en los datos: cuando `ESTATUS_VICTIMA` es `CONFIDENCIAL`, las variables `SEXO`, `EDAD` y otras también toman el valor `CONFIDENCIAL`, creando dummies como `SEXO_CONFIDENCIAL` que son predictores prácticamente perfectos. El árbol detecta esta señal trivial en su primera partición. La clase `DESAPARECIDA` alcanza un F1 de 0.96, mientras que `NO LOCALIZADA` obtiene un F1 de apenas 0.36, reflejando que el desbalance severo (2.77%) sigue dificultando la identificación de esta clase minoritaria.
 
 ### Random Forest
 
@@ -1496,20 +1495,20 @@ print(f"Tiempo de entrenamiento: {round(t1-t0, 2)}s")
 ```{.output}
                 precision    recall  f1-score   support
 
- CONFIDENCIAL       0.70      0.67      0.68      9830
- DESAPARECIDA       0.62      0.69      0.65      9400
-NO LOCALIZADA       0.12      0.14      0.13       547
+ CONFIDENCIAL       1.00      1.00      1.00      9830
+ DESAPARECIDA       0.98      0.92      0.95      9400
+NO LOCALIZADA       0.31      0.64      0.42       547
 
-     accuracy                           0.63     19777
-    macro avg       0.48      0.50      0.49     19777
- weighted avg       0.63      0.63      0.63     19777
+     accuracy                           0.95     19777
+    macro avg       0.76      0.85      0.79     19777
+ weighted avg       0.97      0.95      0.96     19777
 
-Tiempo de entrenamiento: 28.41s
+Tiempo de entrenamiento: 1.36s
 ```
 
-Random Forest supera al árbol de decisión en todas las métricas: F1-macro de **0.49** frente a 0.44, y F1-weighted de 0.63 frente a 0.59. La mejora es consistente en las tres clases, con incrementos de aproximadamente 0.04-0.05 puntos en F1 para cada una. El costo de esta mejora es un tiempo de entrenamiento significativamente mayor (28.41s frente a 0.48s), lo que representa un factor de aproximadamente 59x.
+Random Forest obtiene un F1-macro de **0.79**, ligeramente superior al árbol de decisión (0.77). Al igual que el árbol, clasifica `CONFIDENCIAL` con F1 perfecto de 1.00 y `DESAPARECIDA` con F1 de 0.95. La diferencia más notable está en `NO LOCALIZADA`: Random Forest mejora significativamente el recall (0.64 vs 0.41), lo que significa que detecta una proporción mucho mayor de los casos reales de `NO LOCALIZADA`, aunque a costa de una menor precisión (0.31 vs 0.32). El F1 de esta clase sube de 0.36 a 0.42, confirmando que el ensemble captura patrones más sutiles para la clase minoritaria.
 
-La clase `NO LOCALIZADA` sigue siendo extremadamente difícil de clasificar incluso para Random Forest (F1 = 0.13), lo que confirma que el desbalance severo (2.77% de la muestra) y la posible falta de features discriminativas son limitaciones estructurales del problema, no del modelo. Con solo 547 casos en el conjunto de test, el modelo tiene muy pocas instancias para aprender los patrones de esta clase.
+El costo computacional es mayor (1.36s vs 0.26s), pero sigue siendo razonable. Con solo 547 casos de `NO LOCALIZADA` en el conjunto de test, el modelo tiene muy pocas instancias para aprender los patrones de esta clase, lo que explica que siga siendo la más difícil de clasificar.
 
 ### Matrices de confusión
 
@@ -1536,7 +1535,34 @@ plt.show()
 
 ![Matrices de confusión de ambos modelos de clasificación](heatmaps/confusion_matrices.png)
 
-Las matrices de confusión revelan un patrón común en ambos modelos: la clase `NO LOCALIZADA` es frecuentemente confundida con `DESAPARECIDA`. Esto es consistente con la proximidad semántica de ambas categorías dentro del sistema de registro, donde la distinción entre una persona cuyo paradero se desconoce completamente y una que no ha sido localizada puede depender de criterios administrativos más que de diferencias observables en las variables del registro.
+Las matrices de confusión revelan varios patrones relevantes. En primer lugar, la clase `CONFIDENCIAL` se clasifica de forma prácticamente perfecta en ambos modelos, con errores mínimos o nulos. Esto confirma que la señal de las variables dummy `SEXO_CONFIDENCIAL`, `EDAD_CONFIDENCIAL`, etc., es suficiente para identificar esta clase de forma trivial. La clase `DESAPARECIDA` también se clasifica con alta precisión, aunque una fracción pequeña se confunde con `NO LOCALIZADA`. El error más notable se concentra en `NO LOCALIZADA`, donde una proporción significativa de sus 547 casos se clasifica erróneamente como `DESAPARECIDA`. Esto es consistente con la proximidad semántica de ambas categorías dentro del sistema de registro.
+
+### Visualización del árbol de decisión {#sec-arbol-visual}
+
+Una de las principales ventajas del árbol de decisión es su interpretabilidad visual. Con `max_depth=5`, el árbol completo puede representarse gráficamente, donde cada nodo muestra la variable y el umbral de partición, la distribución de clases y la clase predicha.
+
+```{python}
+#| eval: false
+from sklearn.tree import plot_tree, export_text
+
+fig, ax = plt.subplots(figsize=(28, 14))
+plot_tree(clf_tree,
+          feature_names=X_train.columns.tolist(),
+          class_names=label_encoder.classes_.tolist(),
+          filled=True,
+          rounded=True,
+          fontsize=7,
+          proportion=True,
+          ax=ax)
+ax.set_title('Árbol de Decisión (max_depth=5)', fontsize=16, fontweight='bold')
+plt.tight_layout()
+plt.savefig('heatmaps/decision_tree.png', dpi=150, bbox_inches='tight')
+plt.show()
+```
+
+![Visualización gráfica del árbol de decisión entrenado](heatmaps/decision_tree.png){.lightbox fig-alt="Árbol de decisión completo con max_depth=5 mostrando particiones desde SEXO_CONFIDENCIAL"}
+
+La visualización del árbol revela que la primera partición, la más importante, se realiza sobre la variable `SEXO_CONFIDENCIAL`. Cuando `SEXO_CONFIDENCIAL` es 1 (es decir, cuando la variable `SEXO` toma el valor `CONFIDENCIAL` tras el One-Hot Encoding), la condición `SEXO_CONFIDENCIAL <= 0.5` es falsa, y el árbol predice directamente `CONFIDENCIAL` por la rama derecha. Esto confirma la circularidad discutida previamente: el modelo no necesita más información para clasificar casi la mitad de los registros. Las ramas subsiguientes utilizan variables como `ANIO_REGISTRO`, `ORIGEN_REPORTE` de diversas fiscalías, y `SEXO_HOMBRE` para distinguir entre `DESAPARECIDA` y `NO LOCALIZADA`, lo que indica que el modelo está aprendiendo patrones institucionales de registro más que características intrínsecas de las desapariciones.
 
 ## Análisis de variables importantes
 
@@ -1549,7 +1575,7 @@ top10 = importances.nlargest(10).sort_values()
 
 plt.figure(figsize=(10, 6))
 top10.plot(kind='barh', color='#301934')
-plt.title('Top 10 Variables más Importantes — Random Forest',
+plt.title('Top 10 Variables más Importantes - Random Forest',
           fontweight='bold')
 plt.xlabel('Importancia')
 plt.tight_layout()
@@ -1559,37 +1585,39 @@ plt.show()
 
 ![Top 10 variables más importantes según Random Forest](heatmaps/feature_importance.png)
 
-El análisis de importancia de variables revela información crucial sobre qué está aprendiendo el modelo. Si variables como `ANIO_DESAPARICION` o `ANIO_REGISTRO` aparecen entre las más importantes, esto puede indicar que el estatus `CONFIDENCIAL` fue asignado sistemáticamente en ciertos períodos, es decir, que la política de ocultamiento de información cambió con el tiempo. Si `ENTIDAD` tiene alta importancia, esto conecta directamente con los patrones encontrados en las reglas de asociación: las entidades del Estado de México, Sinaloa, Tamaulipas y Guanajuato presentaban perfiles demográficos diferenciados que podrían correlacionarse con distintos estatus de víctima.
+El análisis de importancia de variables revela información crucial sobre qué está aprendiendo el modelo. Como se observa en la gráfica, las variables más importantes son `MES_REGISTRO` y `MES_DESAPARICION`, seguidas por las dummies de confidencialidad (`EDAD_CONFIDENCIAL`, `ANIO_REGISTRO_CONFIDENCIAL`, `SEXO_CONFIDENCIAL`, `ANIO_DESAPARICION_CONFIDENCIAL`). Esto confirma que el modelo aprende fundamentalmente dos cosas: (1) a identificar registros confidenciales mediante la circularidad de las variables, y (2) a distinguir entre `DESAPARECIDA` y `NO LOCALIZADA` basándose en cuándo ocurrió la desaparición y cuándo se registró el caso. Las variables temporales (`MES_REGISTRO`, `MES_DESAPARICION`, `ANIO_REGISTRO_2024-2025`) dominan la importancia para las clases no confidenciales, sugiriendo patrones estacionales o temporales en la clasificación del estatus.
 
-Una **alerta crítica** debe considerarse: si la variable `ORIGEN_REPORTE` resulta ser la más importante, el modelo estaría aprendiendo fundamentalmente qué institución tiende a marcar casos como `CONFIDENCIAL`, no qué características intrínsecas de la víctima o del evento de desaparición predicen su estatus. En este caso, el modelo capturaría un patrón burocrático, no un fenómeno real sobre las desapariciones. Este hallazgo, aunque técnicamente válido como predicción, tendría implicaciones éticas significativas si se utilizara para tomar decisiones operativas.
+Una **alerta crítica** debe considerarse: que `MES_REGISTRO` sea la variable más importante indica que el modelo distingue entre `DESAPARECIDA` y `NO LOCALIZADA` basándose en el mes en que se registró el caso. Esto podría reflejar cambios en protocolos de registro a lo largo del año o patrones estacionales en la captura de datos, más que diferencias reales en la naturaleza de las desapariciones. También aparecen `SEXO_HOMBRE` y `ANIO_DESAPARICION_2024-2025`, lo que sugiere ciertos perfiles demográficos y temporales asociados a cada estatus. Este hallazgo, aunque técnicamente válido como predicción, tendría implicaciones éticas significativas si se utilizara para tomar decisiones operativas.
 
 ## Comparación de modelos
 
-| Modelo | F1-macro | F1-weighted | Tiempo (s) |
-|:---|:---:|:---:|:---:|
-| Árbol de Decisión (max_depth=5) | 0.44 | 0.59 | 0.48 |
-| Random Forest (100 árboles) | 0.49 | 0.63 | 28.41 |
+| Modelo | F1-macro | F1-weighted | Accuracy | Tiempo (s) |
+|:---|:---:|:---:|:---:|:---:|
+| Árbol de Decisión (max_depth=5) | 0.77 | 0.96 | 0.96 | 0.26 |
+| Random Forest (100 árboles) | 0.79 | 0.96 | 0.95 | 1.36 |
 
 : Comparativa de rendimiento entre modelos de clasificación {#tbl-comparativa-clasificacion}
 
-Random Forest supera al árbol de decisión en ambas métricas por un margen de aproximadamente 0.05 puntos en F1-macro y 0.04 en F1-weighted. Este incremento, aunque modesto en términos absolutos, representa una mejora proporcional del 11% en F1-macro, lo que indica que el ensemble efectivamente reduce la varianza y captura patrones más robustos. Notablemente, ambos modelos alcanzan F1-weighted sensiblemente mayor que F1-macro, lo que refleja que las dos clases mayoritarias (`CONFIDENCIAL` y `DESAPARECIDA`) dominan el promedio ponderado mientras que el rendimiento catastrófico en `NO LOCALIZADA` penaliza fuertemente el promedio no ponderado.
+Ambos modelos alcanzan métricas globales muy altas (accuracy ~96%, F1-weighted ~0.96), lo cual refleja la facilidad con la que se predice la clase `CONFIDENCIAL` (F1 = 1.00 en ambos modelos). La diferencia real entre los modelos se observa en el F1-macro, donde Random Forest supera al árbol por 0.02 puntos (0.79 vs 0.77), y especialmente en la clase `NO LOCALIZADA`, donde el F1 mejora de 0.36 a 0.42.
 
-El trade-off fundamental es entre **interpretabilidad y rendimiento**. El árbol de decisión con `max_depth=5` produce un diagrama de flujo con un máximo de 32 nodos hoja, donde cada regla de decisión es directamente legible. Random Forest, en cambio, produce 100 árboles cuyas predicciones se agregan por votación mayoritaria, lo que dificulta la trazabilidad de cada predicción individual.
+La diferencia entre F1-macro y F1-weighted es reveladora: mientras F1-weighted es ~0.96, F1-macro baja a ~0.78. Esta brecha confirma que el rendimiento en `NO LOCALIZADA` (2.77% de la muestra) penaliza fuertemente el promedio no ponderado, ya que las dos clases mayoritarias dominan el promedio ponderado.
 
-Para presentar resultados a autoridades o familias de víctimas, el árbol de decisión tiene una ventaja comunicativa sustancial: puede mostrarse como un diagrama de flujo donde cada bifurcación corresponde a una pregunta sobre las características del registro. Random Forest, aunque más preciso, requiere un nivel de abstracción mayor para su comunicación, por lo que su utilidad principal es como herramienta de validación técnica interna.
+El trade-off entre **interpretabilidad y rendimiento** sigue siendo relevante, aunque el argumento se matiza dado que ambos modelos tienen rendimiento similar. El árbol de decisión con `max_depth=5` produce un diagrama de flujo con un máximo de 32 nodos hoja, donde cada regla de decisión es directamente legible, como se muestra en la visualización de la sección anterior. Random Forest, en cambio, produce 100 árboles cuyas predicciones se agregan por votación mayoritaria, lo que dificulta la trazabilidad de cada predicción individual.
+
+Para presentar resultados a autoridades o familias de víctimas, el árbol de decisión tiene una ventaja comunicativa sustancial: puede mostrarse como un diagrama de flujo donde cada bifurcación corresponde a una pregunta sobre las características del registro. Random Forest, aunque ligeramente más preciso en la clase minoritaria, requiere un nivel de abstracción mayor para su comunicación, por lo que su utilidad principal es como herramienta de validación técnica interna.
 
 ## Discusión crítica: ¿el modelo captura patrones reales o sesgos?
 
 El análisis de los modelos de clasificación revela tensiones fundamentales entre lo que el modelo aprende y lo que sería deseable que aprendiera. Estas tensiones no son deficiencias técnicas de los algoritmos, sino reflejos de las limitaciones estructurales del sistema de registro de personas desaparecidas en México.
 
-El problema más profundo radica en la naturaleza de la clase `CONFIDENCIAL`. Cuando el modelo aprende a predecir que un registro será `CONFIDENCIAL`, lo que realmente aprende son los patrones del comportamiento institucional de ocultamiento de información. Dado que en el 49.70% de los registros las variables `SEXO`, `EDAD`, `MUNICIPIO`, `FECHA_NACIMIENTO` y `ESTATUS_VICTIMA` toman simultáneamente el valor `CONFIDENCIAL`, el modelo está esencialmente aprendiendo a identificar cuándo una institución decide ocultar la información de un caso, no características intrínsecas de la persona desaparecida. Este fenómeno genera una circularidad: el modelo predice `CONFIDENCIAL` basándose en otras variables que también son `CONFIDENCIAL`, lo cual no constituye conocimiento sobre las desapariciones sino sobre el comportamiento de las instituciones que registran los casos.
+El problema más profundo radica en la naturaleza de la clase `CONFIDENCIAL` y se confirma empíricamente: el modelo clasifica esta clase con F1 perfecto de 1.00. Cuando `ESTATUS_VICTIMA` es `CONFIDENCIAL`, las variables `SEXO`, `EDAD` y otras toman simultáneamente el valor `CONFIDENCIAL`, generando dummies como `SEXO_CONFIDENCIAL` que son predictores perfectos. La visualización del árbol de decisión lo confirma: la primera partición se realiza sobre `SEXO_CONFIDENCIAL`, separando instantáneamente el 49.70% de los registros en una hoja pura. El modelo no “aprende” nada sobre las desapariciones para esta clase; simplemente detecta que las variables de registro están censuradas.
 
-La ausencia de la clase `LOCALIZADA` en el dataset constituye un hallazgo sustantivo que trasciende lo técnico. Un sistema de registro que no refleja cuándo una persona ha sido encontrada sugiere que los datos públicos no se actualizan con los desenlaces de los casos, o que esta información se mantiene reservada. Un modelo predictivo que no puede predecir el resultado más esperado por las familias —que su ser querido sea localizado— tiene un uso práctico inherentemente limitado. Esta ausencia convierte al clasificador en una herramienta que distingue entre formas de desaparición y formas de ocultamiento institucional, pero no entre desaparición y resolución.
+La ausencia de la clase `LOCALIZADA` en el dataset constituye un hallazgo sustantivo que trasciende lo técnico. Un sistema de registro que no refleja cuándo una persona ha sido encontrada sugiere que los datos públicos no se actualizan con los desenlaces de los casos, o que esta información se mantiene reservada. Un modelo predictivo que no puede predecir el resultado más esperado por las familias que su ser querido sea localizado tiene un uso práctico inherentemente limitado. Esta ausencia convierte al clasificador en una herramienta que distingue entre formas de desaparición y formas de ocultamiento institucional, pero no entre desaparición y resolución.
 
-Las variables más importantes para el modelo probablemente reflejan patrones de captura de datos más que características intrínsecas que predigan el destino de una persona desaparecida. Si `ORIGEN_REPORTE` domina la importancia, el modelo ha aprendido que ciertas instituciones tienden a marcar sus registros como `CONFIDENCIAL` con mayor frecuencia que otras. Si `ANIO_DESAPARICION` es relevante, puede indicar cambios en las políticas de confidencialidad a lo largo del tiempo. Si `ENTIDAD` aparece como variable importante, podría reflejar diferencias en los protocolos de registro entre estados más que diferencias reales en la naturaleza de las desapariciones. Este sesgo de registro versus fenómeno real es una limitación que no puede resolverse con mejores algoritmos, sino que requiere mejores datos.
+Las variables más importantes para el modelo confirman estos patrones. Las variables temporales (`MES_REGISTRO`, `MES_DESAPARICION`) dominan el ranking de importancia, seguidas por las dummies de confidencialidad (`EDAD_CONFIDENCIAL`, `ANIO_REGISTRO_CONFIDENCIAL`, `SEXO_CONFIDENCIAL`). Esto significa que, después de resolver trivialmente la clase `CONFIDENCIAL`, el modelo distingue entre `DESAPARECIDA` y `NO LOCALIZADA` basándose principalmente en cuándo se registró el caso y cuándo ocurrió la desaparición. La presencia de `SEXO_HOMBRE` y `ANIO_REGISTRO_2024-2025` en el top 10 sugiere que ciertos perfiles demográficos y períodos temporales están asociados con cada estatus. El modelo captura estos patrones temporales e institucionales, lo que podría reflejar cambios en políticas de registro más que características intrínsecas que predigan el destino de una persona desaparecida.
 
-Los patrones geográficos encontrados mediante reglas de asociación —la concentración de infantes y mujeres adolescentes en el Estado de México, y de hombres jóvenes en Sinaloa, Tamaulipas y Guanajuato— deberían aparecer también como variables importantes en el clasificador. Si la variable `ENTIDAD` y las categorías de `EDAD` ocupan posiciones altas en el ranking de importancia de Random Forest, esto confirma que ambos enfoques (supervisado y no supervisado) convergen hacia los mismos patrones subyacentes. Sin embargo, si estos patrones no aparecen como variables importantes en la clasificación, esto indicaría una diferencia fundamental de perspectiva: las reglas de asociación identifican co-ocurrencias frecuentes sin considerar una variable objetivo, mientras que el clasificador optimiza la separación entre clases específicas. Es posible que patrones geográficos fuertes en el análisis no supervisado se diluyan en el contexto supervisado si la variable `ENTIDAD` no discrimina entre `DESAPARECIDA` y `NO LOCALIZADA`, sino que se distribuye de manera similar en ambas clases.
+Los patrones geográficos encontrados mediante reglas de asociación, la concentración de infantes y mujeres adolescentes en el Estado de México, y de hombres jóvenes en Sinaloa, Tamaulipas y Guanajuato, no aparecen necesariamente entre las variables más importantes del clasificador. Esto se explica porque el clasificador optimiza la separación entre clases específicas y la señal de `CONFIDENCIAL` es tan dominante que eclipsa patrones geográficos más sutiles. Las reglas de asociación, al no tener variable objetivo, identifican co-ocurrencias frecuentes sin esta distorsión. Esta divergencia entre enfoques supervisado y no supervisado es en sí misma un hallazgo: los patrones de las desapariciones son reales pero quedan opacados por los patrones del sistema de registro.
 
-Las implicaciones éticas de usar este modelo en producción son severas. Si un sistema automatizado utilizara las predicciones del clasificador para priorizar recursos de búsqueda, los sesgos del sistema de registro se amplificarían de manera sistemática. Los casos con características similares a los más frecuentemente reportados con información completa recibirían prioridad, mientras que grupos ya subrepresentados —personas con sexo `INDETERMINADO`, registros provenientes de municipios con alto porcentaje de `CONFIDENCIAL`, o casos de entidades con menor capacidad de registro— quedarían marginados. El modelo reproduciría y profundizaría las inequidades existentes en el sistema de registro, no las corregería.
+Las implicaciones éticas de usar este modelo en producción son severas. Si un sistema automatizado utilizara las predicciones del clasificador para priorizar recursos de búsqueda, los sesgos del sistema de registro se amplificarían de manera sistemática. Los casos con características similares a los más frecuentemente reportados con información completa recibirían prioridad, mientras que grupos ya subrepresentados personas con sexo `INDETERMINADO`, registros provenientes de municipios con alto porcentaje de `CONFIDENCIAL`, o casos de entidades con menor capacidad de registro quedarían marginados. El modelo reproduciría y profundizaría las inequidades existentes en el sistema de registro, no las corregería.
 
 Como recomendación técnica para un uso responsable de estos modelos, deberían excluirse del entrenamiento las variables `ORIGEN_REPORTE` y aquellas que están directamente contaminadas por el patrón de confidencialidad. Idealmente, se debería entrenar un modelo separado exclusivamente sobre los registros con información completa (excluyendo todos los registros con algún valor `CONFIDENCIAL`), lo cual reduciría el dataset a aproximadamente 50,000 registros pero eliminaría la circularidad en la predicción. Este modelo complementario permitiría evaluar si las variables demográficas y geográficas tienen poder predictivo real sobre la distinción entre `DESAPARECIDA` y `NO LOCALIZADA`, sin la interferencia del patrón de ocultamiento institucional.

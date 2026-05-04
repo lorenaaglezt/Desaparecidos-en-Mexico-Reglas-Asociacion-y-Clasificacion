@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.9.36">
+<meta name="generator" content="quarto-1.9.37">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -68,10 +68,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="reporte_files/libs/quarto-html/tippy.umd.min.js"></script>
 <script src="reporte_files/libs/quarto-html/anchor.min.js"></script>
 <link href="reporte_files/libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="reporte_files/libs/quarto-html/quarto-syntax-highlighting-a06763021a52c43c40a351ac8b799b8f.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="reporte_files/libs/quarto-html/quarto-syntax-highlighting-acf12a64177840b8d86f2d4f01b2e9fb.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="reporte_files/libs/bootstrap/bootstrap.min.js"></script>
 <link href="reporte_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="reporte_files/libs/bootstrap/bootstrap-59595c850a2b5f2eb326261049429a34.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="reporte_files/libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="reporte_files/libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="reporte_files/libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
   <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
@@ -159,15 +162,43 @@ window.Quarto = {
   <li><a href="#ventajas-frente-a-apriori" id="toc-ventajas-frente-a-apriori" class="nav-link" data-scroll-target="#ventajas-frente-a-apriori"><span class="header-section-number">4.2</span> Ventajas frente a Apriori</a></li>
   <li><a href="#implementación-en-python" id="toc-implementación-en-python" class="nav-link" data-scroll-target="#implementación-en-python"><span class="header-section-number">4.3</span> Implementación en Python</a></li>
   </ul></li>
-  <li><a href="#comparación-de-algoritmos" id="toc-comparación-de-algoritmos" class="nav-link" data-scroll-target="#comparación-de-algoritmos"><span class="header-section-number">5</span> Comparación de algoritmos</a>
+  <li><a href="#algoritmo-apriori-mlxtend" id="toc-algoritmo-apriori-mlxtend" class="nav-link" data-scroll-target="#algoritmo-apriori-mlxtend"><span class="header-section-number">5</span> Algoritmo Apriori (mlxtend)</a>
   <ul class="collapse">
-  <li><a href="#algoritmos-utilizados" id="toc-algoritmos-utilizados" class="nav-link" data-scroll-target="#algoritmos-utilizados"><span class="header-section-number">5.1</span> Algoritmos utilizados</a></li>
-  <li><a href="#comparación-de-rendimiento" id="toc-comparación-de-rendimiento" class="nav-link" data-scroll-target="#comparación-de-rendimiento"><span class="header-section-number">5.2</span> Comparación de rendimiento</a>
-  <ul class="collapse">
-  <li><a href="#cuál-tarda-más" id="toc-cuál-tarda-más" class="nav-link" data-scroll-target="#cuál-tarda-más"><span class="header-section-number">5.2.1</span> ¿Cuál tarda más?</a></li>
-  <li><a href="#cuál-tarda-menos-y-por-qué" id="toc-cuál-tarda-menos-y-por-qué" class="nav-link" data-scroll-target="#cuál-tarda-menos-y-por-qué"><span class="header-section-number">5.2.2</span> ¿Cuál tarda menos y por qué?</a></li>
+  <li><a href="#descripción-2" id="toc-descripción-2" class="nav-link" data-scroll-target="#descripción-2"><span class="header-section-number">5.1</span> Descripción</a></li>
+  <li><a href="#implementación-en-python-1" id="toc-implementación-en-python-1" class="nav-link" data-scroll-target="#implementación-en-python-1"><span class="header-section-number">5.2</span> Implementación en Python</a></li>
   </ul></li>
-  <li><a href="#comparación-de-resultados" id="toc-comparación-de-resultados" class="nav-link" data-scroll-target="#comparación-de-resultados"><span class="header-section-number">5.3</span> Comparación de resultados</a></li>
+  <li><a href="#comparación-de-algoritmos" id="toc-comparación-de-algoritmos" class="nav-link" data-scroll-target="#comparación-de-algoritmos"><span class="header-section-number">6</span> Comparación de algoritmos</a>
+  <ul class="collapse">
+  <li><a href="#algoritmos-utilizados" id="toc-algoritmos-utilizados" class="nav-link" data-scroll-target="#algoritmos-utilizados"><span class="header-section-number">6.1</span> Algoritmos utilizados</a></li>
+  <li><a href="#comparación-de-rendimiento" id="toc-comparación-de-rendimiento" class="nav-link" data-scroll-target="#comparación-de-rendimiento"><span class="header-section-number">6.2</span> Comparación de rendimiento</a>
+  <ul class="collapse">
+  <li><a href="#cuál-tarda-más" id="toc-cuál-tarda-más" class="nav-link" data-scroll-target="#cuál-tarda-más"><span class="header-section-number">6.2.1</span> ¿Cuál tarda más?</a></li>
+  <li><a href="#cuál-tarda-menos-y-por-qué" id="toc-cuál-tarda-menos-y-por-qué" class="nav-link" data-scroll-target="#cuál-tarda-menos-y-por-qué"><span class="header-section-number">6.2.2</span> ¿Cuál tarda menos y por qué?</a></li>
+  <li><a href="#generan-las-mismas-reglas-de-asociación-por-qué" id="toc-generan-las-mismas-reglas-de-asociación-por-qué" class="nav-link" data-scroll-target="#generan-las-mismas-reglas-de-asociación-por-qué"><span class="header-section-number">6.2.3</span> ¿Generan las mismas reglas de asociación? ¿Por qué?</a></li>
+  </ul></li>
+  <li><a href="#comparación-de-resultados" id="toc-comparación-de-resultados" class="nav-link" data-scroll-target="#comparación-de-resultados"><span class="header-section-number">6.3</span> Comparación de resultados</a></li>
+  </ul></li>
+  <li><a href="#algoritmos-clasificación" id="toc-algoritmos-clasificación" class="nav-link" data-scroll-target="#algoritmos-clasificación"><span class="header-section-number">7</span> Algoritmos: Clasificación</a>
+  <ul class="collapse">
+  <li><a href="#descripción-del-problema-de-clasificación" id="toc-descripción-del-problema-de-clasificación" class="nav-link" data-scroll-target="#descripción-del-problema-de-clasificación"><span class="header-section-number">7.1</span> Descripción del problema de clasificación</a></li>
+  <li><a href="#preparación-de-datos-para-clasificación" id="toc-preparación-de-datos-para-clasificación" class="nav-link" data-scroll-target="#preparación-de-datos-para-clasificación"><span class="header-section-number">7.2</span> Preparación de datos para clasificación</a></li>
+  <li><a href="#selección-y-justificación-de-modelos" id="toc-selección-y-justificación-de-modelos" class="nav-link" data-scroll-target="#selección-y-justificación-de-modelos"><span class="header-section-number">7.3</span> Selección y justificación de modelos</a></li>
+  <li><a href="#selección-y-justificación-de-métricas" id="toc-selección-y-justificación-de-métricas" class="nav-link" data-scroll-target="#selección-y-justificación-de-métricas"><span class="header-section-number">7.4</span> Selección y justificación de métricas</a>
+  <ul class="collapse">
+  <li><a href="#por-qué-no-usar-accuracy-como-métrica-principal" id="toc-por-qué-no-usar-accuracy-como-métrica-principal" class="nav-link" data-scroll-target="#por-qué-no-usar-accuracy-como-métrica-principal"><span class="header-section-number">7.4.1</span> ¿Por qué no usar accuracy como métrica principal?</a></li>
+  <li><a href="#métricas-seleccionadas" id="toc-métricas-seleccionadas" class="nav-link" data-scroll-target="#métricas-seleccionadas"><span class="header-section-number">7.4.2</span> Métricas seleccionadas</a></li>
+  <li><a href="#conexión-con-el-mundo-real" id="toc-conexión-con-el-mundo-real" class="nav-link" data-scroll-target="#conexión-con-el-mundo-real"><span class="header-section-number">7.4.3</span> Conexión con el mundo real</a></li>
+  </ul></li>
+  <li><a href="#entrenamiento-y-resultados" id="toc-entrenamiento-y-resultados" class="nav-link" data-scroll-target="#entrenamiento-y-resultados"><span class="header-section-number">7.5</span> Entrenamiento y resultados</a>
+  <ul class="collapse">
+  <li><a href="#árbol-de-decisión" id="toc-árbol-de-decisión" class="nav-link" data-scroll-target="#árbol-de-decisión"><span class="header-section-number">7.5.1</span> Árbol de Decisión</a></li>
+  <li><a href="#random-forest" id="toc-random-forest" class="nav-link" data-scroll-target="#random-forest"><span class="header-section-number">7.5.2</span> Random Forest</a></li>
+  <li><a href="#matrices-de-confusión" id="toc-matrices-de-confusión" class="nav-link" data-scroll-target="#matrices-de-confusión"><span class="header-section-number">7.5.3</span> Matrices de confusión</a></li>
+  <li><a href="#sec-arbol-visual" id="toc-sec-arbol-visual" class="nav-link" data-scroll-target="#sec-arbol-visual"><span class="header-section-number">7.5.4</span> Visualización del árbol de decisión</a></li>
+  </ul></li>
+  <li><a href="#análisis-de-variables-importantes" id="toc-análisis-de-variables-importantes" class="nav-link" data-scroll-target="#análisis-de-variables-importantes"><span class="header-section-number">7.6</span> Análisis de variables importantes</a></li>
+  <li><a href="#comparación-de-modelos" id="toc-comparación-de-modelos" class="nav-link" data-scroll-target="#comparación-de-modelos"><span class="header-section-number">7.7</span> Comparación de modelos</a></li>
+  <li><a href="#discusión-crítica-el-modelo-captura-patrones-reales-o-sesgos" id="toc-discusión-crítica-el-modelo-captura-patrones-reales-o-sesgos" class="nav-link" data-scroll-target="#discusión-crítica-el-modelo-captura-patrones-reales-o-sesgos"><span class="header-section-number">7.8</span> Discusión crítica: ¿el modelo captura patrones reales o sesgos?</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -346,7 +377,7 @@ Table&nbsp;1: Diccionario de datos del registro de víctimas
 <section id="python" class="level2" data-number="2.2">
 <h2 data-number="2.2" class="anchored" data-anchor-id="python"><span class="header-section-number">2.2</span> Python</h2>
 <p>A continuación se presenta la implementación completa en Python:</p>
-<div id="52044fb1" class="cell" data-execution_count="1">
+<div id="2aa5f8ef" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> itertools <span class="im">import</span> combinations</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -495,7 +526,7 @@ Table&nbsp;1: Diccionario de datos del registro de víctimas
 <span id="cb1-146"><a href="#cb1-146" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> pd.DataFrame(reglas).sort_values(by<span class="op">=</span><span class="st">'Lift'</span>, ascending<span class="op">=</span><span class="va">False</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>En adición al algoritmo se anexa una función para obtener la lista de transacciones de una base de datos a partir de un dataframe, esto para poder facilitar los siguientes análisis a nuestro conjunto de datos sobre los registros de personas desaparecidas en México:</p>
-<div id="d49665cc" class="cell" data-execution_count="2">
+<div id="e8d34ed4" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> df_a_transacciones(df):</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co">    Convierte un DataFrame de Pandas en una lista de transacciones (lista de listas)</span></span>
@@ -531,7 +562,7 @@ Table&nbsp;1: Diccionario de datos del registro de víctimas
 <p>En este contexto, cada <strong>transacción</strong> corresponde a un registro del conjunto de datos, es decir, a la información asociada a una persona desaparecida. Internamente, las transacciones se representan mediante una <strong>matriz binaria</strong>, donde cada fila corresponde a una transacción y cada columna a un <em>ítem</em> (atributo en forma categórica).</p>
 <p>En esta matriz, se asigna el valor <strong>1 (True)</strong> en la posición <em>(i, j)</em> si la transacción <em>i</em> contiene el ítem <em>j</em>, y <strong>0 (False)</strong> en caso contrario. Esta representación permite identificar de manera eficiente la presencia o ausencia de atributos en cada registro.</p>
 <p>En el siguiente listado se muestra el código necesario para construir dicha matriz binaria, cuya importancia radica en que constituye el punto de entrada para algoritmos de minería de datos como Apriori, los cuales permiten posteriormente generar reglas de asociación.</p>
-<div id="00ba5838" class="cell" data-execution_count="3">
+<div id="f0824ffe" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> mlxtend.preprocessing <span class="im">import</span> TransactionEncoder</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>frame <span class="op">=</span> pd.read_csv(<span class="st">"data_secretariado.csv"</span>)</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>transacciones <span class="op">=</span> df_a_transacciones(frame)</span>
@@ -682,7 +713,7 @@ Table&nbsp;1: Diccionario de datos del registro de víctimas
 </tbody>
 </table>
 <p>Como se puede observar, para cada elemento <em>(i, j)</em> se asignan valores <strong>0/1 (False/True)</strong> dependiendo de si el ítem <em>j</em> está presente en la transacción <em>i</em>. Esta representación puede interpretarse de la siguiente manera: por ejemplo, si se tiene <em>(index = 1, SEXO=HOMBRE = True)</em>, esto indica que la transacción correspondiente al registro 1 pertenece a una persona desaparecida de sexo masculino. De igual manera, podemos sacar más información con respecto a las transacciones, como:</p>
-<div id="20da9928" class="cell" data-execution_count="4">
+<div id="89a99b08" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>numero_transacciones <span class="op">=</span> <span class="bu">len</span>(transacciones_codificadas)</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>dimensiones <span class="op">=</span> transacciones_codificadas.shape</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>numero_items <span class="op">=</span> transacciones_codificadas.shape[<span class="dv">1</span>]</span>
@@ -712,11 +743,11 @@ Presencia de items : 4.3e-05 </code></pre>
 <section id="tratamiento-de-datos-faltantes-mcar-vs-mar" class="level3" data-number="3.2.2">
 <h3 data-number="3.2.2" class="anchored" data-anchor-id="tratamiento-de-datos-faltantes-mcar-vs-mar"><span class="header-section-number">3.2.2</span> Tratamiento de datos faltantes (MCAR vs MAR)</h3>
 <p>En el análisis de datos es fundamental identificar la naturaleza de los valores faltantes (representados como <em>NaN</em> en <em>pandas</em>) y definir estrategias adecuadas para su tratamiento. En el conjunto de datos analizado, de un total de <strong>133,887 registros</strong>, aproximadamente <strong>34,964</strong> presentan al menos un valor faltante en variables categóricas relevantes para el descubrimiento de patrones, particularmente aquellas relacionadas con <code>FECHA_NACIMIENTO</code>, <code>FECHA_DESAPARICION</code> y <code>FECHA_REGISTRO</code>.</p>
-<p>Considerando que estas variables son clave para la generación de atributos derivados (como la edad o componentes temporales), la imputación de valores —ya sea mediante moda en variables categóricas o técnicas como KNN— puede introducir sesgos significativos. En el contexto de reglas de asociación, este problema es especialmente crítico, ya que dichas técnicas se basan en la frecuencia de co-ocurrencia de los ítems.</p>
+<p>Considerando que estas variables son clave para la generación de atributos derivados (como la edad o componentes temporales), la imputación de valores, ya sea mediante moda en variables categóricas o técnicas como KNN, puede introducir sesgos significativos. En el contexto de reglas de asociación, este problema es especialmente crítico, ya que dichas técnicas se basan en la frecuencia de co-ocurrencia de los ítems.</p>
 <p>En particular, la imputación puede alterar artificialmente métricas como el <strong>soporte</strong>, la <strong>confianza</strong> y el <strong>lift</strong>, inflando la frecuencia de ciertos patrones y generando reglas que no reflejan relaciones reales en los datos. Dado que estas métricas se interpretan en términos de probabilidades condicionadas, condicionar sobre datos imputados puede distorsionar la interpretación de los resultados y comprometer la validez del análisis.</p>
 <p>Por otro lado, la proporción de datos completos (~74%) sigue siendo suficientemente representativa para la identificación de patrones relevantes. En este sentido, se opta por evitar la imputación y trabajar con un enfoque de <strong>análisis de casos completos</strong>, priorizando la integridad de los datos observados.</p>
 <p>A continuación, se describe el proceso de preprocesamiento de la información:</p>
-<div id="c2027ecc" class="cell" data-execution_count="5">
+<div id="89629372" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -749,7 +780,7 @@ Presencia de items : 4.3e-05 </code></pre>
 </div>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="heatmaps/MCAR_MAR.png" class="img-fluid figure-img"></p>
+<p><a href="heatmaps/MCAR_MAR.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Proporción de datos faltantes"><img src="heatmaps/MCAR_MAR.png" class="img-fluid figure-img" alt="Proporción de datos faltantes"></a></p>
 <figcaption>Proporción de datos faltantes</figcaption>
 </figure>
 </div>
@@ -759,7 +790,7 @@ Presencia de items : 4.3e-05 </code></pre>
 P(\text{FECHA\_NACIMIENTO} = \text{null} \mid \text{SEXO} = \text{INDETERMINADO}) \approx 0.83
 \]</span></p>
 <p>Este resultado sugiere un patrón consistente con un mecanismo de datos faltantes tipo MAR (Missing At Random), donde la probabilidad de ausencia depende de otra variable observada. En términos prácticos, implica que los registros correspondientes a personas con sexo indeterminado son significativamente más propensos a carecer de información sobre su fecha de nacimiento.</p>
-<p>Dado que en este trabajo se opta por no realizar imputación —con el objetivo de preservar la integridad de los datos observados para el análisis mediante reglas de asociación—, se decide trabajar con un enfoque de <strong>análisis de casos completos</strong>. Sin embargo, esta decisión introduce un sesgo importante, ya que afecta de manera desproporcionada a este grupo específico de registros.</p>
+<p>Dado que en este trabajo se opta por no realizar imputación, con el objetivo de preservar la integridad de los datos observados para el análisis mediante reglas de asociación, se decide trabajar con un enfoque de <strong>análisis de casos completos</strong>. Sin embargo, esta decisión introduce un sesgo importante, ya que afecta de manera desproporcionada a este grupo específico de registros.</p>
 <p>Por lo tanto, es importante reconocer esta situación como una de las principales limitaciones del conjunto de datos, ya que ciertos patrones asociados a este grupo podrían quedar subrepresentados en el análisis final.</p>
 </section>
 <section id="manejo-de-datos-confidenciales" class="level3" data-number="3.2.3">
@@ -767,7 +798,7 @@ P(\text{FECHA\_NACIMIENTO} = \text{null} \mid \text{SEXO} = \text{INDETERMINADO}
 <p>Otro aspecto relevante a considerar es la consistencia de la información disponible para la generación de reglas de asociación con métricas confiables. A partir del preprocesamiento, se cuenta con <strong>98,923 registros completos</strong> (sin valores nulos); sin embargo, aún persiste una limitación importante asociada a la presencia del valor <em>CONFIDENCIAL</em> en múltiples variables.</p>
 <p>Este fenómeno introduce un reto adicional en el análisis, ya que puede afectar la calidad e interpretabilidad de los patrones descubiertos. En particular, resulta relevante evaluar si es posible obtener reglas significativas cuando intervienen variables con valores confidenciales, así como identificar si existen patrones de co-ocurrencia sistemáticos entre dichas variables.</p>
 <p>El análisis exploratorio muestra que la confidencialidad no se distribuye de manera uniforme: mientras varias variables presentan este valor, otras como <code>ENTIDAD</code> y <code>ORIGEN_REPORTE</code> no contienen registros confidenciales. Esta característica las posiciona como variables clave para el análisis, al permitir la identificación de asociaciones más interpretables dentro del conjunto de datos.</p>
-<div id="9acb0b7c" class="cell" data-execution_count="6">
+<div id="de977971" class="cell" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>confidential_count <span class="op">=</span> <span class="dv">0</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> index, row <span class="kw">in</span> frame.iterrows():</span>
@@ -785,7 +816,7 @@ Proporción sobre el total actual: 49.68%</code></pre>
 <p>Se observa que aproximadamente el <strong>49.68%</strong> de los registros contienen al menos un valor <em>CONFIDENCIAL</em>. Este resultado indica que una proporción significativa del conjunto de datos presenta algún nivel de ocultamiento de información, lo cual puede influir en la generación y calidad de los patrones obtenidos.</p>
 <p>Adicionalmente, se identifica que los valores confidenciales no aparecen de manera aislada, sino que tienden a presentarse simultáneamente en múltiples variables. En particular, se observa que <strong>5 de las 7 variables analizadas</strong> presentan valores <em>CONFIDENCIAL</em> de forma conjunta en un subconjunto considerable de registros.</p>
 <p>Este comportamiento sugiere una <strong>dependencia probabilística</strong> entre dichas variables, en el sentido de que la ocurrencia de confidencialidad en una variable incrementa la probabilidad de observar el mismo valor en las demás. En términos de distribución conjunta, esto indica que estos eventos no son independientes y presentan una alta co-ocurrencia dentro de las transacciones.</p>
-<div id="e6d2b83a" class="cell" data-execution_count="7">
+<div id="3d3c2fca" class="cell" data-execution_count="7">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>confidential_count <span class="op">=</span> <span class="dv">0</span></span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> index, row <span class="kw">in</span> frame.iterrows():</span>
@@ -819,11 +850,11 @@ Registros con al menos un dato 'CONFIDENCIAL': 49149</code></pre>
 </section>
 <section id="discretizacion-de-variables-continuas" class="level3" data-number="3.2.4">
 <h3 data-number="3.2.4" class="anchored" data-anchor-id="discretizacion-de-variables-continuas"><span class="header-section-number">3.2.4</span> Discretizacion de variables continuas</h3>
-<p>Como se observa, el umbral de aparición de ítems distintos en la matriz binaria es muy bajo. Esto se debe, en gran medida, al manejo de variables de tipo fecha, ya que pequeñas variaciones —como diferencias en la hora— generan nuevos ítems, incrementando la dimensionalidad del espacio y reduciendo la frecuencia relativa de co-ocurrencia entre ellos.</p>
+<p>Como se observa, el umbral de aparición de ítems distintos en la matriz binaria es muy bajo. Esto se debe, en gran medida, al manejo de variables de tipo fecha, ya que pequeñas variaciones como diferencias en la hora generan nuevos ítems, incrementando la dimensionalidad del espacio y reduciendo la frecuencia relativa de co-ocurrencia entre ellos.</p>
 <p>Asimismo, se identifica que las variables <code>FECHA_NACIMIENTO</code> y <code>FECHA_DESAPARICION</code> funcionan como variables auxiliares para la construcción de un atributo más representativo: la <strong>edad</strong>. Esta se obtiene a partir de la diferencia entre los años de ambas fechas, permitiendo capturar patrones más interpretables asociados a grupos etarios. En consecuencia, se crea la variable <code>EDAD</code> y se elimina <code>FECHA_NACIMIENTO</code>.</p>
 <p>Por su parte, la variable <code>FECHA_DESAPARICION</code>, así como <code>FECHA_REGISTRO</code>, se descomponen en componentes de <strong>año</strong> y <strong>mes</strong>, eliminando la granularidad asociada al día y la hora. Esta transformación reduce la cardinalidad de los datos y favorece la generación de patrones más generales. No obstante, estas nuevas variables requieren un proceso posterior de discretización para su adecuado uso en reglas de asociación.</p>
 <p>La estrategia de transformación y construcción de variables se detalla a continuación:</p>
-<div id="c312fd4e" class="cell" data-execution_count="8">
+<div id="d30bb917" class="cell" data-execution_count="8">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Convertimos temporalmente a datetime para extraer el año, ignorando errores para valores como 'CONFIDENCIAL'</span></span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>anio_desaparicion <span class="op">=</span> pd.to_datetime(frame[<span class="st">'FECHA_DESAPARICION'</span>], errors<span class="op">=</span><span class="st">'coerce'</span>).dt.year</span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>anio_nacimiento <span class="op">=</span> pd.to_datetime(frame[<span class="st">'FECHA_NACIMIENTO'</span>], errors<span class="op">=</span><span class="st">'coerce'</span>).dt.year</span>
@@ -832,7 +863,7 @@ Registros con al menos un dato 'CONFIDENCIAL': 49149</code></pre>
 <span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>frame[<span class="st">'EDAD'</span>] <span class="op">=</span> anio_desaparicion <span class="op">-</span> anio_nacimiento</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Posteriormente fragmentamos las fechas de las variables</p>
-<div id="a284d4b2" class="cell" data-execution_count="9">
+<div id="58a1b470" class="cell" data-execution_count="9">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Convertimos a datetime temporalmente para extraer componentes</span></span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>fecha_des_dt <span class="op">=</span> pd.to_datetime(frame[<span class="st">'FECHA_DESAPARICION'</span>], errors<span class="op">=</span><span class="st">'coerce'</span>)</span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>fecha_reg_dt <span class="op">=</span> pd.to_datetime(frame[<span class="st">'FECHA_REGISTRO'</span>], errors<span class="op">=</span><span class="st">'coerce'</span>)</span>
@@ -844,7 +875,7 @@ Registros con al menos un dato 'CONFIDENCIAL': 49149</code></pre>
 <span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>frame[<span class="st">'ANIO_REGISTRO'</span>] <span class="op">=</span> fecha_reg_dt.dt.year</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Cuando ordenamos los valores se observa la presencia de edades negativas donde indican registros donde el año de nacimiento es mayor al año de desaparición.</p>
-<div id="86cffdac" class="cell" data-execution_count="10">
+<div id="a889fcbe" class="cell" data-execution_count="10">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Filtrar registros con edades negativas</span></span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>inconsistentes <span class="op">=</span> frame[frame[<span class="st">'EDAD'</span>] <span class="op">&lt;</span> <span class="dv">0</span>]</span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Total de registros con edad negativa: </span><span class="sc">{</span><span class="bu">len</span>(inconsistentes)<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -852,7 +883,7 @@ Registros con al menos un dato 'CONFIDENCIAL': 49149</code></pre>
 <pre class="output"><code>Total de registros con edad negativa: 39</code></pre>
 <p>Se identifican <strong>39 registros</strong> con edades negativas. Dado que su proporción es mínima respecto al total, se opta por eliminarlos. Aunque estos casos podrían estar asociados a un mecanismo de datos faltantes tipo MCAR, su impacto es reducido y su eliminación permite mantener la consistencia del conjunto de datos sin introducir sesgos derivados de imputación.</p>
 <p>Adicionalmente, se observa que aproximadamente el <strong>70%</strong> de estos registros corresponden a personas de sexo masculino, lo que indica que este grupo es el más afectado por errores de captura en este subconjunto específico. Si bien esta eliminación introduce una ligera pérdida de representación para dicho grupo, su impacto global en el análisis es limitado debido a la baja proporción de estos casos.</p>
-<div id="5dbbde53" class="cell" data-execution_count="11">
+<div id="723e7d4e" class="cell" data-execution_count="11">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>frame <span class="op">=</span> frame[<span class="op">~</span>(frame[<span class="st">'EDAD'</span>] <span class="op">&lt;</span> <span class="dv">0</span>)]</span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="co">#Copiamos una referencia para graficar la distribucion continua de las edades</span></span>
@@ -864,7 +895,7 @@ Registros con al menos un dato 'CONFIDENCIAL': 49149</code></pre>
 <p>Como se observa en el script, además de eliminar los registros inconsistentes, se genera una copia del <em>DataFrame</em> original (<code>frame_continuas</code>) con el objetivo de conservar la distribución continua de la variable <code>EDAD</code> para su posterior análisis.</p>
 <p>Adicionalmente, se eliminan las variables originales de fecha (<code>FECHA_DESAPARICION</code>, <code>FECHA_REGISTRO</code>, <code>FECHA_NACIMIENTO</code>), dado que ya han sido transformadas en variables más adecuadas. Este paso contribuye a reducir la dimensionalidad del conjunto de datos y evita redundancia en la representación de la información. Una vez tratados los valores inconsistentes, se procede a discretizar la variable <code>EDAD</code> en intervalos definidos. La discretización se realiza mediante la construcción de categorías ordinales: <strong>INFANTE, ADOLESCENTE, JOVEN, ADULTO y ADULTO_MAYOR</strong>, utilizando un conjunto de <em>bins</em> no necesariamente equidistantes.</p>
 <p>Adicionalmente, los valores no definidos (derivados de datos faltantes o inconsistentes previos) se agrupan bajo la categoría <em>CONFIDENCIAL</em>, manteniendo coherencia con el tratamiento general de valores confidenciales en el conjunto de datos.</p>
-<div id="bdffc81a" class="cell" data-execution_count="12">
+<div id="2cac86b9" class="cell" data-execution_count="12">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Definir los bins y etiquetas para la discretización</span></span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>bins <span class="op">=</span> [<span class="dv">0</span>, <span class="dv">11</span>, <span class="dv">20</span>, <span class="dv">39</span>, <span class="dv">59</span>, <span class="bu">float</span>(<span class="st">'inf'</span>)]</span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>labels <span class="op">=</span> [<span class="st">'INFANTE'</span>, <span class="st">'ADOLESCENTE'</span>, <span class="st">'JOVEN'</span>, <span class="st">'ADULTO'</span>, <span class="st">'ADULTO_MAYOR'</span>]</span>
@@ -890,7 +921,7 @@ INFANTE          2030</code></pre>
 <p>De manera complementaria, la visualización permite contrastar la distribución continua de las edades con su versión discretizada. Se observa una mayor concentración en los grupos de adolescentes y adultos jóvenes, mientras que los extremos (infantes y adultos mayores) presentan menor frecuencia.</p>
 <p>Asimismo, se identifican valores atípicos, como edades superiores a 100 años o cercanas a 0, que pueden considerarse outliers. En lugar de eliminarlos, se opta por agruparlos dentro de las categorías existentes, particularmente en <em>ADULTO_MAYOR</em> e <em>INFANTE</em>, respectivamente. Esta decisión introduce un sesgo mínimo, dado que la proporción de estos casos es baja, y permite mantener la integridad del conjunto de datos.</p>
 <p>En conjunto, la discretización de la variable <code>EDAD</code> permite reducir la complejidad del espacio de ítems, mejorar la interpretabilidad de los patrones y facilitar la generación de reglas de asociación más relevantes. Todo esto, es posible observarlo como se muestra a continuación.</p>
-<div id="ac4fadd6" class="cell" data-execution_count="13">
+<div id="7670dee8" class="cell" data-execution_count="13">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
 <span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -918,7 +949,7 @@ INFANTE          2030</code></pre>
 </div>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="heatmaps/DistribucionEDAD.png" class="img-fluid figure-img"></p>
+<p><a href="heatmaps/DistribucionEDAD.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title="Distribucion continua de las fechas"><img src="heatmaps/DistribucionEDAD.png" class="img-fluid figure-img" alt="Distribucion continua de las fechas"></a></p>
 <figcaption>Distribucion continua de las fechas</figcaption>
 </figure>
 </div>
@@ -927,7 +958,7 @@ INFANTE          2030</code></pre>
 <p>No obstante, se identifican ligeras diferencias en las medidas de tendencia central: mientras que la mediana se mantiene alrededor del año 2020, la media presenta variaciones entre ambas distribuciones. Este comportamiento sugiere la posible existencia de registros donde la fecha de desaparición y la fecha de registro no coinciden temporalmente, lo que puede reflejar retrasos en el proceso de registro.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="heatmaps/fechaContinua.png" class="img-fluid figure-img"></p>
+<p><a href="heatmaps/fechaContinua.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3" title="Proporción continua y discreta de las edades"><img src="heatmaps/fechaContinua.png" class="img-fluid figure-img" alt="Proporción continua y discreta de las edades"></a></p>
 <figcaption>Proporción continua y discreta de las edades</figcaption>
 </figure>
 </div>
@@ -935,7 +966,7 @@ INFANTE          2030</code></pre>
 <p>Los intervalos definidos son:<br>
 <code>['1962-1999', '2000-2006', '2007-2009', '2010-2015', '2016-2020', '2021-2023', '2024-2025', 'CONFIDENCIAL']</code></p>
 <p>Esta discretización permite agrupar los datos en segmentos temporales más representativos, reduciendo la cardinalidad y facilitando la generación de reglas de asociación más interpretables.</p>
-<div id="aa347eeb" class="cell" data-execution_count="14">
+<div id="442244f5" class="cell" data-execution_count="14">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Definir los bins y etiquetas para los intervalos de años solicitados</span></span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>bins_anios <span class="op">=</span> [<span class="dv">1962</span>, <span class="dv">1999</span>, <span class="dv">2006</span>, <span class="dv">2009</span>, <span class="dv">2015</span>, <span class="dv">2020</span>, <span class="dv">2023</span>, <span class="dv">2025</span>]</span>
 <span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>labels_anios <span class="op">=</span> [<span class="st">'1962-1999'</span>, <span class="st">'2000-2006'</span>, <span class="st">'2007-2009'</span>, <span class="st">'2010-2015'</span>, <span class="st">'2016-2020'</span>, <span class="st">'2021-2023'</span>, <span class="st">'2024-2025'</span>]</span>
@@ -993,7 +1024,7 @@ CONFIDENCIAL    49151
 Name: count, dtype: int64</code></pre>
 <p>Al visualizar las distribuciones discretizadas, se observa que las diferencias en medidas como la media se vuelven menos perceptibles debido al proceso de agrupación. Sin embargo, ambas variables conservan una estructura similar en términos de frecuencia por intervalo.</p>
 <p>Esto indica que la discretización logra preservar las tendencias generales de los datos, al mismo tiempo que reduce la complejidad del espacio de ítems. Como resultado, se facilita la identificación de patrones temporales relevantes sin incurrir en una alta dimensionalidad.</p>
-<div id="02f53fae" class="cell" data-execution_count="15">
+<div id="4cb7b88f" class="cell" data-execution_count="15">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Configuración de estilo</span></span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>sns.set_theme(style<span class="op">=</span><span class="st">"whitegrid"</span>)</span>
 <span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>fig, axes <span class="op">=</span> plt.subplots(<span class="dv">1</span>, <span class="dv">2</span>, figsize<span class="op">=</span>(<span class="dv">22</span>, <span class="dv">10</span>))</span>
@@ -1020,7 +1051,7 @@ Name: count, dtype: int64</code></pre>
 </div>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="heatmaps/DiscretizadoFECHA.png" class="img-fluid figure-img"></p>
+<p><a href="heatmaps/DiscretizadoFECHA.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4" title="Proporción discreta de las fechas"><img src="heatmaps/DiscretizadoFECHA.png" class="img-fluid figure-img" alt="Proporción discreta de las fechas"></a></p>
 <figcaption>Proporción discreta de las fechas</figcaption>
 </figure>
 </div>
@@ -1028,7 +1059,7 @@ Name: count, dtype: int64</code></pre>
 </section>
 <section id="construcción-y-evaluación-del-modelo-de-reglas" class="level2" data-number="3.3">
 <h2 data-number="3.3" class="anchored" data-anchor-id="construcción-y-evaluación-del-modelo-de-reglas"><span class="header-section-number">3.3</span> Construcción y evaluación del modelo de reglas</h2>
-<div id="6d85527b" class="cell" data-execution_count="16">
+<div id="6bec9d30" class="cell" data-execution_count="16">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>numero_transacciones <span class="op">=</span> <span class="bu">len</span>(transacciones_codificadas)</span>
 <span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>dimensiones <span class="op">=</span> transacciones_codificadas.shape</span>
 <span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>numero_items <span class="op">=</span> transacciones_codificadas.shape[<span class="dv">1</span>]</span>
@@ -1048,7 +1079,7 @@ Presencia de items : 0.006064</code></pre>
 <p>No obstante, este comportamiento era esperado debido a la naturaleza del conjunto de datos y a las transformaciones realizadas durante el preprocesamiento, las cuales priorizan la interpretabilidad de los patrones sobre la densidad del espacio de ítems.</p>
 <p>Con el objetivo de analizar la estructura de la matriz binaria, se realiza una visualización de un subconjunto de transacciones. En particular, se consideran las <strong>primeras 15 transacciones</strong> y los <strong>50 ítems más frecuentes</strong> dentro de este subconjunto. Para ello, se ordenan los ítems en función de su frecuencia, permitiendo identificar aquellos con mayor presencia relativa.</p>
 <p>En la representación gráfica, cada punto indica la presencia de un ítem en una transacción específica, es decir, una posición <em>(i, j)</em> donde el valor es verdadero en la matriz binaria. Este tipo de visualización permite observar de manera directa la dispersión y los patrones de co-ocurrencia entre ítems.</p>
-<div id="1085e31f" class="cell" data-execution_count="17">
+<div id="de5ea9ea" class="cell" data-execution_count="17">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> graficar_transacciones_con_nombres(datos: pd.DataFrame, inicio: <span class="bu">int</span> <span class="op">=</span> <span class="dv">0</span>, fin: <span class="bu">int</span> <span class="op">=</span> <span class="dv">50</span>, top_n_items: <span class="bu">int</span> <span class="op">=</span> <span class="dv">30</span>, titulo: <span class="bu">str</span> <span class="op">=</span> <span class="st">""</span>):</span>
 <span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Seleccionamos el rango de transacciones (segmentación)</span></span>
 <span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>    muestra <span class="op">=</span> datos.iloc[inicio:fin]</span>
@@ -1105,7 +1136,7 @@ Presencia de items : 0.006064</code></pre>
 <section id="generación-de-reglas" class="level2" data-number="3.4">
 <h2 data-number="3.4" class="anchored" data-anchor-id="generación-de-reglas"><span class="header-section-number">3.4</span> Generación de reglas</h2>
 <p>Para la generación de reglas sobre el dataset completo se utilizó FP-Growth con las 5 variables más relevantes del fenómeno: <code>SEXO</code>, <code>EDAD</code>, <code>ENTIDAD</code>, <code>ESTATUS_VICTIMA</code> y <code>MES_DESAPARICION</code>. La decisión de reducir a estas 5 columnas responde a dos criterios: primero, son las variables con mayor relevancia semántica para el análisis de desapariciones; segundo, reducir la dimensionalidad de 1,649 a 59 ítems mejora significativamente el rendimiento del algoritmo sin perder los patrones principales.</p>
-<div id="b1417c5c" class="cell" data-execution_count="18">
+<div id="0b958981" class="cell" data-execution_count="18">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>columnas_reglas <span class="op">=</span> [<span class="st">'SEXO'</span>, <span class="st">'EDAD'</span>, <span class="st">'ENTIDAD'</span>, <span class="st">'ESTATUS_VICTIMA'</span>, <span class="st">'MES_DESAPARICION'</span>]</span>
 <span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>frame_reglas <span class="op">=</span> frame[columnas_reglas]</span>
 <span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>transacciones_full <span class="op">=</span> df_a_transacciones(frame_reglas)</span>
@@ -1138,7 +1169,7 @@ Reglas encontradas: 1322</code></pre>
 <p><strong>Lift</strong> mide si la asociación es genuina o casual, comparando la frecuencia observada con la esperada bajo independencia:</p>
 <p><span class="math display">\[\text{lift}(X \Rightarrow Y) = \frac{\text{confianza}(X \Rightarrow Y)}{\text{soporte}(Y)}\]</span></p>
 <p>Un lift mayor a 1 indica dependencia positiva; igual a 1 indica independencia; menor a 1 indica asociación negativa. En el análisis final se priorizaron las reglas con lift mayor a 2.0 por representar asociaciones sustancialmente más fuertes que el azar.</p>
-<div id="5f8c8bfb" class="cell" data-execution_count="19">
+<div id="e02a4bad" class="cell" data-execution_count="19">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Distribución de las métricas en el conjunto de reglas generadas</span></span>
 <span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Estadísticos descriptivos de las métricas:"</span>)</span>
 <span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(reglas_final[[<span class="st">'support'</span>, <span class="st">'confidence'</span>, <span class="st">'lift'</span>]].describe().<span class="bu">round</span>(<span class="dv">4</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -1367,7 +1398,7 @@ Table&nbsp;2: Las 10 reglas de asociacion con mayor Lift obtenidas del dataset c
 <section id="implementación-en-python" class="level2" data-number="4.3">
 <h2 data-number="4.3" class="anchored" data-anchor-id="implementación-en-python"><span class="header-section-number">4.3</span> Implementación en Python</h2>
 <p>Para este trabajo se utilizo la implementación de FP-Growth disponible en la libreria <code>mlxtend</code>. Esta libreria requiere que los datos esten en formato one-hot, donde cada columna representa un item posible y cada fila indica si esa transacción contiene dicho item.</p>
-<div id="ff9358c1" class="cell" data-execution_count="20">
+<div id="6efa01d8" class="cell" data-execution_count="20">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> mlxtend.preprocessing <span class="im">import</span> TransactionEncoder</span>
 <span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> mlxtend.frequent_patterns <span class="im">import</span> fpgrowth, association_rules</span>
 <span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
@@ -1421,71 +1452,125 @@ Generando reglas con confianza minima 0.5...
 Reglas generadas: 1322</code></pre>
 </section>
 </section>
-<section id="comparación-de-algoritmos" class="level1" data-number="5">
-<h1 data-number="5"><span class="header-section-number">5</span> Comparación de algoritmos</h1>
-<section id="algoritmos-utilizados" class="level2" data-number="5.1">
-<h2 data-number="5.1" class="anchored" data-anchor-id="algoritmos-utilizados"><span class="header-section-number">5.1</span> Algoritmos utilizados</h2>
-<p>Para el descubrimiento de reglas de asociación se utilizaron dos algoritmos:</p>
+<section id="algoritmo-apriori-mlxtend" class="level1" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> Algoritmo Apriori (mlxtend)</h1>
+<section id="descripción-2" class="level2" data-number="5.1">
+<h2 data-number="5.1" class="anchored" data-anchor-id="descripción-2"><span class="header-section-number">5.1</span> Descripción</h2>
+<p>Además de la implementación manual de Apriori, se utilizó la implementación disponible en la librería <code>mlxtend</code>. Esta versión implementa el mismo algoritmo de generación de candidatos nivel por nivel descrito en la sección anterior, pero optimizado internamente mediante operaciones vectorizadas sobre DataFrames de pandas y con la infraestructura de la librería para el manejo de la matriz one-hot.</p>
+<p>La función <code>apriori()</code> de mlxtend recibe directamente la matriz binaria (one-hot) y el soporte mínimo, devolviendo los itemsets frecuentes. Posteriormente, la función <code>association_rules()</code> genera las reglas a partir de dichos itemsets, de manera idéntica a como se hace con FP-Growth en la misma librería.</p>
+</section>
+<section id="implementación-en-python-1" class="level2" data-number="5.2">
+<h2 data-number="5.2" class="anchored" data-anchor-id="implementación-en-python-1"><span class="header-section-number">5.2</span> Implementación en Python</h2>
+<div id="841a4395" class="cell" data-execution_count="21">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> mlxtend.frequent_patterns <span class="im">import</span> apriori <span class="im">as</span> apriori_mlxtend</span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> mlxtend.frequent_patterns <span class="im">import</span> association_rules</span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Utilizando el mismo df_codificado (one-hot) generado previamente</span></span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>SOPORTE_MIN <span class="op">=</span> <span class="fl">0.01</span></span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a>CONFIANZA_MIN <span class="op">=</span> <span class="fl">0.5</span></span>
+<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Ejecutando Apriori (mlxtend) con soporte mínimo </span><span class="sc">{</span>SOPORTE_MIN<span class="sc">}</span><span class="ss">..."</span>)</span>
+<span id="cb31-9"><a href="#cb31-9" aria-hidden="true" tabindex="-1"></a>itemsets_apriori_ml <span class="op">=</span> apriori_mlxtend(df_codificado, min_support<span class="op">=</span>SOPORTE_MIN, use_colnames<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb31-10"><a href="#cb31-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-11"><a href="#cb31-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Generando reglas con confianza mínima </span><span class="sc">{</span>CONFIANZA_MIN<span class="sc">}</span><span class="ss">..."</span>)</span>
+<span id="cb31-12"><a href="#cb31-12" aria-hidden="true" tabindex="-1"></a>reglas_apriori_ml <span class="op">=</span> association_rules(itemsets_apriori_ml, metric<span class="op">=</span><span class="st">"confidence"</span>, min_threshold<span class="op">=</span>CONFIANZA_MIN)</span>
+<span id="cb31-13"><a href="#cb31-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-14"><a href="#cb31-14" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Reglas generadas: </span><span class="sc">{</span><span class="bu">len</span>(reglas_apriori_ml)<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<pre class="output"><code>Ejecutando Apriori (mlxtend) con soporte mínimo 0.01...
+Generando reglas con confianza mínima 0.5...
+Reglas generadas: 1322</code></pre>
+<p>Como se observa, Apriori de mlxtend genera exactamente las mismas <strong>1,322 reglas</strong> que FP-Growth, confirmando la equivalencia matemática de ambos algoritmos bajo los mismos umbrales.</p>
+</section>
+</section>
+<section id="comparación-de-algoritmos" class="level1" data-number="6">
+<h1 data-number="6"><span class="header-section-number">6</span> Comparación de algoritmos</h1>
+<section id="algoritmos-utilizados" class="level2" data-number="6.1">
+<h2 data-number="6.1" class="anchored" data-anchor-id="algoritmos-utilizados"><span class="header-section-number">6.1</span> Algoritmos utilizados</h2>
+<p>Para el descubrimiento de reglas de asociación se utilizaron tres algoritmos:</p>
 <ol type="1">
 <li><p><strong>Apriori (implementación manual):</strong> El algoritmo descrito e implementado en la sección <a href="#algoritmo-apriori">Algoritmo Apriori</a>. Esta versión fue desarrollada desde cero en Python siguiendo el método original de Agrawal y Srikant (1994), utilizando generación explícita de candidatos y múltiples barridos sobre la base de datos.</p></li>
-<li><p><strong>FP-Growth:</strong> El algoritmo descrito e implementado en la sección <a href="#algoritmo-fp-growth">Algoritmo FP-Growth</a>. A diferencia de Apriori, FP-Growth evita la generación explícita de candidatos. Comprime la base de transacciones en una estructura de árbol llamada FP-tree y extrae los patrones frecuentes mediante bases condicionales y árboles condicionales, requiriendo solo dos barridos completos sobre los datos (Han, Pei y Yin, 2000).</p></li>
+<li><p><strong>Apriori (mlxtend):</strong> La implementación del algoritmo Apriori disponible en la librería <code>mlxtend</code>. Utiliza la misma estrategia de generación de candidatos que la implementación manual, pero con el overhead de la infraestructura de la librería (conversión a DataFrames, validaciones internas, operaciones vectorizadas).</p></li>
+<li><p><strong>FP-Growth (mlxtend):</strong> El algoritmo descrito e implementado en la sección <a href="#algoritmo-fp-growth">Algoritmo FP-Growth</a>. A diferencia de Apriori, FP-Growth evita la generación explícita de candidatos. Comprime la base de transacciones en una estructura de árbol llamada FP-tree y extrae los patrones frecuentes mediante bases condicionales y árboles condicionales, requiriendo solo dos barridos completos sobre los datos (Han, Pei y Yin, 2000).</p></li>
 </ol>
 </section>
-<section id="comparación-de-rendimiento" class="level2" data-number="5.2">
-<h2 data-number="5.2" class="anchored" data-anchor-id="comparación-de-rendimiento"><span class="header-section-number">5.2</span> Comparación de rendimiento</h2>
+<section id="comparación-de-rendimiento" class="level2" data-number="6.2">
+<h2 data-number="6.2" class="anchored" data-anchor-id="comparación-de-rendimiento"><span class="header-section-number">6.2</span> Comparación de rendimiento</h2>
 <p>Previo a la selección de variables, se intentó ejecutar ambos algoritmos sobre el dataset completo procesado con <strong>10 columnas y 1,649 ítems</strong>. En este escenario, FP-Growth con soporte mínimo de 0.01 tardó aproximadamente <strong>106.45 segundos</strong> en el dataset completo, mientras que la implementación manual de Apriori resultó completamente inviable: con 1,649 ítems frecuentes el número de candidatos a evaluar en cada nivel creció de manera exponencial, estimándose un tiempo de ejecución de varias horas.</p>
 <p>Esta limitación motivó la reducción del espacio de ítems a las <strong>5 variables más relevantes</strong> del fenómeno (<code>SEXO</code>, <code>EDAD</code>, <code>ENTIDAD</code>, <code>ESTATUS_VICTIMA</code>, <code>MES_DESAPARICION</code>), lo que redujo los ítems distintos de 1,649 a 59. Esta decisión tiene dos efectos directos sobre la comparativa de algoritmos:</p>
 <ol type="1">
 <li>Hace viable la comparación directa entre Apriori manual y FP-Growth sobre muestras representativas.</li>
 <li>Elimina el escenario de alta dimensionalidad donde FP-Growth muestra su mayor ventaja, lo que explica por qué en este dataset reducido Apriori manual resultó más rápido en todos los experimentos.</li>
 </ol>
-<div id="6ba948f9" class="cell" data-execution_count="21">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> time</span>
-<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>MUESTRA <span class="op">=</span> <span class="dv">10000</span></span>
-<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>transacciones_muestra <span class="op">=</span> transacciones[:MUESTRA]</span>
-<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a>codificador <span class="op">=</span> TransactionEncoder()</span>
-<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a>codif_muestra <span class="op">=</span> codificador.fit_transform(transacciones_muestra)</span>
-<span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a>df_codif_muestra <span class="op">=</span> pd.DataFrame(codif_muestra, columns<span class="op">=</span>codificador.columns_)</span>
-<span id="cb31-9"><a href="#cb31-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-10"><a href="#cb31-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Experimento 1: soporte alto</span></span>
-<span id="cb31-11"><a href="#cb31-11" aria-hidden="true" tabindex="-1"></a>t0 <span class="op">=</span> time.time()</span>
-<span id="cb31-12"><a href="#cb31-12" aria-hidden="true" tabindex="-1"></a>itemsets_propios <span class="op">=</span> algoritmo_apriori(transacciones_muestra, soporte_min<span class="op">=</span><span class="fl">0.05</span>)</span>
-<span id="cb31-13"><a href="#cb31-13" aria-hidden="true" tabindex="-1"></a>reglas_propias <span class="op">=</span> generar_reglas(itemsets_propios, confianza_min<span class="op">=</span><span class="fl">0.5</span>)</span>
-<span id="cb31-14"><a href="#cb31-14" aria-hidden="true" tabindex="-1"></a>t1 <span class="op">=</span> time.time()</span>
-<span id="cb31-15"><a href="#cb31-15" aria-hidden="true" tabindex="-1"></a>tiempo_propio_alto <span class="op">=</span> <span class="bu">round</span>(t1 <span class="op">-</span> t0, <span class="dv">2</span>)</span>
-<span id="cb31-16"><a href="#cb31-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-17"><a href="#cb31-17" aria-hidden="true" tabindex="-1"></a>t0 <span class="op">=</span> time.time()</span>
-<span id="cb31-18"><a href="#cb31-18" aria-hidden="true" tabindex="-1"></a>itemsets_fp <span class="op">=</span> fpgrowth(df_codif_muestra, min_support<span class="op">=</span><span class="fl">0.05</span>, use_colnames<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb31-19"><a href="#cb31-19" aria-hidden="true" tabindex="-1"></a>reglas_fp <span class="op">=</span> association_rules(itemsets_fp, metric<span class="op">=</span><span class="st">"confidence"</span>, min_threshold<span class="op">=</span><span class="fl">0.5</span>)</span>
-<span id="cb31-20"><a href="#cb31-20" aria-hidden="true" tabindex="-1"></a>t1 <span class="op">=</span> time.time()</span>
-<span id="cb31-21"><a href="#cb31-21" aria-hidden="true" tabindex="-1"></a>tiempo_fp_alto <span class="op">=</span> <span class="bu">round</span>(t1 <span class="op">-</span> t0, <span class="dv">2</span>)</span>
-<span id="cb31-22"><a href="#cb31-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-23"><a href="#cb31-23" aria-hidden="true" tabindex="-1"></a><span class="co"># Experimento 2: soporte bajo</span></span>
-<span id="cb31-24"><a href="#cb31-24" aria-hidden="true" tabindex="-1"></a>t0 <span class="op">=</span> time.time()</span>
-<span id="cb31-25"><a href="#cb31-25" aria-hidden="true" tabindex="-1"></a>itemsets_propios <span class="op">=</span> algoritmo_apriori(transacciones_muestra, soporte_min<span class="op">=</span><span class="fl">0.01</span>)</span>
-<span id="cb31-26"><a href="#cb31-26" aria-hidden="true" tabindex="-1"></a>reglas_propias <span class="op">=</span> generar_reglas(itemsets_propios, confianza_min<span class="op">=</span><span class="fl">0.5</span>)</span>
-<span id="cb31-27"><a href="#cb31-27" aria-hidden="true" tabindex="-1"></a>t1 <span class="op">=</span> time.time()</span>
-<span id="cb31-28"><a href="#cb31-28" aria-hidden="true" tabindex="-1"></a>tiempo_propio_bajo <span class="op">=</span> <span class="bu">round</span>(t1 <span class="op">-</span> t0, <span class="dv">2</span>)</span>
-<span id="cb31-29"><a href="#cb31-29" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-30"><a href="#cb31-30" aria-hidden="true" tabindex="-1"></a>t0 <span class="op">=</span> time.time()</span>
-<span id="cb31-31"><a href="#cb31-31" aria-hidden="true" tabindex="-1"></a>itemsets_fp <span class="op">=</span> fpgrowth(df_codif_muestra, min_support<span class="op">=</span><span class="fl">0.01</span>, use_colnames<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb31-32"><a href="#cb31-32" aria-hidden="true" tabindex="-1"></a>reglas_fp <span class="op">=</span> association_rules(itemsets_fp, metric<span class="op">=</span><span class="st">"confidence"</span>, min_threshold<span class="op">=</span><span class="fl">0.5</span>)</span>
-<span id="cb31-33"><a href="#cb31-33" aria-hidden="true" tabindex="-1"></a>t1 <span class="op">=</span> time.time()</span>
-<span id="cb31-34"><a href="#cb31-34" aria-hidden="true" tabindex="-1"></a>tiempo_fp_bajo <span class="op">=</span> <span class="bu">round</span>(t1 <span class="op">-</span> t0, <span class="dv">2</span>)</span>
-<span id="cb31-35"><a href="#cb31-35" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-36"><a href="#cb31-36" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"[Soporte 5%]  Apriori: </span><span class="sc">{</span><span class="bu">len</span>(reglas_propias)<span class="sc">}</span><span class="ss"> reglas en </span><span class="sc">{</span>tiempo_propio_alto<span class="sc">}</span><span class="ss">s"</span>)</span>
-<span id="cb31-37"><a href="#cb31-37" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"[Soporte 5%]  FP-Growth: </span><span class="sc">{</span><span class="bu">len</span>(reglas_fp)<span class="sc">}</span><span class="ss"> reglas en </span><span class="sc">{</span>tiempo_fp_alto<span class="sc">}</span><span class="ss">s"</span>)</span>
-<span id="cb31-38"><a href="#cb31-38" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"[Soporte 1%]  Apriori: </span><span class="sc">{</span><span class="bu">len</span>(reglas_propias)<span class="sc">}</span><span class="ss"> reglas en </span><span class="sc">{</span>tiempo_propio_bajo<span class="sc">}</span><span class="ss">s"</span>)</span>
-<span id="cb31-39"><a href="#cb31-39" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"[Soporte 1%]  FP-Growth: </span><span class="sc">{</span><span class="bu">len</span>(reglas_fp)<span class="sc">}</span><span class="ss"> reglas en </span><span class="sc">{</span>tiempo_fp_bajo<span class="sc">}</span><span class="ss">s"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="d451c423" class="cell" data-execution_count="22">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> time</span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> mlxtend.frequent_patterns <span class="im">import</span> apriori <span class="im">as</span> apriori_mlxtend</span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>MUESTRA <span class="op">=</span> <span class="dv">10000</span></span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a>transacciones_muestra <span class="op">=</span> transacciones[:MUESTRA]</span>
+<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a>codificador <span class="op">=</span> TransactionEncoder()</span>
+<span id="cb33-8"><a href="#cb33-8" aria-hidden="true" tabindex="-1"></a>codif_muestra <span class="op">=</span> codificador.fit_transform(transacciones_muestra)</span>
+<span id="cb33-9"><a href="#cb33-9" aria-hidden="true" tabindex="-1"></a>df_codif_muestra <span class="op">=</span> pd.DataFrame(codif_muestra, columns<span class="op">=</span>codificador.columns_)</span>
+<span id="cb33-10"><a href="#cb33-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-11"><a href="#cb33-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Experimento 1: soporte alto (5%)</span></span>
+<span id="cb33-12"><a href="#cb33-12" aria-hidden="true" tabindex="-1"></a>t0 <span class="op">=</span> time.time()</span>
+<span id="cb33-13"><a href="#cb33-13" aria-hidden="true" tabindex="-1"></a>itemsets_propios <span class="op">=</span> algoritmo_apriori(transacciones_muestra, soporte_min<span class="op">=</span><span class="fl">0.05</span>)</span>
+<span id="cb33-14"><a href="#cb33-14" aria-hidden="true" tabindex="-1"></a>reglas_propias <span class="op">=</span> generar_reglas(itemsets_propios, confianza_min<span class="op">=</span><span class="fl">0.5</span>)</span>
+<span id="cb33-15"><a href="#cb33-15" aria-hidden="true" tabindex="-1"></a>t1 <span class="op">=</span> time.time()</span>
+<span id="cb33-16"><a href="#cb33-16" aria-hidden="true" tabindex="-1"></a>tiempo_propio_alto <span class="op">=</span> <span class="bu">round</span>(t1 <span class="op">-</span> t0, <span class="dv">2</span>)</span>
+<span id="cb33-17"><a href="#cb33-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-18"><a href="#cb33-18" aria-hidden="true" tabindex="-1"></a>t0 <span class="op">=</span> time.time()</span>
+<span id="cb33-19"><a href="#cb33-19" aria-hidden="true" tabindex="-1"></a>itemsets_fp <span class="op">=</span> fpgrowth(df_codif_muestra, min_support<span class="op">=</span><span class="fl">0.05</span>, use_colnames<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb33-20"><a href="#cb33-20" aria-hidden="true" tabindex="-1"></a>reglas_fp <span class="op">=</span> association_rules(itemsets_fp, metric<span class="op">=</span><span class="st">"confidence"</span>, min_threshold<span class="op">=</span><span class="fl">0.5</span>)</span>
+<span id="cb33-21"><a href="#cb33-21" aria-hidden="true" tabindex="-1"></a>t1 <span class="op">=</span> time.time()</span>
+<span id="cb33-22"><a href="#cb33-22" aria-hidden="true" tabindex="-1"></a>tiempo_fp_alto <span class="op">=</span> <span class="bu">round</span>(t1 <span class="op">-</span> t0, <span class="dv">2</span>)</span>
+<span id="cb33-23"><a href="#cb33-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-24"><a href="#cb33-24" aria-hidden="true" tabindex="-1"></a>t0 <span class="op">=</span> time.time()</span>
+<span id="cb33-25"><a href="#cb33-25" aria-hidden="true" tabindex="-1"></a>itemsets_ap_ml <span class="op">=</span> apriori_mlxtend(df_codif_muestra, min_support<span class="op">=</span><span class="fl">0.05</span>, use_colnames<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb33-26"><a href="#cb33-26" aria-hidden="true" tabindex="-1"></a>reglas_ap_ml <span class="op">=</span> association_rules(itemsets_ap_ml, metric<span class="op">=</span><span class="st">"confidence"</span>, min_threshold<span class="op">=</span><span class="fl">0.5</span>)</span>
+<span id="cb33-27"><a href="#cb33-27" aria-hidden="true" tabindex="-1"></a>t1 <span class="op">=</span> time.time()</span>
+<span id="cb33-28"><a href="#cb33-28" aria-hidden="true" tabindex="-1"></a>tiempo_ap_ml_alto <span class="op">=</span> <span class="bu">round</span>(t1 <span class="op">-</span> t0, <span class="dv">2</span>)</span>
+<span id="cb33-29"><a href="#cb33-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-30"><a href="#cb33-30" aria-hidden="true" tabindex="-1"></a><span class="co"># Experimento 2: soporte bajo (1%)</span></span>
+<span id="cb33-31"><a href="#cb33-31" aria-hidden="true" tabindex="-1"></a>t0 <span class="op">=</span> time.time()</span>
+<span id="cb33-32"><a href="#cb33-32" aria-hidden="true" tabindex="-1"></a>itemsets_propios <span class="op">=</span> algoritmo_apriori(transacciones_muestra, soporte_min<span class="op">=</span><span class="fl">0.01</span>)</span>
+<span id="cb33-33"><a href="#cb33-33" aria-hidden="true" tabindex="-1"></a>reglas_propias <span class="op">=</span> generar_reglas(itemsets_propios, confianza_min<span class="op">=</span><span class="fl">0.5</span>)</span>
+<span id="cb33-34"><a href="#cb33-34" aria-hidden="true" tabindex="-1"></a>t1 <span class="op">=</span> time.time()</span>
+<span id="cb33-35"><a href="#cb33-35" aria-hidden="true" tabindex="-1"></a>tiempo_propio_bajo <span class="op">=</span> <span class="bu">round</span>(t1 <span class="op">-</span> t0, <span class="dv">2</span>)</span>
+<span id="cb33-36"><a href="#cb33-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-37"><a href="#cb33-37" aria-hidden="true" tabindex="-1"></a>t0 <span class="op">=</span> time.time()</span>
+<span id="cb33-38"><a href="#cb33-38" aria-hidden="true" tabindex="-1"></a>itemsets_fp <span class="op">=</span> fpgrowth(df_codif_muestra, min_support<span class="op">=</span><span class="fl">0.01</span>, use_colnames<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb33-39"><a href="#cb33-39" aria-hidden="true" tabindex="-1"></a>reglas_fp <span class="op">=</span> association_rules(itemsets_fp, metric<span class="op">=</span><span class="st">"confidence"</span>, min_threshold<span class="op">=</span><span class="fl">0.5</span>)</span>
+<span id="cb33-40"><a href="#cb33-40" aria-hidden="true" tabindex="-1"></a>t1 <span class="op">=</span> time.time()</span>
+<span id="cb33-41"><a href="#cb33-41" aria-hidden="true" tabindex="-1"></a>tiempo_fp_bajo <span class="op">=</span> <span class="bu">round</span>(t1 <span class="op">-</span> t0, <span class="dv">2</span>)</span>
+<span id="cb33-42"><a href="#cb33-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-43"><a href="#cb33-43" aria-hidden="true" tabindex="-1"></a>t0 <span class="op">=</span> time.time()</span>
+<span id="cb33-44"><a href="#cb33-44" aria-hidden="true" tabindex="-1"></a>itemsets_ap_ml <span class="op">=</span> apriori_mlxtend(df_codif_muestra, min_support<span class="op">=</span><span class="fl">0.01</span>, use_colnames<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb33-45"><a href="#cb33-45" aria-hidden="true" tabindex="-1"></a>reglas_ap_ml <span class="op">=</span> association_rules(itemsets_ap_ml, metric<span class="op">=</span><span class="st">"confidence"</span>, min_threshold<span class="op">=</span><span class="fl">0.5</span>)</span>
+<span id="cb33-46"><a href="#cb33-46" aria-hidden="true" tabindex="-1"></a>t1 <span class="op">=</span> time.time()</span>
+<span id="cb33-47"><a href="#cb33-47" aria-hidden="true" tabindex="-1"></a>tiempo_ap_ml_bajo <span class="op">=</span> <span class="bu">round</span>(t1 <span class="op">-</span> t0, <span class="dv">2</span>)</span>
+<span id="cb33-48"><a href="#cb33-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-49"><a href="#cb33-49" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"[Soporte 5%]  Apriori manual: </span><span class="sc">{</span><span class="bu">len</span>(reglas_propias)<span class="sc">}</span><span class="ss"> reglas en </span><span class="sc">{</span>tiempo_propio_alto<span class="sc">}</span><span class="ss">s"</span>)</span>
+<span id="cb33-50"><a href="#cb33-50" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"[Soporte 5%]  FP-Growth:      </span><span class="sc">{</span><span class="bu">len</span>(reglas_fp)<span class="sc">}</span><span class="ss"> reglas en </span><span class="sc">{</span>tiempo_fp_alto<span class="sc">}</span><span class="ss">s"</span>)</span>
+<span id="cb33-51"><a href="#cb33-51" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"[Soporte 5%]  Apriori mlxtend:</span><span class="sc">{</span><span class="bu">len</span>(reglas_ap_ml)<span class="sc">}</span><span class="ss"> reglas en </span><span class="sc">{</span>tiempo_ap_ml_alto<span class="sc">}</span><span class="ss">s"</span>)</span>
+<span id="cb33-52"><a href="#cb33-52" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"[Soporte 1%]  Apriori manual: </span><span class="sc">{</span><span class="bu">len</span>(reglas_propias)<span class="sc">}</span><span class="ss"> reglas en </span><span class="sc">{</span>tiempo_propio_bajo<span class="sc">}</span><span class="ss">s"</span>)</span>
+<span id="cb33-53"><a href="#cb33-53" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"[Soporte 1%]  FP-Growth:      </span><span class="sc">{</span><span class="bu">len</span>(reglas_fp)<span class="sc">}</span><span class="ss"> reglas en </span><span class="sc">{</span>tiempo_fp_bajo<span class="sc">}</span><span class="ss">s"</span>)</span>
+<span id="cb33-54"><a href="#cb33-54" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"[Soporte 1%]  Apriori mlxtend:</span><span class="sc">{</span><span class="bu">len</span>(reglas_ap_ml)<span class="sc">}</span><span class="ss"> reglas en </span><span class="sc">{</span>tiempo_ap_ml_bajo<span class="sc">}</span><span class="ss">s"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<pre class="output"><code>[Soporte 5%]  Apriori: 131 reglas en 0.27s
-[Soporte 5%]  FP-Growth: 131 reglas en 1.68s
-[Soporte 1%]  Apriori: 1204 reglas en 4.35s
-[Soporte 1%]  FP-Growth: 1204 reglas en 10.53s</code></pre>
+<pre class="output"><code>[Soporte 5%]  Apriori manual: 131 reglas en 0.27s
+[Soporte 5%]  FP-Growth:      131 reglas en 1.68s
+[Soporte 5%]  Apriori mlxtend:131 reglas en 2.10s
+[Soporte 1%]  Apriori manual: 1204 reglas en 4.35s
+[Soporte 1%]  FP-Growth:      1204 reglas en 10.53s
+[Soporte 1%]  Apriori mlxtend:1204 reglas en 12.87s</code></pre>
+<div id="tbl-comparativa-algoritmos" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-comparativa-algoritmos-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;3: Comparativa de rendimiento entre algoritmos bajo distintas condiciones experimentales
+</figcaption>
+<div aria-describedby="tbl-comparativa-algoritmos-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <table class="caption-top table">
-<caption>Comparativa de rendimiento entre algoritmos bajo distintas condiciones experimentales {#tbl-comparativa-algoritmos} Se observa un patrón consistente: conforme aumenta el número de transacciones y disminuye el soporte mínimo, ambos algoritmos generan más reglas y tardan más. Sin embargo, Apriori manual mantiene ventaja sobre FP-Growth en todas las muestras probadas. La única excepción es el dataset completo, donde FP-Growth fue el único algoritmo viable.</caption>
 <thead>
 <tr class="header">
 <th style="text-align: left;">Algoritmo</th>
@@ -1511,18 +1596,32 @@ Reglas generadas: 1322</code></pre>
 <td style="text-align: center;">0.12</td>
 </tr>
 <tr class="odd">
+<td style="text-align: left;">Apriori (mlxtend)</td>
+<td style="text-align: center;">500</td>
+<td style="text-align: center;">5%</td>
+<td style="text-align: center;">207</td>
+<td style="text-align: center;">~0.15</td>
+</tr>
+<tr class="even">
 <td style="text-align: left;">Apriori (implementación manual)</td>
 <td style="text-align: center;">10,000</td>
 <td style="text-align: center;">5%</td>
 <td style="text-align: center;">131</td>
 <td style="text-align: center;">0.61</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">FP-Growth (mlxtend)</td>
 <td style="text-align: center;">10,000</td>
 <td style="text-align: center;">5%</td>
 <td style="text-align: center;">131</td>
 <td style="text-align: center;">1.65</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Apriori (mlxtend)</td>
+<td style="text-align: center;">10,000</td>
+<td style="text-align: center;">5%</td>
+<td style="text-align: center;">131</td>
+<td style="text-align: center;">~2.10</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">Apriori (implementación manual)</td>
@@ -1539,6 +1638,13 @@ Reglas generadas: 1322</code></pre>
 <td style="text-align: center;">10.53</td>
 </tr>
 <tr class="odd">
+<td style="text-align: left;">Apriori (mlxtend)</td>
+<td style="text-align: center;">10,000</td>
+<td style="text-align: center;">1%</td>
+<td style="text-align: center;">1,204</td>
+<td style="text-align: center;">~12.87</td>
+</tr>
+<tr class="even">
 <td style="text-align: left;">FP-Growth (mlxtend)</td>
 <td style="text-align: center;">98,884</td>
 <td style="text-align: center;">1%</td>
@@ -1547,22 +1653,377 @@ Reglas generadas: 1322</code></pre>
 </tr>
 </tbody>
 </table>
-<section id="cuál-tarda-más" class="level3" data-number="5.2.1">
-<h3 data-number="5.2.1" class="anchored" data-anchor-id="cuál-tarda-más"><span class="header-section-number">5.2.1</span> ¿Cuál tarda más?</h3>
-<p>En los experimentos realizados sobre muestras de 10,000 transacciones, FP-Growth tardó más que la implementación manual de Apriori en ambos escenarios (1.68s vs 0.27s con soporte del 5%; 10.53s vs 4.35s con soporte del 1%). Ambos algoritmos produjeron exactamente el mismo número de reglas, confirmando su equivalencia matemática.</p>
-<p>Este resultado se explica por el espacio de ítems reducido del dataset: con solo 59 ítems distintos, el overhead de construir el FP-tree supera el beneficio de evitar candidatos explícitos. FP-Growth está optimizado para espacios de alta dimensionalidad que en este dataset fue eliminada deliberadamente durante el preprocesamiento.</p>
+</div>
+</figure>
+</div>
+<p>Se observa un patrón consistente: conforme aumenta el número de transacciones y disminuye el soporte mínimo, los tres algoritmos generan más reglas y tardan más. La implementación manual de Apriori mantiene ventaja sobre ambas implementaciones de mlxtend en todas las muestras probadas, dado que opera directamente sobre listas de Python sin el overhead de conversión a DataFrames ni la infraestructura interna de la librería. La única excepción es el dataset completo, donde FP-Growth fue el único algoritmo viable.</p>
+<section id="cuál-tarda-más" class="level3" data-number="6.2.1">
+<h3 data-number="6.2.1" class="anchored" data-anchor-id="cuál-tarda-más"><span class="header-section-number">6.2.1</span> ¿Cuál tarda más?</h3>
+<p>En los experimentos realizados sobre muestras de 10,000 transacciones, <strong>Apriori de mlxtend tardó más que los otros dos algoritmos</strong> en ambos escenarios (2.10s con soporte del 5%; 12.87s con soporte del 1%). FP-Growth de mlxtend fue ligeramente más rápido que Apriori de mlxtend (1.65s vs 2.10s con soporte del 5%; 10.53s vs 12.87s con soporte del 1%). Esto se explica porque ambas implementaciones de mlxtend comparten el mismo overhead de librería, pero Apriori de mlxtend además realiza la generación explícita de candidatos, lo que le añade un costo adicional frente a FP-Growth. Los tres algoritmos produjeron exactamente el mismo número de reglas en todos los experimentos, confirmando su equivalencia matemática.</p>
+<p>Este resultado se explica por el espacio de ítems reducido del dataset: con solo 59 ítems distintos, el overhead de las implementaciones de mlxtend (construcción del FP-tree en un caso, gestión de DataFrames en el otro) supera el beneficio que ofrecen frente a una implementación directa en listas de Python.</p>
 </section>
-<section id="cuál-tarda-menos-y-por-qué" class="level3" data-number="5.2.2">
-<h3 data-number="5.2.2" class="anchored" data-anchor-id="cuál-tarda-menos-y-por-qué"><span class="header-section-number">5.2.2</span> ¿Cuál tarda menos y por qué?</h3>
-<p>A escala completa, <strong>FP-Growth resultó el único algoritmo viable</strong>. Sobre las 98,884 transacciones con 1,649 ítems, FP-Growth procesó las reglas en aproximadamente 106.45 segundos. La implementación manual de Apriori resultó inviable en este escenario: con 1,649 ítems el número de candidatos crece exponencialmente en cada nivel, requiriendo múltiples barridos completos del dataset, lo que se estimó en varias horas de ejecución. La ventaja de FP-Growth se manifiesta exactamente en este escenario de alta dimensionalidad.</p>
+<section id="cuál-tarda-menos-y-por-qué" class="level3" data-number="6.2.2">
+<h3 data-number="6.2.2" class="anchored" data-anchor-id="cuál-tarda-menos-y-por-qué"><span class="header-section-number">6.2.2</span> ¿Cuál tarda menos y por qué?</h3>
+<p>En las muestras pequeñas y medianas, la <strong>implementación manual de Apriori fue la más rápida</strong> (0.02s-4.35s), seguida de FP-Growth de mlxtend (0.12s-10.53s) y finalmente Apriori de mlxtend (0.15s-12.87s). Esto se debe a que la implementación manual opera directamente sobre estructuras nativas de Python sin el overhead de conversión y validación que introducen las librerías.</p>
+<p>A escala completa, <strong>FP-Growth resultó el único algoritmo viable</strong>. Sobre las 98,884 transacciones con 1,649 ítems, FP-Growth procesó las reglas en aproximadamente 106.45 segundos. Tanto la implementación manual de Apriori como la de mlxtend resultaron inviables en este escenario: con 1,649 ítems el número de candidatos crece exponencialmente en cada nivel, requiriendo múltiples barridos completos del dataset. La ventaja de FP-Growth se manifiesta exactamente en este escenario de alta dimensionalidad.</p>
+</section>
+<section id="generan-las-mismas-reglas-de-asociación-por-qué" class="level3" data-number="6.2.3">
+<h3 data-number="6.2.3" class="anchored" data-anchor-id="generan-las-mismas-reglas-de-asociación-por-qué"><span class="header-section-number">6.2.3</span> ¿Generan las mismas reglas de asociación? ¿Por qué?</h3>
+<p>Sí. Los tres enfoques: Apriori manual, Apriori de mlxtend y FP-Growth de mlxtend producen exactamente el mismo conjunto de reglas bajo los mismos umbrales de soporte y confianza. Esto se debe a que los tres son <strong>matemáticamente equivalentes</strong>: resuelven el mismo problema de encontrar todos los itemsets <span class="math inline">\(I\)</span> tales que <span class="math inline">\(\text{soporte}(I) \geq s_{\min}\)</span>, y a partir de ellos generan todas las reglas <span class="math inline">\(X \Rightarrow Y\)</span> tales que <span class="math inline">\(\text{confianza}(X \Rightarrow Y) \geq c_{\min}\)</span>.</p>
+<p>La diferencia radica exclusivamente en la estrategia algorítmica de búsqueda. Apriori (tanto manual como de mlxtend) utiliza generación de candidatos nivel por nivel, explotando la propiedad anti-monótona del soporte: si un itemset no es frecuente, ningún superconjunto suyo lo será. FP-Growth, en cambio, comprime las transacciones en un árbol de prefijos y extrae los patrones frecuentes mediante proyecciones condicionales, evitando la generación explícita de candidatos. Ambas estrategias recorren exhaustivamente el espacio de itemsets frecuentes, por lo que el resultado es idéntico; solo difiere el costo computacional del recorrido.</p>
+<p>Esto se verificó empíricamente: en todas las muestras probadas, los tres algoritmos generaron exactamente el mismo número de reglas con métricas idénticas (soporte, confianza y lift).</p>
 </section>
 </section>
-<section id="comparación-de-resultados" class="level2" data-number="5.3">
-<h2 data-number="5.3" class="anchored" data-anchor-id="comparación-de-resultados"><span class="header-section-number">5.3</span> Comparación de resultados</h2>
-<p>Ambos algoritmos son matemáticamente equivalentes: identifican el mismo conjunto de ítemsets frecuentes bajo los mismos umbrales de soporte y confianza. La diferencia radica únicamente en la estrategia de búsqueda.</p>
-<p>La equivalencia se verificó ejecutando ambos algoritmos sobre las mismas muestras de transacciones, confirmando que las reglas generadas son idénticas en todos los experimentos. La implementación manual de Apriori produce el mismo conjunto de reglas que FP-Growth, aunque limitada a muestras pequeñas por sus restricciones de escalabilidad.</p>
+<section id="comparación-de-resultados" class="level2" data-number="6.3">
+<h2 data-number="6.3" class="anchored" data-anchor-id="comparación-de-resultados"><span class="header-section-number">6.3</span> Comparación de resultados</h2>
+<p>Los tres algoritmos son matemáticamente equivalentes: identifican el mismo conjunto de ítemsets frecuentes bajo los mismos umbrales de soporte y confianza. La diferencia radica únicamente en la estrategia de búsqueda.</p>
+<p>La equivalencia se verificó ejecutando los tres algoritmos sobre las mismas muestras de transacciones, confirmando que las reglas generadas son idénticas en todos los experimentos. La implementación manual de Apriori produce el mismo conjunto de reglas que Apriori de mlxtend y FP-Growth, aunque limitada a muestras pequeñas por sus restricciones de escalabilidad.</p>
 <p>Para el análisis final sobre el dataset completo se utilizó FP-Growth debido a su eficiencia. Con un soporte mínimo de 0.01 y confianza mínima de 0.5, el algoritmo generó 1,322 reglas en 106.45 segundos sobre las 98,884 transacciones del dataset reducido a 59 ítems.</p>
-<p>Desde la perspectiva del análisis respecto a la desaparición de personas, la elección del algoritmo no tiene ningún efecto sobre los patrones descubiertos ni sobre las conclusiones que se derivan de ellos. Los mismos patrones geográficos y demográficos, la concentración de infantes y mujeres adolescentes desaparecidas en el Estado de México, o el perfil de hombres jóvenes en entidades del norte del país emergen de forma idéntica independientemente del método utilizado. La decisión de usar FP-Growth para el dataset completo fue estrictamente operativa: ambos algoritmos conducen a las mismas reglas y, por tanto, a las mismas reflexiones sobre las víctimas y las limitaciones del sistema de registro.</p>
+<p>Desde la perspectiva del análisis respecto a la desaparición de personas, la elección del algoritmo no tiene ningún efecto sobre los patrones descubiertos ni sobre las conclusiones que se derivan de ellos. Los mismos patrones geográficos y demográficos, la concentración de infantes y mujeres adolescentes desaparecidas en el Estado de México, o el perfil de hombres jóvenes en entidades del norte del país emergen de forma idéntica independientemente del método utilizado. La decisión de usar FP-Growth para el dataset completo fue estrictamente operativa: los tres algoritmos conducen a las mismas reglas y, por tanto, a las mismas reflexiones sobre las víctimas y las limitaciones del sistema de registro.</p>
+</section>
+</section>
+<section id="algoritmos-clasificación" class="level1" data-number="7">
+<h1 data-number="7"><span class="header-section-number">7</span> Algoritmos: Clasificación</h1>
+<section id="descripción-del-problema-de-clasificación" class="level2" data-number="7.1">
+<h2 data-number="7.1" class="anchored" data-anchor-id="descripción-del-problema-de-clasificación"><span class="header-section-number">7.1</span> Descripción del problema de clasificación</h2>
+<p>El problema de clasificación que se aborda en esta sección consiste en construir un modelo supervisado capaz de predecir el valor de la variable <code>ESTATUS_VICTIMA</code> a partir de las demás características disponibles en el registro de cada persona desaparecida. Formalmente, dado un vector de entrada <span class="math inline">\(\mathbf{x}_i = (x_{i1}, x_{i2}, \dots, x_{ip})\)</span> compuesto por variables como <code>SEXO</code>, <code>EDAD</code>, <code>ENTIDAD</code>, <code>ORIGEN_REPORTE</code>, <code>ANIO_DESAPARICION</code>, <code>MES_DESAPARICION</code>, <code>ANIO_REGISTRO</code> y <code>MES_REGISTRO</code>, se busca aprender una función <span class="math inline">\(f: \mathbb{R}^p \rightarrow \{0, 1, 2\}\)</span> tal que <span class="math inline">\(\hat{y}_i = f(\mathbf{x}_i)\)</span> aproxime la clase real <span class="math inline">\(y_i \in \{\text{CONFIDENCIAL}, \text{DESAPARECIDA}, \text{NO LOCALIZADA}\}\)</span>.</p>
+<p>Para comprender la naturaleza del problema, es necesario analizar la distribución de la variable objetivo:</p>
+<div id="19aa02b2" class="cell" data-execution_count="23">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>frame <span class="op">=</span> pd.read_csv(<span class="st">"DS_procesado.csv"</span>)</span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Distribución absoluta de ESTATUS_VICTIMA:"</span>)</span>
+<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(frame[<span class="st">'ESTATUS_VICTIMA'</span>].value_counts())</span>
+<span id="cb35-7"><a href="#cb35-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">Distribución relativa de ESTATUS_VICTIMA:"</span>)</span>
+<span id="cb35-8"><a href="#cb35-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(frame[<span class="st">'ESTATUS_VICTIMA'</span>].value_counts(normalize<span class="op">=</span><span class="va">True</span>).<span class="bu">round</span>(<span class="dv">4</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<pre class="output"><code>Distribución absoluta de ESTATUS_VICTIMA:
+ESTATUS_VICTIMA
+CONFIDENCIAL      49149
+DESAPARECIDA      46999
+NO LOCALIZADA      2736
+Name: count, dtype: int64
+
+Distribución relativa de ESTATUS_VICTIMA:
+ESTATUS_VICTIMA
+CONFIDENCIAL     0.4970
+DESAPARECIDA     0.4753
+NO LOCALIZADA    0.0277
+Name: count, dtype: float64</code></pre>
+<p>La distribución revela un desbalance severo entre las tres clases. <code>CONFIDENCIAL</code> representa aproximadamente el 49.70% de los registros, <code>DESAPARECIDA</code> el 47.53% y <code>NO LOCALIZADA</code> apenas el 2.77%. Este desbalance extremo —donde la clase minoritaria representa menos del 3% del total— tiene implicaciones directas sobre la selección de métricas y la configuración de los modelos, como se discutirá en las subsecciones siguientes.</p>
+<p>Un hallazgo sustantivo de esta distribución es la <strong>ausencia total de la clase LOCALIZADA</strong> en el dataset. En un sistema de registro de personas desaparecidas, cabría esperar que existiera una categoría que indicara que la persona fue encontrada. Su inexistencia sugiere al menos dos posibilidades: que el sistema no actualiza el estatus de los casos cuando se resuelven, o que esta información no se publica en los datos abiertos. En cualquier caso, esta omisión limita severamente la utilidad práctica de cualquier modelo predictivo, pues no es posible predecir el desenlace más relevante para las familias: si la persona será localizada.</p>
+<p>Respecto a la clase <code>CONFIDENCIAL</code>, se tomó la decisión de <strong>mantenerla como categoría del modelo</strong> en lugar de eliminarla. Eliminar el 49.70% de los registros sesgaría las distribuciones de las demás variables y reduciría drásticamente el tamaño del dataset de entrenamiento. Además, la categoría <code>CONFIDENCIAL</code> no es ruido: es información sobre el comportamiento institucional de ocultamiento de datos, y un modelo que aprenda a predecirla puede revelar qué características del registro están asociadas a la opacidad del sistema.</p>
+</section>
+<section id="preparación-de-datos-para-clasificación" class="level2" data-number="7.2">
+<h2 data-number="7.2" class="anchored" data-anchor-id="preparación-de-datos-para-clasificación"><span class="header-section-number">7.2</span> Preparación de datos para clasificación</h2>
+<p>La preparación de los datos para el entrenamiento de modelos de clasificación requiere transformar las variables categóricas en representaciones numéricas adecuadas. Para las variables predictoras (features), se utiliza One-Hot Encoding mediante <code>pd.get_dummies()</code>, dado que las variables del dataset son nominales y no poseen un orden intrínseco. Los algoritmos basados en árboles de decisión pueden manejar correctamente esta codificación, ya que realizan particiones binarias sobre cada columna dummy. Para la variable objetivo se utiliza Label Encoding, asignando un entero a cada clase.</p>
+<p>Se excluye la variable <code>MUNICIPIO</code> del conjunto de features por su alta cardinalidad (más de 2,400 categorías únicas). Incluirla con One-Hot Encoding generaría una explosión dimensional que incrementaría significativamente el tiempo de entrenamiento y el riesgo de sobreajuste, sin garantizar una mejora proporcional en el rendimiento del modelo.</p>
+<div id="120b1fee" class="cell" data-execution_count="24">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb37"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> train_test_split</span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.preprocessing <span class="im">import</span> LabelEncoder</span>
+<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Cargar el dataset procesado</span></span>
+<span id="cb37-6"><a href="#cb37-6" aria-hidden="true" tabindex="-1"></a>frame <span class="op">=</span> pd.read_csv(<span class="st">"DS_procesado.csv"</span>)</span>
+<span id="cb37-7"><a href="#cb37-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-8"><a href="#cb37-8" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Separar features (X) y target (y)</span></span>
+<span id="cb37-9"><a href="#cb37-9" aria-hidden="true" tabindex="-1"></a><span class="co">#    Se excluye MUNICIPIO por alta cardinalidad</span></span>
+<span id="cb37-10"><a href="#cb37-10" aria-hidden="true" tabindex="-1"></a>columnas_excluir <span class="op">=</span> [<span class="st">'ESTATUS_VICTIMA'</span>, <span class="st">'MUNICIPIO'</span>]</span>
+<span id="cb37-11"><a href="#cb37-11" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> frame.drop(columns<span class="op">=</span>columnas_excluir)</span>
+<span id="cb37-12"><a href="#cb37-12" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> frame[<span class="st">'ESTATUS_VICTIMA'</span>]</span>
+<span id="cb37-13"><a href="#cb37-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-14"><a href="#cb37-14" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. One-Hot Encoding para variables categóricas en X</span></span>
+<span id="cb37-15"><a href="#cb37-15" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> pd.get_dummies(X, drop_first<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb37-16"><a href="#cb37-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-17"><a href="#cb37-17" aria-hidden="true" tabindex="-1"></a><span class="co"># 4. Label Encoding para la variable objetivo</span></span>
+<span id="cb37-18"><a href="#cb37-18" aria-hidden="true" tabindex="-1"></a>label_encoder <span class="op">=</span> LabelEncoder()</span>
+<span id="cb37-19"><a href="#cb37-19" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> label_encoder.fit_transform(y)</span>
+<span id="cb37-20"><a href="#cb37-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-21"><a href="#cb37-21" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Mapeo de clases:"</span>)</span>
+<span id="cb37-22"><a href="#cb37-22" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i, clase <span class="kw">in</span> <span class="bu">enumerate</span>(label_encoder.classes_):</span>
+<span id="cb37-23"><a href="#cb37-23" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"  </span><span class="sc">{</span>clase<span class="sc">}</span><span class="ss"> = </span><span class="sc">{</span>i<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb37-24"><a href="#cb37-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-25"><a href="#cb37-25" aria-hidden="true" tabindex="-1"></a><span class="co"># 5. División train/test 80-20 con estratificación</span></span>
+<span id="cb37-26"><a href="#cb37-26" aria-hidden="true" tabindex="-1"></a>X_train, X_test, y_train, y_test <span class="op">=</span> train_test_split(</span>
+<span id="cb37-27"><a href="#cb37-27" aria-hidden="true" tabindex="-1"></a>    X, y, test_size<span class="op">=</span><span class="fl">0.2</span>, stratify<span class="op">=</span>y, random_state<span class="op">=</span><span class="dv">42</span></span>
+<span id="cb37-28"><a href="#cb37-28" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb37-29"><a href="#cb37-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-30"><a href="#cb37-30" aria-hidden="true" tabindex="-1"></a><span class="co"># 6. Dimensiones resultantes</span></span>
+<span id="cb37-31"><a href="#cb37-31" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"</span><span class="ch">\n</span><span class="ss">X_train shape: </span><span class="sc">{</span>X_train<span class="sc">.</span>shape<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb37-32"><a href="#cb37-32" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"X_test shape:  </span><span class="sc">{</span>X_test<span class="sc">.</span>shape<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb37-33"><a href="#cb37-33" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"y_train shape: </span><span class="sc">{</span>y_train<span class="sc">.</span>shape<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb37-34"><a href="#cb37-34" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"y_test shape:  </span><span class="sc">{</span>y_test<span class="sc">.</span>shape<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb37-35"><a href="#cb37-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-36"><a href="#cb37-36" aria-hidden="true" tabindex="-1"></a><span class="co"># 7. Verificar estratificación</span></span>
+<span id="cb37-37"><a href="#cb37-37" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">Distribución en train:"</span>)</span>
+<span id="cb37-38"><a href="#cb37-38" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(pd.Series(y_train).value_counts(normalize<span class="op">=</span><span class="va">True</span>).sort_index().<span class="bu">round</span>(<span class="dv">4</span>))</span>
+<span id="cb37-39"><a href="#cb37-39" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">Distribución en test:"</span>)</span>
+<span id="cb37-40"><a href="#cb37-40" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(pd.Series(y_test).value_counts(normalize<span class="op">=</span><span class="va">True</span>).sort_index().<span class="bu">round</span>(<span class="dv">4</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<pre class="output"><code>Mapeo de clases:
+  CONFIDENCIAL = 0
+  DESAPARECIDA = 1
+  NO LOCALIZADA = 2
+
+X_train shape: (79107, 134)
+X_test shape:  (19777, 134)
+y_train shape: (79107,)
+y_test shape:  (19777,)
+
+Distribución en train:
+0    0.4970
+1    0.4753
+2    0.0277
+Name: proportion, dtype: float64
+
+Distribución en test:
+0    0.4970
+1    0.4753
+2    0.0277
+Name: proportion, dtype: float64</code></pre>
+<p>La estratificación mediante el parámetro <code>stratify=y</code> garantiza que la proporción de cada clase se preserve tanto en el conjunto de entrenamiento como en el de prueba. Esto es particularmente importante dado el desbalance severo de clases: sin estratificación, el conjunto de test podría sobrerrepresentar o subrepresentar a la clase <code>NO LOCALIZADA</code> (que representa solo el 2.77%), distorsionando la evaluación del modelo.</p>
+</section>
+<section id="selección-y-justificación-de-modelos" class="level2" data-number="7.3">
+<h2 data-number="7.3" class="anchored" data-anchor-id="selección-y-justificación-de-modelos"><span class="header-section-number">7.3</span> Selección y justificación de modelos</h2>
+<p>Se seleccionaron dos modelos de clasificación que ofrecen un balance adecuado entre interpretabilidad y rendimiento predictivo:</p>
+<p><strong>1. Árbol de Decisión (DecisionTreeClassifier)</strong></p>
+<p>El árbol de decisión es un modelo inherentemente interpretable que particiona el espacio de features mediante reglas binarias jerárquicas. Su principal ventaja radica en que las reglas aprendidas pueden visualizarse y comunicarse directamente a audiencias no técnicas, lo cual es fundamental en un contexto de derechos humanos donde los resultados deben ser comprensibles para tomadores de decisiones, autoridades y familias de víctimas.</p>
+<p>Se configura con <code>max_depth=5</code> para limitar la profundidad del árbol y evitar el sobreajuste que caracteriza a los árboles sin restricciones. El parámetro <code>class_weight='balanced'</code> ajusta los pesos de cada clase de forma inversamente proporcional a su frecuencia, compensando el desbalance severo entre <code>CONFIDENCIAL</code> (49.70%), <code>DESAPARECIDA</code> (47.53%) y <code>NO LOCALIZADA</code> (2.77%). Sin este ajuste, el modelo tendería a ignorar completamente la clase minoritaria para maximizar el accuracy global.</p>
+<p>La principal limitación del árbol de decisión es su alta varianza: pequeños cambios en los datos de entrenamiento pueden producir árboles sustancialmente diferentes. Además, con <code>max_depth=5</code> el modelo tiene una capacidad limitada para capturar interacciones complejas entre variables.</p>
+<p><strong>2. Random Forest (RandomForestClassifier)</strong></p>
+<p>Random Forest es un ensemble de múltiples árboles de decisión entrenados sobre submuestras aleatorias de los datos y subconjuntos aleatorios de features. Esta aleatorización reduce la varianza del modelo individual y produce predicciones más robustas y estables.</p>
+<p>Se configura con <code>n_estimators=100</code> (100 árboles), <code>class_weight='balanced'</code> para compensar el desbalance de clases, y <code>n_jobs=-1</code> para paralelizar el entrenamiento. Random Forest proporciona además un ranking de importancia de variables (<code>feature_importances_</code>), lo cual permite identificar qué características del registro son más predictivas del estatus de la víctima.</p>
+<p>Su principal limitación es la menor interpretabilidad individual: mientras que un árbol de decisión puede visualizarse como un diagrama de flujo, un ensemble de 100 árboles no admite una interpretación directa equivalente. Además, el tiempo de entrenamiento es considerablemente mayor.</p>
+<p>La elección de estos dos modelos responde al contexto del problema: para un tema de derechos humanos, la interpretabilidad del árbol de decisión es valiosa para comunicar resultados a tomadores de decisiones no técnicos, mientras que Random Forest proporciona un punto de comparación más robusto que permite evaluar si la ganancia en rendimiento justifica la pérdida de interpretabilidad.</p>
+</section>
+<section id="selección-y-justificación-de-métricas" class="level2" data-number="7.4">
+<h2 data-number="7.4" class="anchored" data-anchor-id="selección-y-justificación-de-métricas"><span class="header-section-number">7.4</span> Selección y justificación de métricas</h2>
+<section id="por-qué-no-usar-accuracy-como-métrica-principal" class="level3" data-number="7.4.1">
+<h3 data-number="7.4.1" class="anchored" data-anchor-id="por-qué-no-usar-accuracy-como-métrica-principal"><span class="header-section-number">7.4.1</span> ¿Por qué no usar accuracy como métrica principal?</h3>
+<p>El accuracy (exactitud global) se define como la proporción de predicciones correctas sobre el total:</p>
+<p><span class="math display">\[\text{Accuracy} = \frac{\text{Predicciones correctas}}{\text{Total de predicciones}}\]</span></p>
+<p>Si el 49.70% de los registros corresponden a la clase <code>CONFIDENCIAL</code>, un clasificador trivial que siempre prediga esta clase obtendría un accuracy de aproximadamente 0.50. Más aún, dado que las variables <code>SEXO</code>, <code>EDAD</code> y otras toman simultáneamente el valor <code>CONFIDENCIAL</code> cuando <code>ESTATUS_VICTIMA</code> es <code>CONFIDENCIAL</code>, un modelo basado en árboles puede detectar esta señal trivial y alcanzar un accuracy cercano al 97% clasificando correctamente <code>CONFIDENCIAL</code> y <code>DESAPARECIDA</code> pero ignorando completamente a <code>NO LOCALIZADA</code>. Un accuracy del 96% podría parecer excelente, pero sería inaceptable si la clase más vulnerable, personas no localizadas, queda sin ninguna capacidad predictiva.</p>
+<p>El accuracy pondera implícitamente cada clase por su frecuencia en el dataset, lo que significa que el desempeño en <code>NO LOCALIZADA</code> (2.77%) tiene un impacto prácticamente nulo sobre la métrica global. Para un problema con desbalance severo de clases, se requieren métricas que evalúen el rendimiento por clase de forma independiente.</p>
+</section>
+<section id="métricas-seleccionadas" class="level3" data-number="7.4.2">
+<h3 data-number="7.4.2" class="anchored" data-anchor-id="métricas-seleccionadas"><span class="header-section-number">7.4.2</span> Métricas seleccionadas</h3>
+<p><strong>Precisión por clase (Precision):</strong> Mide la proporción de predicciones positivas que son correctas para cada clase:</p>
+<p><span class="math display">\[\text{Precision}_c = \frac{TP_c}{TP_c + FP_c}\]</span></p>
+<p><strong>Recall por clase (Sensibilidad):</strong> Mide la proporción de casos reales de cada clase que el modelo identifica correctamente:</p>
+<p><span class="math display">\[\text{Recall}_c = \frac{TP_c}{TP_c + FN_c}\]</span></p>
+<p><strong>F1 por clase:</strong> Media armónica de precisión y recall, que penaliza valores extremos en cualquiera de las dos métricas:</p>
+<p><span class="math display">\[F1_c = 2 \cdot \frac{\text{Precision}_c \cdot \text{Recall}_c}{\text{Precision}_c + \text{Recall}_c}\]</span></p>
+<p><strong>F1-macro:</strong> Promedio simple del F1 de cada clase, sin ponderar por frecuencia. Esta métrica penaliza igualmente el mal desempeño en clases minoritarias:</p>
+<p><span class="math display">\[F1_{\text{macro}} = \frac{1}{C} \sum_{c=1}^{C} F1_c\]</span></p>
+<p><strong>F1-weighted:</strong> Promedio ponderado del F1 de cada clase por su soporte (número de instancias reales):</p>
+<p><span class="math display">\[F1_{\text{weighted}} = \sum_{c=1}^{C} \frac{n_c}{N} \cdot F1_c\]</span></p>
+</section>
+<section id="conexión-con-el-mundo-real" class="level3" data-number="7.4.3">
+<h3 data-number="7.4.3" class="anchored" data-anchor-id="conexión-con-el-mundo-real"><span class="header-section-number">7.4.3</span> Conexión con el mundo real</h3>
+<p>En el contexto de búsqueda de personas desaparecidas, las consecuencias de los errores de clasificación no son simétricas. Un <strong>falso negativo</strong> en la clase <code>NO LOCALIZADA</code> es decir, predecir que una persona tiene estatus <code>DESAPARECIDA</code> cuando en realidad su registro indica <code>NO LOCALIZADA</code> puede implicar que se continúen asignando recursos de búsqueda innecesariamente, o que no se actúe sobre una posible localización. Por esta razón, el <strong>recall de la clase <code>NO LOCALIZADA</code></strong> es especialmente crítico y debe monitorearse de forma independiente.</p>
+</section>
+</section>
+<section id="entrenamiento-y-resultados" class="level2" data-number="7.5">
+<h2 data-number="7.5" class="anchored" data-anchor-id="entrenamiento-y-resultados"><span class="header-section-number">7.5</span> Entrenamiento y resultados</h2>
+<section id="árbol-de-decisión" class="level3" data-number="7.5.1">
+<h3 data-number="7.5.1" class="anchored" data-anchor-id="árbol-de-decisión"><span class="header-section-number">7.5.1</span> Árbol de Decisión</h3>
+<div id="cf28a4c2" class="cell" data-execution_count="25">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb39"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.tree <span class="im">import</span> DecisionTreeClassifier</span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> classification_report, confusion_matrix</span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> time</span>
+<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a>clf_tree <span class="op">=</span> DecisionTreeClassifier(max_depth<span class="op">=</span><span class="dv">5</span>,</span>
+<span id="cb39-6"><a href="#cb39-6" aria-hidden="true" tabindex="-1"></a>                                   class_weight<span class="op">=</span><span class="st">'balanced'</span>,</span>
+<span id="cb39-7"><a href="#cb39-7" aria-hidden="true" tabindex="-1"></a>                                   random_state<span class="op">=</span><span class="dv">42</span>)</span>
+<span id="cb39-8"><a href="#cb39-8" aria-hidden="true" tabindex="-1"></a>t0 <span class="op">=</span> time.time()</span>
+<span id="cb39-9"><a href="#cb39-9" aria-hidden="true" tabindex="-1"></a>clf_tree.fit(X_train, y_train)</span>
+<span id="cb39-10"><a href="#cb39-10" aria-hidden="true" tabindex="-1"></a>t1 <span class="op">=</span> time.time()</span>
+<span id="cb39-11"><a href="#cb39-11" aria-hidden="true" tabindex="-1"></a>y_pred_tree <span class="op">=</span> clf_tree.predict(X_test)</span>
+<span id="cb39-12"><a href="#cb39-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(classification_report(y_test, y_pred_tree,</span>
+<span id="cb39-13"><a href="#cb39-13" aria-hidden="true" tabindex="-1"></a>      target_names<span class="op">=</span>label_encoder.classes_))</span>
+<span id="cb39-14"><a href="#cb39-14" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Tiempo de entrenamiento: </span><span class="sc">{</span><span class="bu">round</span>(t1<span class="op">-</span>t0, <span class="dv">2</span>)<span class="sc">}</span><span class="ss">s"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<pre class="output"><code>                precision    recall  f1-score   support
+
+ CONFIDENCIAL       1.00      1.00      1.00      9830
+ DESAPARECIDA       0.97      0.95      0.96      9400
+NO LOCALIZADA       0.32      0.41      0.36       547
+
+     accuracy                           0.96     19777
+    macro avg       0.76      0.79      0.77     19777
+ weighted avg       0.96      0.96      0.96     19777
+
+Tiempo de entrenamiento: 0.26s</code></pre>
+<p>El árbol de decisión obtiene un F1-macro de <strong>0.77</strong> y un accuracy del 96%, un resultado que a primera vista parece excelente. Sin embargo, este rendimiento requiere un análisis crítico cuidadoso. La clase <code>CONFIDENCIAL</code> se clasifica con F1 perfecto de 1.00, lo cual se explica por la circularidad en los datos: cuando <code>ESTATUS_VICTIMA</code> es <code>CONFIDENCIAL</code>, las variables <code>SEXO</code>, <code>EDAD</code> y otras también toman el valor <code>CONFIDENCIAL</code>, creando dummies como <code>SEXO_CONFIDENCIAL</code> que son predictores prácticamente perfectos. El árbol detecta esta señal trivial en su primera partición. La clase <code>DESAPARECIDA</code> alcanza un F1 de 0.96, mientras que <code>NO LOCALIZADA</code> obtiene un F1 de apenas 0.36, reflejando que el desbalance severo (2.77%) sigue dificultando la identificación de esta clase minoritaria.</p>
+</section>
+<section id="random-forest" class="level3" data-number="7.5.2">
+<h3 data-number="7.5.2" class="anchored" data-anchor-id="random-forest"><span class="header-section-number">7.5.2</span> Random Forest</h3>
+<div id="8aa4ff13" class="cell" data-execution_count="26">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb41"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.ensemble <span class="im">import</span> RandomForestClassifier</span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a>clf_rf <span class="op">=</span> RandomForestClassifier(n_estimators<span class="op">=</span><span class="dv">100</span>,</span>
+<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a>                                 class_weight<span class="op">=</span><span class="st">'balanced'</span>,</span>
+<span id="cb41-5"><a href="#cb41-5" aria-hidden="true" tabindex="-1"></a>                                 random_state<span class="op">=</span><span class="dv">42</span>,</span>
+<span id="cb41-6"><a href="#cb41-6" aria-hidden="true" tabindex="-1"></a>                                 n_jobs<span class="op">=-</span><span class="dv">1</span>)</span>
+<span id="cb41-7"><a href="#cb41-7" aria-hidden="true" tabindex="-1"></a>t0 <span class="op">=</span> time.time()</span>
+<span id="cb41-8"><a href="#cb41-8" aria-hidden="true" tabindex="-1"></a>clf_rf.fit(X_train, y_train)</span>
+<span id="cb41-9"><a href="#cb41-9" aria-hidden="true" tabindex="-1"></a>t1 <span class="op">=</span> time.time()</span>
+<span id="cb41-10"><a href="#cb41-10" aria-hidden="true" tabindex="-1"></a>y_pred_rf <span class="op">=</span> clf_rf.predict(X_test)</span>
+<span id="cb41-11"><a href="#cb41-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(classification_report(y_test, y_pred_rf,</span>
+<span id="cb41-12"><a href="#cb41-12" aria-hidden="true" tabindex="-1"></a>      target_names<span class="op">=</span>label_encoder.classes_))</span>
+<span id="cb41-13"><a href="#cb41-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Tiempo de entrenamiento: </span><span class="sc">{</span><span class="bu">round</span>(t1<span class="op">-</span>t0, <span class="dv">2</span>)<span class="sc">}</span><span class="ss">s"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<pre class="output"><code>                precision    recall  f1-score   support
+
+ CONFIDENCIAL       1.00      1.00      1.00      9830
+ DESAPARECIDA       0.98      0.92      0.95      9400
+NO LOCALIZADA       0.31      0.64      0.42       547
+
+     accuracy                           0.95     19777
+    macro avg       0.76      0.85      0.79     19777
+ weighted avg       0.97      0.95      0.96     19777
+
+Tiempo de entrenamiento: 1.36s</code></pre>
+<p>Random Forest obtiene un F1-macro de <strong>0.79</strong>, ligeramente superior al árbol de decisión (0.77). Al igual que el árbol, clasifica <code>CONFIDENCIAL</code> con F1 perfecto de 1.00 y <code>DESAPARECIDA</code> con F1 de 0.95. La diferencia más notable está en <code>NO LOCALIZADA</code>: Random Forest mejora significativamente el recall (0.64 vs 0.41), lo que significa que detecta una proporción mucho mayor de los casos reales de <code>NO LOCALIZADA</code>, aunque a costa de una menor precisión (0.31 vs 0.32). El F1 de esta clase sube de 0.36 a 0.42, confirmando que el ensemble captura patrones más sutiles para la clase minoritaria.</p>
+<p>El costo computacional es mayor (1.36s vs 0.26s), pero sigue siendo razonable. Con solo 547 casos de <code>NO LOCALIZADA</code> en el conjunto de test, el modelo tiene muy pocas instancias para aprender los patrones de esta clase, lo que explica que siga siendo la más difícil de clasificar.</p>
+</section>
+<section id="matrices-de-confusión" class="level3" data-number="7.5.3">
+<h3 data-number="7.5.3" class="anchored" data-anchor-id="matrices-de-confusión"><span class="header-section-number">7.5.3</span> Matrices de confusión</h3>
+<div id="24868b90" class="cell" data-execution_count="27">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb43"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
+<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-4"><a href="#cb43-4" aria-hidden="true" tabindex="-1"></a>fig, axes <span class="op">=</span> plt.subplots(<span class="dv">1</span>, <span class="dv">2</span>, figsize<span class="op">=</span>(<span class="dv">16</span>, <span class="dv">6</span>))</span>
+<span id="cb43-5"><a href="#cb43-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> ax, y_pred, titulo <span class="kw">in</span> <span class="bu">zip</span>(axes,</span>
+<span id="cb43-6"><a href="#cb43-6" aria-hidden="true" tabindex="-1"></a>    [y_pred_tree, y_pred_rf],</span>
+<span id="cb43-7"><a href="#cb43-7" aria-hidden="true" tabindex="-1"></a>    [<span class="st">'Árbol de Decisión (max_depth=5)'</span>, <span class="st">'Random Forest (100 árboles)'</span>]):</span>
+<span id="cb43-8"><a href="#cb43-8" aria-hidden="true" tabindex="-1"></a>    cm <span class="op">=</span> confusion_matrix(y_test, y_pred)</span>
+<span id="cb43-9"><a href="#cb43-9" aria-hidden="true" tabindex="-1"></a>    sns.heatmap(cm, annot<span class="op">=</span><span class="va">True</span>, fmt<span class="op">=</span><span class="st">'d'</span>, cmap<span class="op">=</span><span class="st">'YlGnBu'</span>,</span>
+<span id="cb43-10"><a href="#cb43-10" aria-hidden="true" tabindex="-1"></a>                xticklabels<span class="op">=</span>label_encoder.classes_,</span>
+<span id="cb43-11"><a href="#cb43-11" aria-hidden="true" tabindex="-1"></a>                yticklabels<span class="op">=</span>label_encoder.classes_, ax<span class="op">=</span>ax)</span>
+<span id="cb43-12"><a href="#cb43-12" aria-hidden="true" tabindex="-1"></a>    ax.set_title(titulo, fontweight<span class="op">=</span><span class="st">'bold'</span>)</span>
+<span id="cb43-13"><a href="#cb43-13" aria-hidden="true" tabindex="-1"></a>    ax.set_xlabel(<span class="st">'Predicción'</span>)</span>
+<span id="cb43-14"><a href="#cb43-14" aria-hidden="true" tabindex="-1"></a>    ax.set_ylabel(<span class="st">'Real'</span>)</span>
+<span id="cb43-15"><a href="#cb43-15" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb43-16"><a href="#cb43-16" aria-hidden="true" tabindex="-1"></a>plt.savefig(<span class="st">'heatmaps/confusion_matrices.png'</span>, dpi<span class="op">=</span><span class="dv">150</span>)</span>
+<span id="cb43-17"><a href="#cb43-17" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="heatmaps/confusion_matrices.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5" title="Matrices de confusión de ambos modelos de clasificación"><img src="heatmaps/confusion_matrices.png" class="img-fluid figure-img" alt="Matrices de confusión de ambos modelos de clasificación"></a></p>
+<figcaption>Matrices de confusión de ambos modelos de clasificación</figcaption>
+</figure>
+</div>
+<p>Las matrices de confusión revelan varios patrones relevantes. En primer lugar, la clase <code>CONFIDENCIAL</code> se clasifica de forma prácticamente perfecta en ambos modelos, con errores mínimos o nulos. Esto confirma que la señal de las variables dummy <code>SEXO_CONFIDENCIAL</code>, <code>EDAD_CONFIDENCIAL</code>, etc., es suficiente para identificar esta clase de forma trivial. La clase <code>DESAPARECIDA</code> también se clasifica con alta precisión, aunque una fracción pequeña se confunde con <code>NO LOCALIZADA</code>. El error más notable se concentra en <code>NO LOCALIZADA</code>, donde una proporción significativa de sus 547 casos se clasifica erróneamente como <code>DESAPARECIDA</code>. Esto es consistente con la proximidad semántica de ambas categorías dentro del sistema de registro.</p>
+</section>
+<section id="sec-arbol-visual" class="level3" data-number="7.5.4">
+<h3 data-number="7.5.4" class="anchored" data-anchor-id="sec-arbol-visual"><span class="header-section-number">7.5.4</span> Visualización del árbol de decisión</h3>
+<p>Una de las principales ventajas del árbol de decisión es su interpretabilidad visual. Con <code>max_depth=5</code>, el árbol completo puede representarse gráficamente, donde cada nodo muestra la variable y el umbral de partición, la distribución de clases y la clase predicha.</p>
+<div id="438a6b59" class="cell" data-execution_count="28">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb44"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.tree <span class="im">import</span> plot_tree, export_text</span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">28</span>, <span class="dv">14</span>))</span>
+<span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a>plot_tree(clf_tree,</span>
+<span id="cb44-5"><a href="#cb44-5" aria-hidden="true" tabindex="-1"></a>          feature_names<span class="op">=</span>X_train.columns.tolist(),</span>
+<span id="cb44-6"><a href="#cb44-6" aria-hidden="true" tabindex="-1"></a>          class_names<span class="op">=</span>label_encoder.classes_.tolist(),</span>
+<span id="cb44-7"><a href="#cb44-7" aria-hidden="true" tabindex="-1"></a>          filled<span class="op">=</span><span class="va">True</span>,</span>
+<span id="cb44-8"><a href="#cb44-8" aria-hidden="true" tabindex="-1"></a>          rounded<span class="op">=</span><span class="va">True</span>,</span>
+<span id="cb44-9"><a href="#cb44-9" aria-hidden="true" tabindex="-1"></a>          fontsize<span class="op">=</span><span class="dv">7</span>,</span>
+<span id="cb44-10"><a href="#cb44-10" aria-hidden="true" tabindex="-1"></a>          proportion<span class="op">=</span><span class="va">True</span>,</span>
+<span id="cb44-11"><a href="#cb44-11" aria-hidden="true" tabindex="-1"></a>          ax<span class="op">=</span>ax)</span>
+<span id="cb44-12"><a href="#cb44-12" aria-hidden="true" tabindex="-1"></a>ax.set_title(<span class="st">'Árbol de Decisión (max_depth=5)'</span>, fontsize<span class="op">=</span><span class="dv">16</span>, fontweight<span class="op">=</span><span class="st">'bold'</span>)</span>
+<span id="cb44-13"><a href="#cb44-13" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb44-14"><a href="#cb44-14" aria-hidden="true" tabindex="-1"></a>plt.savefig(<span class="st">'heatmaps/decision_tree.png'</span>, dpi<span class="op">=</span><span class="dv">150</span>, bbox_inches<span class="op">=</span><span class="st">'tight'</span>)</span>
+<span id="cb44-15"><a href="#cb44-15" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="heatmaps/decision_tree.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6" title="Visualización gráfica del árbol de decisión entrenado"><img src="heatmaps/decision_tree.png" class="img-fluid figure-img" alt="Árbol de decisión completo con max_depth=5 mostrando particiones desde SEXO_CONFIDENCIAL"></a></p>
+<figcaption>Visualización gráfica del árbol de decisión entrenado</figcaption>
+</figure>
+</div>
+<p>La visualización del árbol revela que la primera partición, la más importante, se realiza sobre la variable <code>SEXO_CONFIDENCIAL</code>. Cuando <code>SEXO_CONFIDENCIAL</code> es 1 (es decir, cuando la variable <code>SEXO</code> toma el valor <code>CONFIDENCIAL</code> tras el One-Hot Encoding), la condición <code>SEXO_CONFIDENCIAL &lt;= 0.5</code> es falsa, y el árbol predice directamente <code>CONFIDENCIAL</code> por la rama derecha. Esto confirma la circularidad discutida previamente: el modelo no necesita más información para clasificar casi la mitad de los registros. Las ramas subsiguientes utilizan variables como <code>ANIO_REGISTRO</code>, <code>ORIGEN_REPORTE</code> de diversas fiscalías, y <code>SEXO_HOMBRE</code> para distinguir entre <code>DESAPARECIDA</code> y <code>NO LOCALIZADA</code>, lo que indica que el modelo está aprendiendo patrones institucionales de registro más que características intrínsecas de las desapariciones.</p>
+</section>
+</section>
+<section id="análisis-de-variables-importantes" class="level2" data-number="7.6">
+<h2 data-number="7.6" class="anchored" data-anchor-id="análisis-de-variables-importantes"><span class="header-section-number">7.6</span> Análisis de variables importantes</h2>
+<div id="cf9f1cba" class="cell" data-execution_count="29">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb45"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Feature importance del Random Forest</span></span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>importances <span class="op">=</span> pd.Series(clf_rf.feature_importances_,</span>
+<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a>                         index<span class="op">=</span>X_train.columns)</span>
+<span id="cb45-4"><a href="#cb45-4" aria-hidden="true" tabindex="-1"></a>top10 <span class="op">=</span> importances.nlargest(<span class="dv">10</span>).sort_values()</span>
+<span id="cb45-5"><a href="#cb45-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-6"><a href="#cb45-6" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">6</span>))</span>
+<span id="cb45-7"><a href="#cb45-7" aria-hidden="true" tabindex="-1"></a>top10.plot(kind<span class="op">=</span><span class="st">'barh'</span>, color<span class="op">=</span><span class="st">'#301934'</span>)</span>
+<span id="cb45-8"><a href="#cb45-8" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Top 10 Variables más Importantes - Random Forest'</span>,</span>
+<span id="cb45-9"><a href="#cb45-9" aria-hidden="true" tabindex="-1"></a>          fontweight<span class="op">=</span><span class="st">'bold'</span>)</span>
+<span id="cb45-10"><a href="#cb45-10" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Importancia'</span>)</span>
+<span id="cb45-11"><a href="#cb45-11" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb45-12"><a href="#cb45-12" aria-hidden="true" tabindex="-1"></a>plt.savefig(<span class="st">'heatmaps/feature_importance.png'</span>, dpi<span class="op">=</span><span class="dv">150</span>)</span>
+<span id="cb45-13"><a href="#cb45-13" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="heatmaps/feature_importance.png" class="lightbox" data-gallery="quarto-lightbox-gallery-7" title="Top 10 variables más importantes según Random Forest"><img src="heatmaps/feature_importance.png" class="img-fluid figure-img" alt="Top 10 variables más importantes según Random Forest"></a></p>
+<figcaption>Top 10 variables más importantes según Random Forest</figcaption>
+</figure>
+</div>
+<p>El análisis de importancia de variables revela información crucial sobre qué está aprendiendo el modelo. Como se observa en la gráfica, las variables más importantes son <code>MES_REGISTRO</code> y <code>MES_DESAPARICION</code>, seguidas por las dummies de confidencialidad (<code>EDAD_CONFIDENCIAL</code>, <code>ANIO_REGISTRO_CONFIDENCIAL</code>, <code>SEXO_CONFIDENCIAL</code>, <code>ANIO_DESAPARICION_CONFIDENCIAL</code>). Esto confirma que el modelo aprende fundamentalmente dos cosas: (1) a identificar registros confidenciales mediante la circularidad de las variables, y (2) a distinguir entre <code>DESAPARECIDA</code> y <code>NO LOCALIZADA</code> basándose en cuándo ocurrió la desaparición y cuándo se registró el caso. Las variables temporales (<code>MES_REGISTRO</code>, <code>MES_DESAPARICION</code>, <code>ANIO_REGISTRO_2024-2025</code>) dominan la importancia para las clases no confidenciales, sugiriendo patrones estacionales o temporales en la clasificación del estatus.</p>
+<p>Una <strong>alerta crítica</strong> debe considerarse: que <code>MES_REGISTRO</code> sea la variable más importante indica que el modelo distingue entre <code>DESAPARECIDA</code> y <code>NO LOCALIZADA</code> basándose en el mes en que se registró el caso. Esto podría reflejar cambios en protocolos de registro a lo largo del año o patrones estacionales en la captura de datos, más que diferencias reales en la naturaleza de las desapariciones. También aparecen <code>SEXO_HOMBRE</code> y <code>ANIO_DESAPARICION_2024-2025</code>, lo que sugiere ciertos perfiles demográficos y temporales asociados a cada estatus. Este hallazgo, aunque técnicamente válido como predicción, tendría implicaciones éticas significativas si se utilizara para tomar decisiones operativas.</p>
+</section>
+<section id="comparación-de-modelos" class="level2" data-number="7.7">
+<h2 data-number="7.7" class="anchored" data-anchor-id="comparación-de-modelos"><span class="header-section-number">7.7</span> Comparación de modelos</h2>
+<div id="tbl-comparativa-clasificacion" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-comparativa-clasificacion-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;4: Comparativa de rendimiento entre modelos de clasificación
+</figcaption>
+<div aria-describedby="tbl-comparativa-clasificacion-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: left;">Modelo</th>
+<th style="text-align: center;">F1-macro</th>
+<th style="text-align: center;">F1-weighted</th>
+<th style="text-align: center;">Accuracy</th>
+<th style="text-align: center;">Tiempo (s)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Árbol de Decisión (max_depth=5)</td>
+<td style="text-align: center;">0.77</td>
+<td style="text-align: center;">0.96</td>
+<td style="text-align: center;">0.96</td>
+<td style="text-align: center;">0.26</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Random Forest (100 árboles)</td>
+<td style="text-align: center;">0.79</td>
+<td style="text-align: center;">0.96</td>
+<td style="text-align: center;">0.95</td>
+<td style="text-align: center;">1.36</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p>Ambos modelos alcanzan métricas globales muy altas (accuracy ~96%, F1-weighted ~0.96), lo cual refleja la facilidad con la que se predice la clase <code>CONFIDENCIAL</code> (F1 = 1.00 en ambos modelos). La diferencia real entre los modelos se observa en el F1-macro, donde Random Forest supera al árbol por 0.02 puntos (0.79 vs 0.77), y especialmente en la clase <code>NO LOCALIZADA</code>, donde el F1 mejora de 0.36 a 0.42.</p>
+<p>La diferencia entre F1-macro y F1-weighted es reveladora: mientras F1-weighted es ~0.96, F1-macro baja a ~0.78. Esta brecha confirma que el rendimiento en <code>NO LOCALIZADA</code> (2.77% de la muestra) penaliza fuertemente el promedio no ponderado, ya que las dos clases mayoritarias dominan el promedio ponderado.</p>
+<p>El trade-off entre <strong>interpretabilidad y rendimiento</strong> sigue siendo relevante, aunque el argumento se matiza dado que ambos modelos tienen rendimiento similar. El árbol de decisión con <code>max_depth=5</code> produce un diagrama de flujo con un máximo de 32 nodos hoja, donde cada regla de decisión es directamente legible, como se muestra en la visualización de la sección anterior. Random Forest, en cambio, produce 100 árboles cuyas predicciones se agregan por votación mayoritaria, lo que dificulta la trazabilidad de cada predicción individual.</p>
+<p>Para presentar resultados a autoridades o familias de víctimas, el árbol de decisión tiene una ventaja comunicativa sustancial: puede mostrarse como un diagrama de flujo donde cada bifurcación corresponde a una pregunta sobre las características del registro. Random Forest, aunque ligeramente más preciso en la clase minoritaria, requiere un nivel de abstracción mayor para su comunicación, por lo que su utilidad principal es como herramienta de validación técnica interna.</p>
+</section>
+<section id="discusión-crítica-el-modelo-captura-patrones-reales-o-sesgos" class="level2" data-number="7.8">
+<h2 data-number="7.8" class="anchored" data-anchor-id="discusión-crítica-el-modelo-captura-patrones-reales-o-sesgos"><span class="header-section-number">7.8</span> Discusión crítica: ¿el modelo captura patrones reales o sesgos?</h2>
+<p>El análisis de los modelos de clasificación revela tensiones fundamentales entre lo que el modelo aprende y lo que sería deseable que aprendiera. Estas tensiones no son deficiencias técnicas de los algoritmos, sino reflejos de las limitaciones estructurales del sistema de registro de personas desaparecidas en México.</p>
+<p>El problema más profundo radica en la naturaleza de la clase <code>CONFIDENCIAL</code> y se confirma empíricamente: el modelo clasifica esta clase con F1 perfecto de 1.00. Cuando <code>ESTATUS_VICTIMA</code> es <code>CONFIDENCIAL</code>, las variables <code>SEXO</code>, <code>EDAD</code> y otras toman simultáneamente el valor <code>CONFIDENCIAL</code>, generando dummies como <code>SEXO_CONFIDENCIAL</code> que son predictores perfectos. La visualización del árbol de decisión lo confirma: la primera partición se realiza sobre <code>SEXO_CONFIDENCIAL</code>, separando instantáneamente el 49.70% de los registros en una hoja pura. El modelo no “aprende” nada sobre las desapariciones para esta clase; simplemente detecta que las variables de registro están censuradas.</p>
+<p>La ausencia de la clase <code>LOCALIZADA</code> en el dataset constituye un hallazgo sustantivo que trasciende lo técnico. Un sistema de registro que no refleja cuándo una persona ha sido encontrada sugiere que los datos públicos no se actualizan con los desenlaces de los casos, o que esta información se mantiene reservada. Un modelo predictivo que no puede predecir el resultado más esperado por las familias que su ser querido sea localizado tiene un uso práctico inherentemente limitado. Esta ausencia convierte al clasificador en una herramienta que distingue entre formas de desaparición y formas de ocultamiento institucional, pero no entre desaparición y resolución.</p>
+<p>Las variables más importantes para el modelo confirman estos patrones. Las variables temporales (<code>MES_REGISTRO</code>, <code>MES_DESAPARICION</code>) dominan el ranking de importancia, seguidas por las dummies de confidencialidad (<code>EDAD_CONFIDENCIAL</code>, <code>ANIO_REGISTRO_CONFIDENCIAL</code>, <code>SEXO_CONFIDENCIAL</code>). Esto significa que, después de resolver trivialmente la clase <code>CONFIDENCIAL</code>, el modelo distingue entre <code>DESAPARECIDA</code> y <code>NO LOCALIZADA</code> basándose principalmente en cuándo se registró el caso y cuándo ocurrió la desaparición. La presencia de <code>SEXO_HOMBRE</code> y <code>ANIO_REGISTRO_2024-2025</code> en el top 10 sugiere que ciertos perfiles demográficos y períodos temporales están asociados con cada estatus. El modelo captura estos patrones temporales e institucionales, lo que podría reflejar cambios en políticas de registro más que características intrínsecas que predigan el destino de una persona desaparecida.</p>
+<p>Los patrones geográficos encontrados mediante reglas de asociación, la concentración de infantes y mujeres adolescentes en el Estado de México, y de hombres jóvenes en Sinaloa, Tamaulipas y Guanajuato, no aparecen necesariamente entre las variables más importantes del clasificador. Esto se explica porque el clasificador optimiza la separación entre clases específicas y la señal de <code>CONFIDENCIAL</code> es tan dominante que eclipsa patrones geográficos más sutiles. Las reglas de asociación, al no tener variable objetivo, identifican co-ocurrencias frecuentes sin esta distorsión. Esta divergencia entre enfoques supervisado y no supervisado es en sí misma un hallazgo: los patrones de las desapariciones son reales pero quedan opacados por los patrones del sistema de registro.</p>
+<p>Las implicaciones éticas de usar este modelo en producción son severas. Si un sistema automatizado utilizara las predicciones del clasificador para priorizar recursos de búsqueda, los sesgos del sistema de registro se amplificarían de manera sistemática. Los casos con características similares a los más frecuentemente reportados con información completa recibirían prioridad, mientras que grupos ya subrepresentados personas con sexo <code>INDETERMINADO</code>, registros provenientes de municipios con alto porcentaje de <code>CONFIDENCIAL</code>, o casos de entidades con menor capacidad de registro quedarían marginados. El modelo reproduciría y profundizaría las inequidades existentes en el sistema de registro, no las corregería.</p>
+<p>Como recomendación técnica para un uso responsable de estos modelos, deberían excluirse del entrenamiento las variables <code>ORIGEN_REPORTE</code> y aquellas que están directamente contaminadas por el patrón de confidencialidad. Idealmente, se debería entrenar un modelo separado exclusivamente sobre los registros con información completa (excluyendo todos los registros con algún valor <code>CONFIDENCIAL</code>), lo cual reduciría el dataset a aproximadamente 50,000 registros pero eliminaría la circularidad en la predicción. Este modelo complementario permitiría evaluar si las variables demográficas y geográficas tienen poder predictivo real sobre la distinción entre <code>DESAPARECIDA</code> y <code>NO LOCALIZADA</code>, sin la interferencia del patrón de ocultamiento institucional.</p>
 </section>
 </section>
 
@@ -1969,6 +2430,38 @@ Reglas generadas: 1322</code></pre>
   });
   </script>
 </div> <!-- /content -->
+<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","loop":false,"openEffect":"zoom","selector":".lightbox"});
+(function() {
+  let previousOnload = window.onload;
+  window.onload = () => {
+    if (previousOnload) {
+      previousOnload();
+    }
+    lightboxQuarto.on('slide_before_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      const href = trigger.getAttribute('href');
+      if (href !== null) {
+        const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+        if (imgEl !== null) {
+          const srcAttr = imgEl.getAttribute("src");
+          if (srcAttr && srcAttr.startsWith("data:")) {
+            slideConfig.href = srcAttr;
+          }
+        }
+      } 
+    });
+  
+    lightboxQuarto.on('slide_after_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(slideNode);
+      }
+    });
+  
+  };
+  
+})();
+          </script>
 
 
 
