@@ -292,7 +292,7 @@ transacciones_codificadas = pd.DataFrame(transacciones_codificadas, columns=codi
 transacciones_codificadas
 ```
 ::: {.tbl-cap}
-Vista parcial del conjunto de datos transformado a formato transaccional (one-hot encoding)
+Vista parcial del conjunto de datos transformado a formato transaccional 
 :::
 
 | index | CVE_ENT=10 | CVE_ENT=11 | CVE_ENT=13 | ... | ORIGEN_REPORTE=SE DESCONOCE | ... | SEXO=CONFIDENCIAL | SEXO=HOMBRE | SEXO=MUJER |
@@ -324,9 +324,9 @@ print(f"Presencia de items : {round(proporcion, 6)}")
 ```
 
 ```{.output}
-numero de transacciones : 131715
-dimensiones : (131715, 255842)
-items distintos : 255842
+Número de transacciones : 131715
+Dimensiones : (131715, 255842)
+ítems distintos : 255842
 Presencia de items : 4.3e-05 
 ```
 
@@ -484,7 +484,7 @@ Por otro lado, las reglas que involucren combinaciones como `{CONFIDENCIAL, CONF
 
 En este sentido, se opta por **mantener el valor CONFIDENCIAL como una categoría dentro de las variables categóricas**, en lugar de eliminarlo. Esta decisión permite conservar la estructura probabilística de las transacciones y evitar la pérdida de asociaciones entre variables no confidenciales, como `ENTIDAD` y `ORIGEN_REPORTE`. No obstante, se reconoce que esta elección puede introducir limitaciones en la interpretabilidad de las reglas generadas.
 
-### Discretizacion de variables continuas 
+### Discretización de variables continuas 
 Como se observa, el umbral de aparición de ítems distintos en la matriz binaria es muy bajo. Esto se debe, en gran medida, al manejo de variables de tipo fecha, ya que pequeñas variaciones como diferencias en la hora generan nuevos ítems, incrementando la dimensionalidad del espacio y reduciendo la frecuencia relativa de co-ocurrencia entre ellos.
 
 Asimismo, se identifica que las variables `FECHA_NACIMIENTO` y `FECHA_DESAPARICION` funcionan como variables auxiliares para la construcción de un atributo más representativo: la **edad**. Esta se obtiene a partir de la diferencia entre los años de ambas fechas, permitiendo capturar patrones más interpretables asociados a grupos etarios. En consecuencia, se crea la variable `EDAD` y se elimina `FECHA_NACIMIENTO`.
@@ -594,14 +594,14 @@ sns.set_theme(style="whitegrid")
 # Aumentamos el tamaño de la figura para mejor visibilidad
 fig, axes = plt.subplots(1, 2, figsize=(22, 10))
 
-# 1. Histograma de Edades (Izquierda) - Rojo oscuro y curva KDE marcada (se mantiene)
+# 1. Histograma de Edades (Izquierda) - Rojo oscuro y curva KDE marcada 
 sns.histplot(edades_numericas.dropna(), bins=50, kde=True, ax=axes[0], color='darkred', 
              line_kws={'linewidth': 4})
 axes[0].set_title('Distribución de Edades Original (Antes de Discretizar)', fontsize=16, fontweight='bold')
 axes[0].set_xlabel('Edad', fontsize=13)
 axes[0].set_ylabel('Frecuencia', fontsize=13)
 
-# 2. Gráfico de Barras (Derecha) - Paleta 'crest' para un acabado más profesional y elegante
+# 2. Gráfico de Barras (Derecha) - Paleta 'crest'
 orden_categorias = ['INFANTE', 'ADOLESCENTE', 'JOVEN', 'ADULTO', 'ADULTO_MAYOR', 'CONFIDENCIAL']
 sns.countplot(data=frame, x='EDAD', order=orden_categorias, ax=axes[1], palette='crest', hue='EDAD', legend=False)
 axes[1].set_title('Distribución por Categorías Discretizadas (Después)', fontsize=16, fontweight='bold')
@@ -611,7 +611,7 @@ axes[1].set_ylabel('Frecuencia', fontsize=13)
 plt.tight_layout()
 plt.show()
 ```
-![Distribucion continua de las fechas](heatmaps/DistribucionEDAD.png)
+![Distribución continua de las fechas](heatmaps/DistribucionEDAD.png)
 
 A continuación, se procede a discretizar las variables `ANIO_DESAPARICION` y `ANIO_REGISTRO`. Las variables relacionadas con el mes se preservan sin transformación adicional, con el objetivo de mantener cierta granularidad temporal que permita identificar patrones específicos asociados a periodos mensuales.
 
@@ -727,10 +727,10 @@ print(f'items distintos : {numero_items}')
 print(f"Presencia de items : {round(proporcion, 6)}")
 ```
 ```{.output}
-numero de transacciones : 98884
-dimensiones : (98884, 1649)
-items distintos : 1649
-Presencia de items : 0.006064
+Número de transacciones : 98884
+Dimensiones : (98884, 1649)
+ítems distintos : 1649
+Presencia de ítems : 0.006064
 ```
 Una vez finalizado el preprocesamiento, se observa una reducción considerable en la dimensionalidad de la matriz binaria, obteniendo 1,649 ítems distintos sobre un total de 98,884 transacciones.
 
@@ -793,7 +793,6 @@ def graficar_transacciones_con_nombres(datos: pd.DataFrame, inicio: int = 0, fin
     plt.grid(True, linestyle=':', alpha=0.5)
     plt.tight_layout()
     plt.show()
-```
 
 graficar_transacciones_con_nombres(
     datos=transacciones_codificadas,
@@ -801,6 +800,8 @@ graficar_transacciones_con_nombres(
     fin=15,
     top_n_items=50
 )
+```
+
 
 ![Muestra las primeras transacciones de co-ocurrencia 1](heatmaps/Top15Dispersa.png)
 ![Proporción continua y discreta de las edades](heatmaps/MatrizDispersa.png)
