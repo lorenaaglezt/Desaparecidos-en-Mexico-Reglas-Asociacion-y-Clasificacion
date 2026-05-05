@@ -1665,3 +1665,31 @@ El análisis realizado en este trabajo trasciende lo estrictamente técnico. Det
 Los algoritmos de minería de datos, tanto los de reglas de asociación como los de clasificación, son herramientas poderosas para descubrir patrones, pero su utilidad depende fundamentalmente de la calidad y transparencia de los datos sobre los que operan. Un sistema que oculta la mitad de su información y no registra las resoluciones exitosas de los casos produce modelos que aprenden más sobre el comportamiento institucional que sobre el fenómeno mismo de las desapariciones.
 
 Como trabajo futuro, se sugiere entrenar modelos exclusivamente sobre los registros con información completa, eliminar la circularidad de las variables confidenciales, e incorporar fuentes de datos complementarias que permitan enriquecer el análisis. Solo así será posible construir herramientas que contribuyan de manera real y ética a la búsqueda de las personas desaparecidas en México.
+
+# Referencias bibliográficas
+
+## Algoritmos de asociación
+
+Agrawal, R., & Srikant, R. (1994). Fast algorithms for mining association rules. *Proceedings of the 20th International Conference on Very Large Data Bases (VLDB)*, 487–499.
+
+Han, J., Pei, J., & Yin, Y. (2000). Mining frequent patterns without candidate generation. *ACM SIGMOD Record*, *29*(2), 1–12. <https://doi.org/10.1145/335191.335372>
+
+Geeks for Geeks. (Abril, 2026). *Apriori Algorithm*. Recuperado de <https://www.geeksforgeeks.org/machine-learning/apriori-algorithm/>
+
+## Librerías utilizadas
+
+Raschka, S. (2018). MLxtend: Providing machine learning and data science utilities and extensions to Python's scientific computing stack. *Journal of Open Source Software*, *3*(24), 638. <https://doi.org/10.21105/joss.00638>
+
+Pedregosa, F., et al. (2011). Scikit-learn: Machine learning in Python. *Journal of Machine Learning Research*, *12*, 2825–2830. Recuperado de <https://scikit-learn.org>
+
+## Clasificación y métricas
+
+Geeks for Geeks. (Abril, 2026). *Decision Tree*. Recuperado de <https://www.geeksforgeeks.org/decision-tree/>
+
+Geeks for Geeks. (Abril, 2026). *Random Forest Classifier*. Recuperado de <https://www.geeksforgeeks.org/random-forest-classifier-using-scikit-learn/>
+
+## Contexto del problema
+
+Organización de las Naciones Unidas. (1948). *Declaración Universal de los Derechos Humanos*. Recuperado de <https://www.un.org/es/about-us/universal-declaration-of-human-rights>
+
+Secretariado Ejecutivo del Sistema Nacional de Seguridad Pública. (2026). *Registro Nacional de Personas Desaparecidas y No Localizadas*. Recuperado de <https://www.gob.mx/sesnsp>
