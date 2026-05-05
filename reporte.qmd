@@ -1610,3 +1610,58 @@ Los patrones geográficos encontrados mediante reglas de asociación, la concent
 Las implicaciones éticas de usar este modelo en producción son severas. Si un sistema automatizado utilizara las predicciones del clasificador para priorizar recursos de búsqueda, los sesgos del sistema de registro se amplificarían de manera sistemática. Los casos con características similares a los más frecuentemente reportados con información completa recibirían prioridad, mientras que grupos ya subrepresentados personas con sexo `INDETERMINADO`, registros provenientes de municipios con alto porcentaje de `CONFIDENCIAL`, o casos de entidades con menor capacidad de registro quedarían marginados. El modelo reproduciría y profundizaría las inequidades existentes en el sistema de registro, no las corregería.
 
 Como recomendación técnica para un uso responsable de estos modelos, deberían excluirse del entrenamiento las variables `ORIGEN_REPORTE` y aquellas que están directamente contaminadas por el patrón de confidencialidad. Idealmente, se debería entrenar un modelo separado exclusivamente sobre los registros con información completa (excluyendo todos los registros con algún valor `CONFIDENCIAL`), lo cual reduciría el dataset a aproximadamente 50,000 registros pero eliminaría la circularidad en la predicción. Este modelo complementario permitiría evaluar si las variables demográficas y geográficas tienen poder predictivo real sobre la distinción entre `DESAPARECIDA` y `NO LOCALIZADA`, sin la interferencia del patrón de ocultamiento institucional.
+
+# Conclusiones
+
+El presente trabajo aplicó técnicas de minería de datos sobre un conjunto de **98,884 registros** de personas desaparecidas en México, abordando dos ejes: el descubrimiento de reglas de asociación y la construcción de modelos de clasificación supervisada. A partir de los resultados obtenidos, se presentan las siguientes conclusiones.
+
+## Sobre las reglas de asociación
+
+Se implementaron y compararon tres algoritmos para la generación de reglas de asociación: una **implementación manual del algoritmo Apriori**, la **implementación de Apriori de la librería mlxtend**, y el **algoritmo FP-Growth** también de mlxtend. Los tres produjeron exactamente el mismo conjunto de **1,322 reglas** bajo los mismos umbrales de soporte mínimo (0.01) y confianza mínima (0.5), confirmando su equivalencia matemática.
+
+Las 10 reglas con mayor lift (2.46–7.17) revelaron patrones geográficos y demográficos significativos:
+
+- **Infantes en el Estado de México** (lift hasta 7.17): más de la mitad de los registros de infantes desaparecidos se concentran en esta entidad, una proporción 7 veces mayor a lo esperado bajo independencia.
+- **Mujeres adolescentes en el Estado de México** (lift ~6.0): el 62% de los adolescentes desaparecidos en esta entidad son mujeres, un patrón potencialmente vinculado a la trata de personas o violencia de género focalizada.
+- **Hombres jóvenes en entidades del norte** (lift ~2.5): Sinaloa, Tamaulipas y Guanajuato presentan un perfil predominante de hombres jóvenes (20–39 años) con estatus `DESAPARECIDA`, compatible con contextos de desaparición relacionados con el crimen organizado.
+
+Estos hallazgos aportan evidencia cuantitativa sobre patrones que, si bien son conocidos cualitativamente, aquí se documentan con métricas formales de soporte, confianza y lift.
+
+## Sobre la comparación de algoritmos de asociación
+
+La comparativa de rendimiento mostró que la **implementación manual de Apriori fue la más rápida** en muestras pequeñas y medianas (0.27s–4.35s para 10,000 transacciones), superando a ambas implementaciones de mlxtend. Sin embargo, a escala completa con 1,649 ítems, **FP-Growth fue el único algoritmo viable**, procesando las 98,884 transacciones en 106.45 segundos. Tanto la implementación manual de Apriori como la de mlxtend resultaron computacionalmente inviables en este escenario de alta dimensionalidad, debido a la explosión combinatoria en la generación de candidatos.
+
+Este resultado ilustra la complementariedad de los enfoques: Apriori es adecuado para espacios de ítems reducidos donde su simplicidad y menor overhead son ventajosos, mientras que FP-Growth es indispensable cuando la dimensionalidad del problema crece.
+
+## Sobre los modelos de clasificación
+
+Se entrenaron un **Árbol de Decisión** (max_depth=5) y un **Random Forest** (100 árboles) para predecir la variable `ESTATUS_VICTIMA` con tres clases: `CONFIDENCIAL` (49.70%), `DESAPARECIDA` (47.53%) y `NO LOCALIZADA` (2.77%).
+
+Ambos modelos alcanzaron un accuracy del ~96% y un F1-weighted de ~0.96, pero estas métricas globales ocultan una realidad más compleja: la clase `CONFIDENCIAL` se clasificó con F1 perfecto de 1.00 en ambos modelos debido a la circularidad inherente en los datos, donde múltiples variables toman simultáneamente el valor `CONFIDENCIAL`. La clase `NO LOCALIZADA`, con apenas el 2.77% de los registros, obtuvo un F1 de 0.36 en el árbol y 0.42 en Random Forest, siendo la más difícil de predecir.
+
+La visualización del árbol de decisión confirmó que la primera partición se realiza sobre `SEXO_CONFIDENCIAL`, separando trivialmente la mitad del dataset. Las variables temporales (`MES_REGISTRO`, `MES_DESAPARICION`) resultaron ser las más importantes para distinguir entre `DESAPARECIDA` y `NO LOCALIZADA`, lo que sugiere que el modelo aprende patrones del sistema de registro más que características intrínsecas de las desapariciones.
+
+## Sobre el preprocesamiento y las limitaciones de los datos
+
+El proceso de preparación de datos fue determinante para la viabilidad del análisis. La reducción de **255,842 ítems** (dataset crudo) a **1,649 ítems** (dataset procesado con 10 columnas) y posteriormente a **59 ítems** (5 variables seleccionadas para reglas) representó una reducción del 99.4% en la dimensionalidad, lograda mediante la eliminación de variables redundantes, la derivación de la variable `EDAD`, la descomposición temporal de fechas y la discretización de variables continuas.
+
+Se identificaron dos limitaciones estructurales que afectan tanto las reglas de asociación como los modelos de clasificación:
+
+1. **El valor CONFIDENCIAL** está presente en el 49.68% de los registros y afecta simultáneamente a 5 de las 7 variables analizadas. Este ocultamiento sistemático de información introduce un sesgo que no puede resolverse con mejores algoritmos, sino que requiere mejores datos.
+2. **La ausencia de la clase LOCALIZADA** limita la utilidad práctica de cualquier modelo predictivo, pues no es posible predecir el desenlace más relevante para las familias de las víctimas.
+
+Adicionalmente, el análisis de datos faltantes reveló un patrón de tipo MAR (Missing At Random) en la variable `FECHA_NACIMIENTO`, donde la probabilidad de ausencia dado `SEXO=INDETERMINADO` es de aproximadamente 0.83, lo que indica un sesgo en el registro que afecta de manera desproporcionada a este grupo.
+
+## Sobre la convergencia entre enfoques supervisado y no supervisado
+
+Un hallazgo transversal del trabajo es la **divergencia entre los patrones descubiertos por las reglas de asociación y los patrones que dominan los modelos de clasificación**. Mientras que las reglas de asociación identificaron patrones geográficos y demográficos sustantivos (infantes en el Estado de México, mujeres adolescentes, hombres jóvenes en el norte), los modelos de clasificación estuvieron dominados por la señal de confidencialidad y por variables temporales de registro.
+
+Esta divergencia no es una inconsistencia sino un hallazgo en sí mismo: los patrones reales de las desapariciones existen y son detectables mediante análisis no supervisado, pero quedan opacados en el contexto supervisado por los patrones del sistema de registro. Esta observación refuerza la necesidad de abordar el fenómeno de las desapariciones desde múltiples perspectivas analíticas, ya que ningún enfoque individual captura la complejidad completa del problema.
+
+## Reflexión final
+
+El análisis realizado en este trabajo trasciende lo estrictamente técnico. Detrás de cada registro hay una persona cuyo destino es desconocido y una familia que busca respuestas. Las limitaciones identificadas en los datos, particularmente el ocultamiento sistemático de información bajo la categoría `CONFIDENCIAL` y la ausencia de un estatus que indique que la persona fue localizada, son reflejos de las deficiencias estructurales del sistema de registro de personas desaparecidas en México.
+
+Los algoritmos de minería de datos, tanto los de reglas de asociación como los de clasificación, son herramientas poderosas para descubrir patrones, pero su utilidad depende fundamentalmente de la calidad y transparencia de los datos sobre los que operan. Un sistema que oculta la mitad de su información y no registra las resoluciones exitosas de los casos produce modelos que aprenden más sobre el comportamiento institucional que sobre el fenómeno mismo de las desapariciones.
+
+Como trabajo futuro, se sugiere entrenar modelos exclusivamente sobre los registros con información completa, eliminar la circularidad de las variables confidenciales, e incorporar fuentes de datos complementarias que permitan enriquecer el análisis. Solo así será posible construir herramientas que contribuyan de manera real y ética a la búsqueda de las personas desaparecidas en México.
